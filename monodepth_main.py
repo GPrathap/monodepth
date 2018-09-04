@@ -38,7 +38,7 @@ parser.add_argument('--encoder',                   type=str,   help='type of enc
 parser.add_argument('--dataset',                   type=str,   help='dataset to train on, kitti, or cityscapes', default='kitti')
 parser.add_argument('--z_dim',                     type=int,   help=' default set to 100', default=100)
 parser.add_argument('--data_path',                 type=str,   help='path to the data', default="/dataset/images/data_tracking_image_3/training/image_03/0000")
-parser.add_argument('--filenames_file',            type=str,   help='path to the filenames text file', default="/home/geesara/project/monodepth/utils/filenames/kitti_train_files_trail.txt")
+parser.add_argument('--filenames_file',            type=str,   help='path to the filenames text file', default="./utils/filenames/kitti_train_files_trail.txt")
 parser.add_argument('--input_height',              type=int,   help='input height', default=256)
 parser.add_argument('--input_width',               type=int,   help='input width', default=512)
 parser.add_argument('--batch_size',                type=int,   help='batch size', default=8)
