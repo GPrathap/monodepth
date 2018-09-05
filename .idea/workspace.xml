@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/filenames/kitti_train_files_trail.txt" beforeDir="false" afterPath="$PROJECT_DIR$/utils/filenames/kitti_train_files_trail.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,15 +13,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/monodepth$monodepth_main.coverage" NAME="monodepth_main Coverage Results" MODIFIED="1536066036034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/monodepth$monodepth_main.coverage" NAME="monodepth_main Coverage Results" MODIFIED="1536157882465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-378">
-              <caret line="91" column="14" selection-start-line="91" selection-start-column="14" selection-end-line="91" selection-end-column="14" />
+            <state relative-caret-position="405">
+              <caret line="48" column="84" lean-forward="true" selection-start-line="48" selection-start-column="84" selection-end-line="48" selection-end-column="84" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kitti_stereo_2015_test_files.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_stereo_2015_test_files.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1809">
+              <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kitti_train_files_trail.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_train_files_trail.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" column="59" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -43,6 +62,7 @@
         <option value="$PROJECT_DIR$/../monodepth_main.py" />
         <option value="$PROJECT_DIR$/utils/kitti_archives_to_download_next.txt" />
         <option value="$PROJECT_DIR$/monodepth_main.py" />
+        <option value="$PROJECT_DIR$/utils/filenames/kitti_train_files_trail.txt" />
       </list>
     </option>
   </component>
@@ -195,7 +215,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536157482798</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="adding debug logs">
+      <created>1536157837469</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1536157837469</updated>
+    </task>
+    <task id="LOCAL-00008" summary="adding debug logs">
+      <created>1536157971390</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1536157971390</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -207,9 +241,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32925472" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3826474" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17395945" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32925472" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3826474" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17395945" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -237,7 +271,8 @@
     <MESSAGE value="adding new dataset" />
     <MESSAGE value="adding the .gitignore file" />
     <MESSAGE value="setting dataset directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="setting dataset directory" />
+    <MESSAGE value="adding debug logs" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding debug logs" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../monodepth_main.py" />
@@ -266,8 +301,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-378">
-          <caret line="91" column="14" selection-start-line="91" selection-start-column="14" selection-end-line="91" selection-end-column="14" />
+        <state relative-caret-position="405">
+          <caret line="48" column="84" lean-forward="true" selection-start-line="48" selection-start-column="84" selection-end-line="48" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_stereo_2015_test_files.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1809">
+          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_train_files_trail.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="59" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
         </state>
       </provider>
     </entry>
