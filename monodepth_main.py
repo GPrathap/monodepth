@@ -205,7 +205,7 @@ def train(params):
                                'time left: {:.2f}h'
                 print(print_string.format(step, examples_per_sec, loss_value_generator, time_sofar,
                                           training_time_left))
-                summary_str = sess.run(summary_op)
+                summary_str = sess.run(summary_op, feed_dict={z: batch_z})
                 summary_writer.add_summary(summary_str, global_step=step)
             if step and step % 10000 == 0:
                 train_saver.save(sess, args.log_directory + '/' + args.model_name + '/model', global_step=step)
