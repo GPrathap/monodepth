@@ -79,7 +79,7 @@ def count_text_lines(file_path):
 def train(params):
     """Training loop."""
 
-    with tf.Graph().as_default(), tf.device('/cpu:0'):
+    with tf.Graph().as_default():
         print("--------------1--------------")
         global_step = tf.Variable(0, trainable=False)
 
