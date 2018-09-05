@@ -21,7 +21,7 @@ import numpy as np
 import argparse
 import re
 import time
-import tensorflow as tf
+
 import tensorflow.contrib.slim as slim
 
 from monodepth_model import *
@@ -79,7 +79,8 @@ def count_text_lines(file_path):
 def train(params):
     """Training loop."""
 
-    with tf.Graph().as_default():
+    with tf.Graph().as_default(), tf.device('/device:GPU:0'):
+
         print("--------------1--------------")
         global_step = tf.Variable(0, trainable=False)
 
@@ -111,106 +112,105 @@ def train(params):
         left_splits_fake = tf.split(model_generator.get_model(), args.num_gpus, 0)
         right_splits = tf.split(right, args.num_gpus, 0)
 
-        with tf.device('/device:GPU:0'):
+        model_real = MonodepthModel(params, args.mode, left_splits[0],
+                                                  right_splits[0], reuse_variables, 0)
+        loss_discriminator_real = model_real.discriminator_total_loss
+        real_feature_set = model_real.get_feature_set()
 
-            model_real = MonodepthModel(params, args.mode, left_splits[0],
-                                                      right_splits[0], reuse_variables, 0)
-            loss_discriminator_real = model_real.discriminator_total_loss
-            real_feature_set = model_real.get_feature_set()
+        model_fake = MonodepthModel(params, args.mode, left_splits_fake[0], right_splits[0],
+                                    reuse_variables, 10)
 
-            model_fake = MonodepthModel(params, args.mode, left_splits_fake[0], right_splits[0],
-                                        reuse_variables, 10)
+        fake_feature_set = model_fake.get_feature_set()
+        #loss_discriminator_fake = model_fake.discriminator_total_loss
 
-            fake_feature_set = model_fake.get_feature_set()
-            #loss_discriminator_fake = model_fake.discriminator_total_loss
+        d_loss_real = tf.reduce_mean(
+            tf.nn.sigmoid_cross_entropy_with_logits(logits=model_real.classification, labels=tf.ones_like(model_real.classification)))  # real == 1
+        # discriminator: images from generator (fake) are labelled as 0
+        d_loss_fake = tf.reduce_mean(
+            tf.nn.sigmoid_cross_entropy_with_logits(logits=model_fake.classification, labels=tf.zeros_like(model_fake.classification)))  # fake == 0
+        loss_discriminator = loss_discriminator_real
 
-            d_loss_real = tf.reduce_mean(
-                tf.nn.sigmoid_cross_entropy_with_logits(logits=model_real.classification, labels=tf.ones_like(model_real.classification)))  # real == 1
-            # discriminator: images from generator (fake) are labelled as 0
-            d_loss_fake = tf.reduce_mean(
-                tf.nn.sigmoid_cross_entropy_with_logits(logits=model_fake.classification, labels=tf.zeros_like(model_fake.classification)))  # fake == 0
-            loss_discriminator = loss_discriminator_real
+        g_loss1 = tf.reduce_mean(
+            tf.nn.sigmoid_cross_entropy_with_logits(logits=model_fake.classification, labels=tf.ones_like(model_fake.classification)))
 
-            g_loss1 = tf.reduce_mean(
-                tf.nn.sigmoid_cross_entropy_with_logits(logits=model_fake.classification, labels=tf.ones_like(model_fake.classification)))
+        generator_loss = tf.nn.l2_loss((real_feature_set - fake_feature_set))
+        total_loss_discriminator = tf.reduce_mean(loss_discriminator) + d_loss_real + d_loss_fake
+        total_loss_generator = tf.reduce_mean(generator_loss) + g_loss1
 
-            generator_loss = tf.nn.l2_loss((real_feature_set - fake_feature_set))
-            total_loss_discriminator = tf.reduce_mean(loss_discriminator) + d_loss_real + d_loss_fake
-            total_loss_generator = tf.reduce_mean(generator_loss) + g_loss1
+        opt_discriminator_step = tf.train.AdamOptimizer(learning_rate)
+        opt_generator_step = tf.train.AdamOptimizer(learning_rate)
 
-            opt_discriminator_step = tf.train.AdamOptimizer(learning_rate)
-            opt_generator_step = tf.train.AdamOptimizer(learning_rate)
+        extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
+        with tf.control_dependencies(extra_update_ops):
+            g_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope="generator/*")
+            d_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope="discriminator/*")
+            d_optim = opt_discriminator_step.minimize(total_loss_discriminator, var_list=d_vars)
+            g_optim = opt_generator_step.minimize(total_loss_generator, var_list=g_vars)
 
-            extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
-            with tf.control_dependencies(extra_update_ops):
-                g_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope="generator/*")
-                d_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope="discriminator/*")
-                d_optim = opt_discriminator_step.minimize(total_loss_discriminator, var_list=d_vars)
-                g_optim = opt_generator_step.minimize(total_loss_generator, var_list=g_vars)
+        tf.summary.scalar('learning_rate', learning_rate, ['discriminator_0'])
+        tf.summary.scalar('total_loss', total_loss_discriminator, ['discriminator_0'])
+        summary_op = tf.summary.merge_all('discriminator_0')
 
-            tf.summary.scalar('learning_rate', learning_rate, ['discriminator_0'])
-            tf.summary.scalar('total_loss', total_loss_discriminator, ['discriminator_0'])
-            summary_op = tf.summary.merge_all('discriminator_0')
+        # SESSION
+        config = tf.ConfigProto(allow_soft_placement=True)
+        config.gpu_options.allow_growth = True
+        config.log_device_placement = True
+        sess = tf.Session(config=config)
 
-            # SESSION
-            config = tf.ConfigProto(allow_soft_placement=True)
-            config.gpu_options.allow_growth = True
-            sess = tf.Session(config=config)
+        # SAVER
+        summary_writer = tf.summary.FileWriter(args.log_directory + '/' + args.model_name, sess.graph)
+        train_saver = tf.train.Saver()
 
-            # SAVER
-            summary_writer = tf.summary.FileWriter(args.log_directory + '/' + args.model_name, sess.graph)
-            train_saver = tf.train.Saver()
+        # COUNT PARAMS
+        total_num_parameters = 0
+        for variable in tf.trainable_variables():
+            total_num_parameters += np.array(variable.get_shape().as_list()).prod()
+        print("number of trainable parameters: {}".format(total_num_parameters))
 
-            # COUNT PARAMS
-            total_num_parameters = 0
-            for variable in tf.trainable_variables():
-                total_num_parameters += np.array(variable.get_shape().as_list()).prod()
-            print("number of trainable parameters: {}".format(total_num_parameters))
+        # INIT
+        sess.run(tf.global_variables_initializer())
+        sess.run(tf.local_variables_initializer())
+        coordinator = tf.train.Coordinator()
+        threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
 
-            # INIT
-            sess.run(tf.global_variables_initializer())
-            sess.run(tf.local_variables_initializer())
-            coordinator = tf.train.Coordinator()
-            threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
+        # LOAD CHECKPOINT IF SET
+        if args.checkpoint_path != '':
+            train_saver.restore(sess, args.checkpoint_path.split(".")[0])
 
-            # LOAD CHECKPOINT IF SET
-            if args.checkpoint_path != '':
-                train_saver.restore(sess, args.checkpoint_path.split(".")[0])
+            if args.retrain:
+                sess.run(global_step.assign(0))
 
-                if args.retrain:
-                    sess.run(global_step.assign(0))
+        # GO!
+        start_step = global_step.eval(session=sess)
+        start_time = time.time()
+        for step in range(start_step, num_total_steps):
+            before_op_time = time.time()
+            batch_z = np.random.uniform(low=-1, high=1, size=(params.batch_size, params.z_dim)).astype(np.float32)
+            _, loss_value_discriminator = sess.run([d_optim, total_loss_discriminator], feed_dict={z: batch_z})
+            _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
+                                               feed_dict={z: batch_z})
 
-            # GO!
-            start_step = global_step.eval(session=sess)
-            start_time = time.time()
-            for step in range(start_step, num_total_steps):
-                before_op_time = time.time()
-                batch_z = np.random.uniform(low=-1, high=1, size=(params.batch_size, params.z_dim)).astype(np.float32)
-                _, loss_value_discriminator = sess.run([d_optim, total_loss_discriminator], feed_dict={z: batch_z})
-                _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
-                                                   feed_dict={z: batch_z})
+            duration = time.time() - before_op_time
+            if step and step % 100 == 0:
+                save_images(generated_images, image_manifold_size(generated_images.shape[0]),
+                            './{}/train_{:02d}_{:04d}.png'.format(config.sample_dir, step, 1))
+                examples_per_sec = params.batch_size / duration
+                time_sofar = (time.time() - start_time) / 3600
+                training_time_left = (num_total_steps / step - 1.0) * time_sofar
+                print_string = 'batch {:>6} | examples/s: {:4.2f} | loss_discriminator: {:.5f} | time elapsed: {:.2f}h ' \
+                               '| time left: {:.2f}h'
+                print(print_string.format(step, examples_per_sec, loss_value_discriminator, time_sofar,
+                                          training_time_left))
+                print_string = 'batch {:>6} | examples/s: {:4.2f} | loss_generator: {:.5f} | time elapsed: {:.2f}h | ' \
+                               'time left: {:.2f}h'
+                print(print_string.format(step, examples_per_sec, loss_value_generator, time_sofar,
+                                          training_time_left))
+                summary_str = sess.run(summary_op)
+                summary_writer.add_summary(summary_str, global_step=step)
+            if step and step % 10000 == 0:
+                train_saver.save(sess, args.log_directory + '/' + args.model_name + '/model', global_step=step)
 
-                duration = time.time() - before_op_time
-                if step and step % 100 == 0:
-                    save_images(generated_images, image_manifold_size(generated_images.shape[0]),
-                                './{}/train_{:02d}_{:04d}.png'.format(config.sample_dir, step, 1))
-                    examples_per_sec = params.batch_size / duration
-                    time_sofar = (time.time() - start_time) / 3600
-                    training_time_left = (num_total_steps / step - 1.0) * time_sofar
-                    print_string = 'batch {:>6} | examples/s: {:4.2f} | loss_discriminator: {:.5f} | time elapsed: {:.2f}h ' \
-                                   '| time left: {:.2f}h'
-                    print(print_string.format(step, examples_per_sec, loss_value_discriminator, time_sofar,
-                                              training_time_left))
-                    print_string = 'batch {:>6} | examples/s: {:4.2f} | loss_generator: {:.5f} | time elapsed: {:.2f}h | ' \
-                                   'time left: {:.2f}h'
-                    print(print_string.format(step, examples_per_sec, loss_value_generator, time_sofar,
-                                              training_time_left))
-                    summary_str = sess.run(summary_op)
-                    summary_writer.add_summary(summary_str, global_step=step)
-                if step and step % 10000 == 0:
-                    train_saver.save(sess, args.log_directory + '/' + args.model_name + '/model', global_step=step)
-
-            train_saver.save(sess, args.log_directory + '/' + args.model_name + '/model', global_step=num_total_steps)
+        train_saver.save(sess, args.log_directory + '/' + args.model_name + '/model', global_step=num_total_steps)
 
     def model_validate(params):
         """Test function."""
