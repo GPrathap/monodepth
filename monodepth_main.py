@@ -40,7 +40,7 @@ parser.add_argument('--data_path',                 type=str,   help='path to the
 parser.add_argument('--filenames_file',            type=str,   help='path to the filenames text file', default="./utils/filenames/kitti_train_files.txt")
 parser.add_argument('--input_height',              type=int,   help='input height', default=256)
 parser.add_argument('--input_width',               type=int,   help='input width', default=512)
-parser.add_argument('--batch_size',                type=int,   help='batch size', default=64)
+parser.add_argument('--batch_size',                type=int,   help='batch size', default=32)
 parser.add_argument('--num_epochs',                type=int,   help='number of epochs', default=50)
 parser.add_argument('--learning_rate',             type=float, help='initial learning rate', default=1e-4)
 parser.add_argument('--lr_loss_weight',            type=float, help='left-right consistency weight', default=1.0)
@@ -252,15 +252,15 @@ def train(params):
 
         print('done.')
 
-    print('writing disparities.')
-    if args.output_directory == '':
-        output_directory = os.path.dirname(args.checkpoint_path)
-    else:
-        output_directory = args.output_directory
-    np.save(output_directory + '/disparities.npy',    disparities)
-    np.save(output_directory + '/disparities_pp.npy', disparities_pp)
+        print('writing disparities.')
+        if args.output_directory == '':
+            output_directory = os.path.dirname(args.checkpoint_path)
+        else:
+            output_directory = args.output_directory
+        np.save(output_directory + '/disparities.npy',    disparities)
+        np.save(output_directory + '/disparities_pp.npy', disparities_pp)
 
-    print('done.')
+        print('done.')
 
 def main():
     params = monodepth_parameters(
