@@ -106,25 +106,25 @@ def train(params):
     """Training loop."""
 
     with tf.Graph().as_default(), tf.device('/cpu:0'):
-
+        print("--------------1--------------")
         global_step = tf.Variable(0, trainable=False)
 
         # OPTIMIZER
         num_training_samples = count_text_lines(args.filenames_file)
-
+        print("--------------1--------------")
         steps_per_epoch = np.ceil(num_training_samples / params.batch_size).astype(np.int32)
         num_total_steps = params.num_epochs * steps_per_epoch
         start_learning_rate = args.learning_rate
-
+        print("-------------2-------------")
         boundaries = [np.int32((3/5) * num_total_steps), np.int32((4/5) * num_total_steps)]
         values = [args.learning_rate, args.learning_rate / 2, args.learning_rate / 4]
         learning_rate = tf.train.piecewise_constant(global_step, boundaries, values)
-
+        print("-------------3-------------")
         print("Total number of samples: {}".format(num_training_samples))
         print("Total number of steps: {}".format(num_total_steps))
 
         z = tf.placeholder(tf.float32, [params.batch_size, params.z_dim], name='z_noise')
-
+        print("--------------4--------------")
         dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
         left = dataloader.left_image_batch
         right = dataloader.right_image_batch

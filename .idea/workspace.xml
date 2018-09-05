@@ -16,18 +16,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="kitti_archives_to_download_next.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/kitti_archives_to_download_next.txt">
+      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="4" selection-end-column="72" />
+            <state relative-caret-position="-378">
+              <caret line="91" column="14" selection-start-line="91" selection-start-column="14" selection-end-line="91" selection-end-column="14" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -44,10 +39,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/monodepth_main.py" />
         <option value="$PROJECT_DIR$/../utils/kitti_archives_to_download.txt" />
         <option value="$PROJECT_DIR$/../monodepth_main.py" />
         <option value="$PROJECT_DIR$/utils/kitti_archives_to_download_next.txt" />
+        <option value="$PROJECT_DIR$/monodepth_main.py" />
       </list>
     </option>
   </component>
@@ -83,6 +78,12 @@
               <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
               <item name="monodepth" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="filenames" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -180,11 +181,26 @@
       <option name="project" value="LOCAL" />
       <updated>1536123095691</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="adding the .gitignore file">
+      <created>1536123105826</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1536123105826</updated>
+    </task>
+    <task id="LOCAL-00006" summary="setting dataset directory">
+      <created>1536157482798</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1536157482798</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-1" width="1922" height="1059" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -192,8 +208,8 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32925472" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3826474" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17395945" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3826474" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17395945" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -220,7 +236,8 @@
     <MESSAGE value="adding logger directory" />
     <MESSAGE value="adding new dataset" />
     <MESSAGE value="adding the .gitignore file" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding the .gitignore file" />
+    <MESSAGE value="setting dataset directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="setting dataset directory" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../monodepth_main.py" />
@@ -230,15 +247,29 @@
     <entry file="file://$PROJECT_DIR$/../average_gradients.py" />
     <entry file="file://$PROJECT_DIR$/../monodepth_main.py" />
     <entry file="file://$PROJECT_DIR$/../utils/kitti_archives_to_download.txt" />
-    <entry file="file://$PROJECT_DIR$/utils/kitti_archives_to_download_next.txt">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="4" selection-end-column="72" />
+        <state relative-caret-position="378">
+          <caret line="14" column="2" lean-forward="true" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/utils/kitti_archives_to_download_next.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_files.txt">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-378">
+          <caret line="91" column="14" selection-start-line="91" selection-start-column="14" selection-end-line="91" selection-end-column="14" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
