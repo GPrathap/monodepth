@@ -111,7 +111,7 @@ def train(params):
         left_splits_fake = tf.split(model_generator.get_model(), args.num_gpus, 0)
         right_splits = tf.split(right, args.num_gpus, 0)
 
-        with tf.device('/gpu:%d' % 0):
+        with tf.device('/device:GPU:0'):
 
             model_real = MonodepthModel(params, args.mode, left_splits[0],
                                                       right_splits[0], reuse_variables, 0)
@@ -154,6 +154,7 @@ def train(params):
 
             # SESSION
             config = tf.ConfigProto(allow_soft_placement=True)
+            config.gpu_options.allow_growth = True
             sess = tf.Session(config=config)
 
             # SAVER

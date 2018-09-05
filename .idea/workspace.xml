@@ -20,8 +20,11 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1080">
-              <caret line="32" column="84" selection-start-line="32" selection-start-column="84" selection-end-line="32" selection-end-column="84" />
+            <state relative-caret-position="494">
+              <caret line="156" column="50" selection-start-line="156" selection-start-column="50" selection-end-line="156" selection-end-column="50" />
+              <folding>
+                <element signature="e#472#481#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -247,7 +250,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536158615322</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fixing a bug">
+      <created>1536159161883</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1536159161883</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixing a bug">
+      <created>1536159266549</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1536159266549</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -259,7 +276,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32925472" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.15684094" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3826474" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17395945" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -290,7 +307,8 @@
     <MESSAGE value="adding the .gitignore file" />
     <MESSAGE value="setting dataset directory" />
     <MESSAGE value="adding debug logs" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding debug logs" />
+    <MESSAGE value="fixing a bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing a bug" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../monodepth_main.py" />
@@ -333,8 +351,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1080">
-          <caret line="32" column="84" selection-start-line="32" selection-start-column="84" selection-end-line="32" selection-end-column="84" />
+        <state relative-caret-position="494">
+          <caret line="156" column="50" selection-start-line="156" selection-start-column="50" selection-end-line="156" selection-end-column="50" />
+          <folding>
+            <element signature="e#472#481#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
