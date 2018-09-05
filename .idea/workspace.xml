@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +21,8 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="203" column="76" lean-forward="true" selection-start-line="203" selection-start-column="76" selection-end-line="203" selection-end-column="76" />
+            <state relative-caret-position="342">
+              <caret line="46" column="82" lean-forward="true" selection-start-line="46" selection-start-column="82" selection-end-line="46" selection-end-column="82" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -86,12 +87,13 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>monodepth</find>
-      <find>log_directory</find>
       <find>num_gpus</find>
       <find>jpg</find>
       <find>image_manifold_size</find>
       <find>summary</find>
       <find>summary_op</find>
+      <find>log_directory</find>
+      <find>disparities</find>
     </findStrings>
     <replaceStrings>
       <replace>png</replace>
@@ -367,11 +369,25 @@
       <option name="project" value="LOCAL" />
       <updated>1536161608536</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fixing a bug">
+      <created>1536169411970</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1536169411970</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fixing a bug">
+      <created>1536169701795</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1536169701795</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-1" width="1922" height="1059" extended-state="7" />
+    <frame x="-1" y="-1" width="1922" height="1059" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -482,8 +498,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="203" column="76" lean-forward="true" selection-start-line="203" selection-start-column="76" selection-end-line="203" selection-end-column="76" />
+        <state relative-caret-position="342">
+          <caret line="46" column="82" lean-forward="true" selection-start-line="46" selection-start-column="82" selection-end-line="46" selection-end-column="82" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>
