@@ -266,7 +266,7 @@ def model_validate(params):
     num_test_samples = count_text_lines(args.filenames_file)
 
     print('now testing {} files'.format(num_test_samples))
-    disparities    = np.zeros((num_test_samples, params.height, params.width), dtype=np.float32)
+    disparities = np.zeros((num_test_samples, params.height, params.width), dtype=np.float32)
     disparities_pp = np.zeros((num_test_samples, params.height, params.width), dtype=np.float32)
     for step in range(num_test_samples):
         disp = sess.run(model.disp_left_est[0])
