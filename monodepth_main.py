@@ -105,7 +105,7 @@ def train(params):
         fake_generated_left_image = []
         reuse_variables = tf.AUTO_REUSE
         # split for each gpu
-        model_generator = MonodepthGenerateModel(params, args.mode, z, reuse_variables, 80)
+        model_generator = MonodepthGenerateModel(params, args.mode, z, reuse_variables, 0)
 
         left_splits = tf.split(left,  args.num_gpus, 0)
         left_splits_fake = tf.split(model_generator.get_model(), args.num_gpus, 0)
