@@ -35,7 +35,7 @@ parser.add_argument('--mode',                      type=str,   help='train or te
 parser.add_argument('--model_name',                type=str,   help='model name', default='monodepth')
 parser.add_argument('--encoder',                   type=str,   help='type of encoder, vgg or resnet50', default='vgg')
 parser.add_argument('--dataset',                   type=str,   help='dataset to train on, kitti, or cityscapes', default='kitti')
-parser.add_argument('--z_dim',                     type=int,   help=' default set to 100', default=100)
+parser.add_argument('--z_dim',                     type=int,   help='default set to 100', default=100)
 parser.add_argument('--data_path',                 type=str,   help='path to the data', default="/home/a.gabdullin/geesara/2011_kia/")
 parser.add_argument('--filenames_file',            type=str,   help='path to the filenames text file', default="./utils/filenames/kitti_train_files.txt")
 parser.add_argument('--input_height',              type=int,   help='input height', default=256)
@@ -192,8 +192,8 @@ def train(params):
 
             duration = time.time() - before_op_time
             if step and step % 100 == 0:
-                save_images(generated_images, image_manifold_size(generated_images.shape[0]),
-                            './{}/train_{:02d}_{:04d}.png'.format(config.sample_dir, step, 1))
+                # save_images(generated_images, image_manifold_size(generated_images.shape[0]),
+                #             './{}/train_{:02d}_{:04d}.png'.format(config.sample_dir, step, 1))
                 examples_per_sec = params.batch_size / duration
                 time_sofar = (time.time() - start_time) / 3600
                 training_time_left = (num_total_steps / step - 1.0) * time_sofar
