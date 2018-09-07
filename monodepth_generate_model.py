@@ -47,6 +47,9 @@ class MonodepthGenerateModel(object):
         self.g_bn1 = batch_norm(name='g_bn1')
         self.g_bn2 = batch_norm(name='g_bn2')
         self.g_bn3 = batch_norm(name='g_bn3')
+        self.g_bn4 = batch_norm(name='g_bn4')
+        self.g_bn5 = batch_norm(name='g_bn5')
+        self.g_bn6 = batch_norm(name='g_bn6')
         self.build_model()
         self.build_summaries()
 
@@ -109,16 +112,16 @@ class MonodepthGenerateModel(object):
             h1 = tf.nn.elu(self.g_bn1(h1, train=False))
 
             h1 = self.deconv2d(h1, [self.batch_size, s_h16, s_w16, self.gf_dim *8], name='g_h2')
-            h1 = tf.nn.elu(self.g_bn1(h1, train=False))
+            h1 = tf.nn.elu(self.g_bn2(h1, train=False))
 
             h1 = self.deconv2d(h1, [self.batch_size, s_h8, s_w8, self.gf_dim * 4], name='g_h3')
-            h1 = tf.nn.elu(self.g_bn1(h1, train=False))
+            h1 = tf.nn.elu(self.g_bn3(h1, train=False))
 
             h2 = self.deconv2d(h1, [self.batch_size, s_h4, s_w4, self.gf_dim * 2], name='g_h4')
-            h2 = tf.nn.elu(self.g_bn2(h2, train=False))
+            h2 = tf.nn.elu(self.g_bn4(h2, train=False))
 
             h3 = self.deconv2d(h2, [self.batch_size, s_h2, s_w2, self.gf_dim * 1], name='g_h5')
-            h3 = tf.nn.elu(self.g_bn3(h3, train=False))
+            h3 = tf.nn.elu(self.g_bn5(h3, train=False))
 
             h4 = self.deconv2d(h3, [self.batch_size, s_h, s_w, self.c_dim], name='g_h6')
 
@@ -141,26 +144,25 @@ class MonodepthGenerateModel(object):
             self.z_, [-1, s_h64, s_w64, self.gf_dim * 32])
         h0 = tf.nn.elu(self.g_bn0(self.h0))
 
-
         self.h11, self.h11_w, self.h11_b = self.deconv2d(
             h0, [self.batch_size, s_h32, s_w32, self.gf_dim * 16], name='g_h1', with_w=True)
         h11 = tf.nn.elu(self.g_bn1(self.h11))
 
         self.h12, self.h12_w, self.h12_b = self.deconv2d(
             h11, [self.batch_size, s_h16, s_w16, self.gf_dim * 8], name='g_h2', with_w=True)
-        h12 = tf.nn.elu(self.g_bn1(self.h12))
+        h12 = tf.nn.elu(self.g_bn2(self.h12))
 
         self.h13, self.h13_w, self.h13_b = self.deconv2d(
             h12, [self.batch_size, s_h8, s_w8, self.gf_dim * 4], name='g_h3', with_w=True)
-        h13 = tf.nn.elu(self.g_bn1(self.h13))
+        h13 = tf.nn.elu(self.g_bn3(self.h13))
 
         h2, self.h2_w, self.h2_b = self.deconv2d(
             h13, [self.batch_size, s_h4, s_w4, self.gf_dim * 2], name='g_h4', with_w=True)
-        h2 = tf.nn.elu(self.g_bn2(h2))
+        h2 = tf.nn.elu(self.g_bn4(h2))
 
         h3, self.h3_w, self.h3_b = self.deconv2d(
             h2, [self.batch_size, s_h2, s_w2, self.gf_dim * 1], name='g_h5', with_w=True)
-        h3 = tf.nn.elu(self.g_bn3(h3))
+        h3 = tf.nn.elu(self.g_bn5(h3))
 
         h4, self.h4_w, self.h4_b = self.deconv2d(
             h3, [self.batch_size, s_h, s_w, self.c_dim], name='g_h6', with_w=True)
