@@ -181,7 +181,7 @@ def train(params):
             before_op_time = time.time()
 
             batch_z = np.random.uniform(low=-1, high=1, size=(params.batch_size, params.z_dim)).astype(np.float32)
-            _, loss_value_discriminator, images_original = sess.run([d_optim, total_loss_discriminator, model_real.right], feed_dict={z: batch_z})
+            _, loss_value_discriminator, images_original = sess.run([d_optim, total_loss_discriminator, dataloader.left_image_batch], feed_dict={z: batch_z})
             print("size-------> {}".format(images_original))
             _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
                                                feed_dict={z: batch_z})
