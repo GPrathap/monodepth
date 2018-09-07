@@ -47,11 +47,11 @@ class MonodepthDataloader(object):
         if mode == 'train':
             # randomly flip images
             do_flip = tf.random_uniform([], 0, 1)
-            left_image  = tf.cond(do_flip > 0.5, lambda: tf.image.flip_left_right(right_image_o), lambda: left_image_o)
+            left_image = tf.cond(do_flip > 0.5, lambda: tf.image.flip_left_right(right_image_o), lambda: left_image_o)
             right_image = tf.cond(do_flip > 0.5, lambda: tf.image.flip_left_right(left_image_o),  lambda: right_image_o)
 
             # randomly augment images
-            do_augment  = tf.random_uniform([], 0, 1)
+            do_augment = tf.random_uniform([], 0, 1)
             left_image, right_image = tf.cond(do_augment > 0.5, lambda: self.augment_image_pair(left_image, right_image)
                                               , lambda: (left_image, right_image))
 
@@ -115,3 +115,4 @@ class MonodepthDataloader(object):
         image  = tf.image.resize_images(image,  [self.params.height, self.params.width], tf.image.ResizeMethod.AREA)
 
         return image
+

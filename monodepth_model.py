@@ -46,6 +46,7 @@ class MonodepthModel(object):
         self.mode = mode
         self.left = left
         self.right = right
+        print("size-------> {}".format(self.right[0][0]))
         self.model_collection = ['model_' + str(model_index)]
         self.width = self.params.width
         self.height = self.params.height
@@ -87,6 +88,7 @@ class MonodepthModel(object):
     def scale_pyramid(self, img, num_scales):
         scaled_imgs = [img]
         s = tf.shape(img)
+        print(img[0])
         h = s[1]
         w = s[2]
         for i in range(num_scales - 1):
