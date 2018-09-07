@@ -181,15 +181,16 @@ def train(params):
             before_op_time = time.time()
 
             batch_z = np.random.uniform(low=-1, high=1, size=(params.batch_size, params.z_dim)).astype(np.float32)
-            _, loss_value_discriminator, images_original = sess.run([d_optim, total_loss_discriminator, dataloader.left_image_batch], feed_dict={z: batch_z})
-            print("size-------> {}".format(images_original))
+            _, loss_value_discriminator = sess.run([d_optim, total_loss_discriminator], feed_dict={z: batch_z})
+            # _, loss_value_discriminator, images_original = sess.run([d_optim, total_loss_discriminator, dataloader.left_image_batch], feed_dict={z: batch_z})
+            # print("size-------> {}".format(images_original))
             _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
                                                feed_dict={z: batch_z})
 
             duration = time.time() - before_op_time
             if step and step % 100 == 0:
-                save_images(generated_images, image_manifold_size(generated_images.shape[0]),
-                            './{}/train_{:02d}_{:04d}.png'.format(config.sample_dir, step, 1))
+                # save_images(generated_images, image_manifold_size(generated_images.shape[0]),
+                #             './{}/train_{:02d}_{:04d}.png'.format(config.sample_dir, step, 1))
                 examples_per_sec = params.batch_size / duration
                 time_sofar = (time.time() - start_time) / 3600
                 training_time_left = (num_total_steps / step - 1.0) * time_sofar

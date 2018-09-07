@@ -111,8 +111,8 @@ class MonodepthDataloader(object):
             crop_height = (o_height * 4) // 5
             image  =  image[:crop_height,:,:]
 
-        image  = tf.image.convert_image_dtype(image,  tf.float32)
-        image  = tf.image.resize_images(image,  [self.params.height, self.params.width], tf.image.ResizeMethod.AREA)
+        image = tf.image.convert_image_dtype(image,  tf.float32)
+        image = tf.image.resize_images(image,  [self.params.height, self.params.width], tf.image.ResizeMethod.AREA)
 
         return image
 
