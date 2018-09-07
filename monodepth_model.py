@@ -46,7 +46,6 @@ class MonodepthModel(object):
         self.mode = mode
         self.left = left
         self.right = right
-        print("size-------> {}".format(self.right[0][0]))
         self.model_collection = ['model_' + str(model_index)]
         self.width = self.params.width
         self.height = self.params.height

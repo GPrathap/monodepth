@@ -179,6 +179,7 @@ def train(params):
         start_time = time.time()
         for step in range(start_step, num_total_steps):
             before_op_time = time.time()
+            print("size-------> {}".format(model_real.right[0][0]))
             batch_z = np.random.uniform(low=-1, high=1, size=(params.batch_size, params.z_dim)).astype(np.float32)
             _, loss_value_discriminator = sess.run([d_optim, total_loss_discriminator], feed_dict={z: batch_z})
             _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
