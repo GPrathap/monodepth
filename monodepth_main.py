@@ -148,7 +148,7 @@ def train(params):
         # SESSION
         config = tf.ConfigProto(allow_soft_placement=True)
         config.gpu_options.allow_growth = True
-        config.log_device_placement = True
+        config.log_device_placement = False
         sess = tf.Session(config=config)
 
         # SAVER
