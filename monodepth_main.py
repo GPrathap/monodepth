@@ -184,7 +184,8 @@ def train(params):
             _, loss_value_discriminator = sess.run([d_optim, total_loss_discriminator], feed_dict={z: batch_z})
             # _, loss_value_discriminator, images_original = sess.run([d_optim, total_loss_discriminator, dataloader.left_image_batch], feed_dict={z: batch_z})
             # print("size-------> {}".format(images_original))
-            _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
+            for _ in range(3):
+                _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
                                                feed_dict={z: batch_z})
 
             duration = time.time() - before_op_time
