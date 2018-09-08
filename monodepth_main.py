@@ -56,6 +56,7 @@ parser.add_argument('--log_directory',             type=str,   help='directory t
 parser.add_argument('--checkpoint_path',           type=str,   help='path to a specific checkpoint to load', default='')
 parser.add_argument('--retrain',                               help='if used with checkpoint_path, will restart training from step zero', action='store_true')
 parser.add_argument('--full_summary',                          help='if set, will keep more data for each summary. Warning: the file can become very large', action='store_true')
+parser.add_argument('--sample_dir',                type=str,   help='sample directory', default='./dataset/images')
 
 args = parser.parse_args()
 
@@ -177,6 +178,8 @@ def train(params):
         # GO!
         start_step = global_step.eval(session=sess)
         start_time = time.time()
+        sample_dataset = np.random.uniform(low=-1, high=1, size=(16, params.z_dim)).astype(np.float32)
+
         for step in range(start_step, num_total_steps):
             before_op_time = time.time()
 
@@ -187,11 +190,13 @@ def train(params):
             for _ in range(3):
                 _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
                                                feed_dict={z: batch_z})
-
             duration = time.time() - before_op_time
             if step and step % 100 == 0:
-                # save_images(generated_images, image_manifold_size(generated_images.shape[0]),
-                #             './{}/train_{:02d}_{:04d}.png'.format(config.sample_dir, step, 1))
+                _, loss_value_generator, generated_images = sess.run(
+                    [g_optim, total_loss_generator, model_generator.samplter_network],
+                    feed_dict={z: sample_dataset})
+                save_images(generated_images, image_manifold_size(generated_images.shape[0]),
+                             './{}/train_{:02d}_{:04d}.png'.format(params.sample_dir, step, 1))
                 examples_per_sec = params.batch_size / duration
                 time_sofar = (time.time() - start_time) / 3600
                 training_time_left = (num_total_steps / step - 1.0) * time_sofar
