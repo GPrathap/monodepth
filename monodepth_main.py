@@ -280,6 +280,7 @@ def main():
         disp_gradient_loss_weight=args.disp_gradient_loss_weight,
         lr_loss_weight=args.lr_loss_weight,
         full_summary=args.full_summary,
+        sample_dir=args.sample_dir,
         z_dim=100)
 
     if args.mode == 'train':
