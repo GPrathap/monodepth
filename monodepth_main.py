@@ -196,7 +196,7 @@ def train(params):
                     [g_optim, total_loss_generator, model_generator.samplter_network],
                     feed_dict={z: sample_dataset})
                 save_images(generated_images, image_manifold_size(generated_images.shape[0]),
-                             './{}/train_{:02d}_{:04d}.png'.format(params.sample_dir, step, 1))
+                             '{}/train_{:02d}_{:04d}.png'.format(params.sample_dir, step, 1))
                 examples_per_sec = params.batch_size / duration
                 time_sofar = (time.time() - start_time) / 3600
                 training_time_left = (num_total_steps / step - 1.0) * time_sofar
