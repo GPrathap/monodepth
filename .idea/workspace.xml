@@ -4,7 +4,6 @@
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/monodepth_generate_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_generate_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/monodepth_model.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2352">
-              <caret line="151" column="38" lean-forward="true" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
+              <caret line="151" column="38" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -62,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/temp.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="404">
-              <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="30" />
+              <caret line="17" column="30" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -70,8 +69,17 @@
       <file leaf-file-name="monodepth_generate_model.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_generate_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="164" column="49" lean-forward="true" selection-start-line="164" selection-start-column="49" selection-end-line="164" selection-end-column="49" />
+            <state relative-caret-position="574">
+              <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Batch_Norm.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Batch_Norm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -109,6 +117,7 @@
       <find>tf.nn.elu</find>
       <find>relu</find>
       <find>gf_dim</find>
+      <find>g_bn0</find>
     </findStrings>
     <replaceStrings>
       <replace>png</replace>
@@ -472,7 +481,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536348977155</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="tuning hyper parameters">
+      <created>1536353278594</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1536353278594</updated>
+    </task>
+    <task id="LOCAL-00032" summary="tuning hyper parameters">
+      <created>1536353868797</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1536353868797</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -658,7 +681,7 @@
     <entry file="file://$PROJECT_DIR$/temp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="404">
-          <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="30" />
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -672,7 +695,7 @@
     <entry file="file://$PROJECT_DIR$/monodepth_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2352">
-          <caret line="151" column="38" lean-forward="true" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
+          <caret line="151" column="38" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -693,10 +716,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Batch_Norm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_generate_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="164" column="49" lean-forward="true" selection-start-line="164" selection-start-column="49" selection-end-line="164" selection-end-column="49" />
+        <state relative-caret-position="574">
+          <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
         </state>
       </provider>
     </entry>

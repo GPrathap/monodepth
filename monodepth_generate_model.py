@@ -101,17 +101,17 @@ class MonodepthGenerateModel(object):
             s_h8, s_w8 = self.conv_out_size_same(s_h4, 2), self.conv_out_size_same(s_w4, 2)
             s_h16, s_w16 = self.conv_out_size_same(s_h8, 2), self.conv_out_size_same(s_w8, 2)
             s_h32, s_w32 = self.conv_out_size_same(s_h16, 2), self.conv_out_size_same(s_w16, 2)
-            s_h64, s_w64 = self.conv_out_size_same(s_h32, 2), self.conv_out_size_same(s_w32, 2)
+            # s_h64, s_w64 = self.conv_out_size_same(s_h32, 2), self.conv_out_size_same(s_w32, 2)
 
             # project `z` and reshape
-            h0 = tf.reshape( self.linear(z, self.gf_dim * 32 * s_h64 * s_w64, 'g_h0_lin'),
-                [-1, s_h64, s_w64, self.gf_dim * 32])
+            h0 = tf.reshape( self.linear(z, self.gf_dim * 16 * s_h32 * s_w32, 'g_h0_lin'),
+                [-1, s_h32, s_w32, self.gf_dim * 16])
             h0 = tf.nn.elu(self.g_bn0(h0, train=False))
 
-            h1 = self.deconv2d(h0, [self.batch_size, s_h32, s_w32, self.gf_dim * 16], name='g_h1')
-            h1 = tf.nn.elu(self.g_bn1(h1, train=False))
+            # h1 = self.deconv2d(h0, [self.batch_size, s_h32, s_w32, self.gf_dim * 16], name='g_h1')
+            # h1 = tf.nn.elu(self.g_bn1(h1, train=False))
 
-            h1 = self.deconv2d(h1, [self.batch_size, s_h16, s_w16, self.gf_dim *8], name='g_h2')
+            h1 = self.deconv2d(h0, [self.batch_size, s_h16, s_w16, self.gf_dim *8], name='g_h2')
             h1 = tf.nn.elu(self.g_bn2(h1, train=False))
 
             h1 = self.deconv2d(h1, [self.batch_size, s_h8, s_w8, self.gf_dim * 4], name='g_h3')
@@ -135,21 +135,20 @@ class MonodepthGenerateModel(object):
         s_h8, s_w8 = self.conv_out_size_same(s_h4, 2), self.conv_out_size_same(s_w4, 2)
         s_h16, s_w16 = self.conv_out_size_same(s_h8, 2), self.conv_out_size_same(s_w8, 2)
         s_h32, s_w32 = self.conv_out_size_same(s_h16, 2), self.conv_out_size_same(s_w16, 2)
-        s_h64, s_w64 = self.conv_out_size_same(s_h32, 2), self.conv_out_size_same(s_w32, 2)
+        # s_h64, s_w64 = self.conv_out_size_same(s_h32, 2), self.conv_out_size_same(s_w32, 2)
 
         self.z_, self.h0_w, self.h0_b = self.linear(
-            z, self.gf_dim * 32 * s_h64 * s_w64, 'g_h0_lin', with_w=True)
+            z, self.gf_dim * 16 * s_h32 * s_w32, 'g_h0_lin', with_w=True)
 
-        self.h0 = tf.reshape(
-            self.z_, [-1, s_h64, s_w64, self.gf_dim * 32])
+        self.h0 = tf.reshape(self.z_, [-1, s_h32, s_w32, self.gf_dim * 16])
         h0 = tf.nn.elu(self.g_bn0(self.h0))
 
-        self.h11, self.h11_w, self.h11_b = self.deconv2d(
-            h0, [self.batch_size, s_h32, s_w32, self.gf_dim * 16], name='g_h1', with_w=True)
-        h11 = tf.nn.elu(self.g_bn1(self.h11))
+        # self.h11, self.h11_w, self.h11_b = self.deconv2d(
+        #     h0, [self.batch_size, s_h32, s_w32, self.gf_dim * 16], name='g_h1', with_w=True)
+        # h11 = tf.nn.elu(self.g_bn1(self.h11))
 
         self.h12, self.h12_w, self.h12_b = self.deconv2d(
-            h11, [self.batch_size, s_h16, s_w16, self.gf_dim * 8], name='g_h2', with_w=True)
+            h0, [self.batch_size, s_h16, s_w16, self.gf_dim * 8], name='g_h2', with_w=True)
         h12 = tf.nn.elu(self.g_bn2(self.h12))
 
         self.h13, self.h13_w, self.h13_b = self.deconv2d(
