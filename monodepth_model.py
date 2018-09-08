@@ -36,6 +36,7 @@ monodepth_parameters = namedtuple('parameters',
                         'alpha_image_loss, '
                         'disp_gradient_loss_weight, '
                         'lr_loss_weight, '
+                        'sample_dir, '
                         'z_dim, '
                         'full_summary')
 
