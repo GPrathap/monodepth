@@ -85,8 +85,13 @@ def transform(image, input_height, input_width,
     cropped_image = scipy.misc.imresize(image, [resize_height, resize_width])
   return np.array(cropped_image)/127.5 - 1.
 
-def inverse_transform(images):
-  return (images+1.)/2.
+def inverse_transform(images, is_apply=False):
+  if is_apply:
+    return (images+1.)/2.
+  else:
+    return images
+
+
 
 def to_json(output_path, *layers):
   with open(output_path, "w") as layer_f:
@@ -243,8 +248,10 @@ def visualize(sess, dcgan, config, option):
 
 
 def image_manifold_size(num_images):
-  manifold_h = int(np.floor(np.sqrt(num_images)))
-  manifold_w = int(np.ceil(np.sqrt(num_images)))
+  # manifold_h = int(np.floor(np.sqrt(num_images)))
+  # manifold_w = int(np.ceil(np.sqrt(num_images)))
+  manifold_h = 4
+  manifold_w = 2
   print(" height {} width {} number  of images {}".format(manifold_h, manifold_w, num_images))
   assert manifold_h * manifold_w == num_images
   return manifold_h, manifold_w

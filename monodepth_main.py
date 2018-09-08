@@ -178,7 +178,7 @@ def train(params):
         # GO!
         start_step = global_step.eval(session=sess)
         start_time = time.time()
-        sample_dataset = np.random.uniform(low=-1, high=1, size=(16, params.z_dim)).astype(np.float32)
+        sample_dataset = np.random.uniform(low=-1, high=1, size=(params.batch_size, params.z_dim)).astype(np.float32)
 
         for step in range(start_step, num_total_steps):
             before_op_time = time.time()
