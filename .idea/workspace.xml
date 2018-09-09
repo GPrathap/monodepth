@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/monodepth_main_new_loss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wloss.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monodepth_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
-    </list>
+    <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,8 +30,8 @@
       <file leaf-file-name="monodepth_main_new_loss.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main_new_loss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1188">
-              <caret line="315" column="39" selection-start-line="315" selection-start-column="30" selection-end-line="315" selection-end-column="39" />
+            <state relative-caret-position="675">
+              <caret line="138" column="82" selection-start-line="138" selection-start-column="71" selection-end-line="138" selection-end-column="82" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -561,7 +554,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536415233960</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="tuning hyper parameters">
+      <created>1536525341943</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1536525341943</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -838,8 +838,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main_new_loss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1188">
-          <caret line="315" column="39" selection-start-line="315" selection-start-column="30" selection-end-line="315" selection-end-column="39" />
+        <state relative-caret-position="675">
+          <caret line="138" column="82" selection-start-line="138" selection-start-column="71" selection-end-line="138" selection-end-column="82" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>

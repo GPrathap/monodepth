@@ -97,7 +97,7 @@ def data_preprocessing_for_wasserstein_loss(real_data, generated_data):
     # if generated_data.shape.ndims is None:
     #     raise ValueError('`generated_data` can\'t have unknown rank.')
 
-    differences = generated_data - real_data
+    differences = tf.subtract(generated_data, real_data)
     batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
     alpha_shape = [batch_size] + [1] * (differences.shape.ndims - 1)
     alpha = random_ops.random_uniform(shape=alpha_shape)
