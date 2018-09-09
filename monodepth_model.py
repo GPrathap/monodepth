@@ -248,6 +248,7 @@ class MonodepthModel(object):
             concat1 = tf.concat([upconv1, udisp2], 3)
             iconv1 = conv(concat1,   16, 3, 1)
             self.disp1 = self.get_disp(iconv1)
+            self.logistic = iconv1
             self.classification = tf.nn.sigmoid(iconv1)
 
     def build_resnet50(self):
@@ -305,6 +306,7 @@ class MonodepthModel(object):
             concat1 = tf.concat([upconv1, udisp2], 3)
             iconv1 = conv(concat1,   16, 3, 1)
             self.disp1 = self.get_disp(iconv1)
+            self.logistic = iconv1
             self.classification = tf.nn.sigmoid(iconv1)
 
     def build_model(self):
