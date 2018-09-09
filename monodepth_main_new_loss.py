@@ -92,10 +92,10 @@ def count_text_lines(file_path):
     return len(lines)
 
 def data_preprocessing_for_wasserstein_loss(real_data, generated_data):
-    if real_data.shape.ndims is None:
-        raise ValueError('`real_data` can\'t have unknown rank.')
-    if generated_data.shape.ndims is None:
-        raise ValueError('`generated_data` can\'t have unknown rank.')
+    # if real_data.shape.ndims is None:
+    #     raise ValueError('`real_data` can\'t have unknown rank.')
+    # if generated_data.shape.ndims is None:
+    #     raise ValueError('`generated_data` can\'t have unknown rank.')
 
     differences = generated_data - real_data
     batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
