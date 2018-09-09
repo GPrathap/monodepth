@@ -149,8 +149,8 @@ def train(params):
         #loss_discriminator_fake = model_fake.discriminator_total_loss
 
         gradients = gradients_impl.gradients(model_real.logistic, left_splits_gradient)[0]
-        gradient_squares = math_ops.reduce_sum(
-            math_ops.square(gradients), axis=list(range(1, gradients.shape.ndims)))
+        gradients_sqrt = math_ops.square(gradients)
+        gradient_squares = math_ops.reduce_sum(gradients_sqrt, axis=list(range(1, gradients.shape.ndims)))
 
         if isinstance(params.batch_size, int):
             gradient_squares.set_shape([params.batch_size] + gradient_squares.shape.as_list()[1:])
