@@ -23,6 +23,7 @@ import tensorflow.contrib.slim as slim
 histogram_summary = tf.summary.histogram
 from Batch_Norm import batch_norm
 from bilinear_sampler import *
+layers = tf.contrib.layers
 
 monodepth_parameters = namedtuple('parameters', 
                         'encoder, '
@@ -249,7 +250,8 @@ class MonodepthModel(object):
             iconv1 = conv(concat1,   16, 3, 1)
             self.disp1 = self.get_disp(iconv1)
             self.logistic = iconv1
-            self.classification = tf.nn.sigmoid(iconv1)
+            # self.classification = tf.nn.sigmoid(iconv1)
+            self.classification = layers.linear(iconv1, 1)
 
     def build_resnet50(self):
         #set convenience functions
@@ -307,7 +309,8 @@ class MonodepthModel(object):
             iconv1 = conv(concat1,   16, 3, 1)
             self.disp1 = self.get_disp(iconv1)
             self.logistic = iconv1
-            self.classification = tf.nn.sigmoid(iconv1)
+            # self.classification = tf.nn.sigmoid(iconv1)
+            self.classification = layers.linear(iconv1, 1)
 
     def build_model(self):
         with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], activation_fn=tf.nn.elu):

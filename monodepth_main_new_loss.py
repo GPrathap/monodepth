@@ -136,7 +136,7 @@ def train(params):
         left_splits_fake = tf.split(model_generator.get_model(), args.num_gpus, 0)
         right_splits = tf.split(right, args.num_gpus, 0)
 
-        left_splits_gradient = data_preprocessing_for_wasserstein_loss(left_splits, left_splits_fake)
+        # left_splits_gradient = data_preprocessing_for_wasserstein_loss(left_splits, left_splits_fake)
 
         model_real = MonodepthModel(params, args.mode, left_splits[0],
                                                   right_splits[0], reuse_variables, 0)
@@ -148,29 +148,29 @@ def train(params):
         fake_feature_set = model_fake.get_feature_set()
         #loss_discriminator_fake = model_fake.discriminator_total_loss
 
-        gradients = gradients_impl.gradients(model_real.logistic, left_splits_gradient)[0]
-        gradients_sqrt = math_ops.square(gradients)
-        gradient_squares = math_ops.reduce_sum(gradients_sqrt, axis=list(range(1, gradients.shape.ndims)))
-
-        if isinstance(params.batch_size, int):
-            gradient_squares.set_shape([params.batch_size] + gradient_squares.shape.as_list()[1:])
-        # For numerical stability, add epsilon to the sum before taking the square
+        # gradients = gradients_impl.gradients(model_real.classification, left_splits_gradient[0])[0]
+        # gradients_sqrt = math_ops.square(gradients)
+        # gradient_squares = math_ops.reduce_sum(gradients_sqrt, axis=list(range(1, gradients.shape.ndims)))
+        #
+        # if isinstance(params.batch_size, int):
+        #     gradient_squares.set_shape([params.batch_size] + gradient_squares.shape.as_list()[1:])
+        # # For numerical stability, add epsilon to the sum before taking the square
         # root. Note tf.norm does not add epsilon.
-        epsilon = 1e-10
-        target = 1.0
-        one_sided = False
-        weights = 1.0
-        scope = None
-        loss_collection = ops.GraphKeys.LOSSES
-        reduction = losses.Reduction.SUM_BY_NONZERO_WEIGHTS
-        slopes = math_ops.sqrt(gradient_squares + epsilon)
-        penalties = slopes / target - 1.0
-        if one_sided:
-            penalties = math_ops.maximum(0., penalties)
-        penalties_squared = math_ops.square(penalties)
-        penalty = losses.compute_weighted_loss(penalties_squared, weights, loss_collection=loss_collection, reduction=reduction)
+        # epsilon = 1e-10
+        # target = 1.0
+        # one_sided = False
+        # weights = 1.0
+        # scope = None
+        # loss_collection = ops.GraphKeys.LOSSES
+        # reduction = losses.Reduction.SUM_BY_NONZERO_WEIGHTS
+        # slopes = math_ops.sqrt(gradient_squares + epsilon)
+        # penalties = slopes / target - 1.0
+        # if one_sided:
+        #     penalties = math_ops.maximum(0., penalties)
+        # penalties_squared = math_ops.square(penalties)
+        # penalty = losses.compute_weighted_loss(penalties_squared, weights, loss_collection=loss_collection, reduction=reduction)
 
-        summary.scalar('gradient_penalty_loss', penalty)
+        # summary.scalar('gradient_penalty_loss', penalty)
 
 
 
@@ -190,7 +190,7 @@ def train(params):
         generator_loss = tf.nn.l2_loss((real_feature_set - fake_feature_set))
 
         total_loss_discriminator = tf.reduce_mean(loss_discriminator) + wasserstein_discriminator_loss(
-            model_real.classification, model_fake.classification) + penalty
+            model_real.classification, model_fake.classification)
 
         total_loss_generator = tf.reduce_mean(generator_loss) + wasserstein_generator_loss(model_fake.classification)
 
