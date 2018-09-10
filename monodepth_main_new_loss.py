@@ -107,11 +107,128 @@ def data_preprocessing_for_wasserstein_loss(real_data, generated_data):
 def em_loss(y_coefficients, y_pred):
     return tf.reduce_mean(tf.multiply(y_coefficients, y_pred))
 
+# Wasserstein losses from `Wasserstein GAN` (https://arxiv.org/abs/1701.07875).
+def wasserstein_generator_loss(
+    discriminator_gen_outputs,
+    weights=1.0,
+    scope=None,
+    loss_collection=ops.GraphKeys.LOSSES,
+    reduction=losses.Reduction.SUM_BY_NONZERO_WEIGHTS,
+    add_summaries=False):
+  with ops.name_scope(scope, 'generator_wasserstein_loss', (
+      discriminator_gen_outputs, weights)) as scope:
+    discriminator_gen_outputs = math_ops.to_float(discriminator_gen_outputs)
+
+    loss = - discriminator_gen_outputs
+    loss = losses.compute_weighted_loss(
+        loss, weights, scope, loss_collection, reduction)
+
+  summary.scalar('generator_wass_loss', loss)
+
+  return loss
+
+
+def wasserstein_discriminator_loss(
+    discriminator_real_outputs,
+    discriminator_gen_outputs,
+    real_weights=1.0,
+    generated_weights=1.0,
+    scope=None,
+    loss_collection=ops.GraphKeys.LOSSES,
+    reduction=losses.Reduction.SUM_BY_NONZERO_WEIGHTS,
+    add_summaries=False):
+  with ops.name_scope(scope, 'discriminator_wasserstein_loss', (
+      discriminator_real_outputs, discriminator_gen_outputs, real_weights,
+      generated_weights)) as scope:
+    discriminator_real_outputs = math_ops.to_float(discriminator_real_outputs)
+    discriminator_gen_outputs = math_ops.to_float(discriminator_gen_outputs)
+    discriminator_real_outputs.shape.assert_is_compatible_with(
+        discriminator_gen_outputs.shape)
+
+    loss_on_generated = losses.compute_weighted_loss(
+        discriminator_gen_outputs, generated_weights, scope,
+        loss_collection=None, reduction=reduction)
+    loss_on_real = losses.compute_weighted_loss(
+        discriminator_real_outputs, real_weights, scope, loss_collection=None,
+        reduction=reduction)
+    loss = loss_on_generated - loss_on_real
+    util.add_loss(loss, loss_collection)
+
+
+  summary.scalar('discriminator_gen_wass_loss', loss_on_generated)
+  summary.scalar('discriminator_real_wass_loss', loss_on_real)
+  summary.scalar('discriminator_wass_loss', loss)
+
+  return loss
+
+
+def wasserstein_gradient_penalty(
+    real_data,
+    generated_data,
+    generator_inputs,
+    discriminator_fn,
+    discriminator_scope,
+    epsilon=1e-10,
+    target=1.0,
+    one_sided=False,
+    weights=1.0,
+    scope=None,
+    loss_collection=ops.GraphKeys.LOSSES,
+    reduction=losses.Reduction.SUM_BY_NONZERO_WEIGHTS,
+    add_summaries=False):
+  with ops.name_scope(scope, 'wasserstein_gradient_penalty',
+                      (real_data, generated_data)) as scope:
+    real_data = ops.convert_to_tensor(real_data)
+    generated_data = ops.convert_to_tensor(generated_data)
+    if real_data.shape.ndims is None:
+      raise ValueError('`real_data` can\'t have unknown rank.')
+    if generated_data.shape.ndims is None:
+      raise ValueError('`generated_data` can\'t have unknown rank.')
+
+    differences = generated_data - real_data
+    batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
+    alpha_shape = [batch_size] + [1] * (differences.shape.ndims - 1)
+    alpha = random_ops.random_uniform(shape=alpha_shape)
+    interpolates = real_data + (alpha * differences)
+
+    with ops.name_scope(None):  # Clear scope so update ops are added properly.
+      # Reuse variables if variables already exists.
+      with variable_scope.variable_scope(discriminator_scope, 'gpenalty_dscope',
+                                         reuse=variable_scope.AUTO_REUSE):
+        disc_interpolates = discriminator_fn(interpolates, generator_inputs)
+
+    if isinstance(disc_interpolates, tuple):
+      # ACGAN case: disc outputs more than one tensor
+      disc_interpolates = disc_interpolates[0]
+
+    gradients = gradients_impl.gradients(disc_interpolates, interpolates)[0]
+    gradient_squares = math_ops.reduce_sum(
+        math_ops.square(gradients), axis=list(range(1, gradients.shape.ndims)))
+    # Propagate shape information, if possible.
+    if isinstance(batch_size, int):
+      gradient_squares.set_shape([
+          batch_size] + gradient_squares.shape.as_list()[1:])
+    # For numerical stability, add epsilon to the sum before taking the square
+    # root. Note tf.norm does not add epsilon.
+    slopes = math_ops.sqrt(gradient_squares + epsilon)
+    penalties = slopes / target - 1.0
+    if one_sided:
+      penalties = math_ops.maximum(0., penalties)
+    penalties_squared = math_ops.square(penalties)
+    penalty = losses.compute_weighted_loss(
+        penalties_squared, weights, scope=scope,
+        loss_collection=loss_collection, reduction=reduction)
+
+    if add_summaries:
+      summary.scalar('gradient_penalty_loss', penalty)
+
+    return penalty
+
+
 def train(params):
     """Training loop."""
     with tf.Graph().as_default(), tf.device('/device:GPU:0'):
         global_step = tf.Variable(0, trainable=False)
-
         # OPTIMIZER
         num_training_samples = count_text_lines(args.filenames_file)
         steps_per_epoch = np.ceil(num_training_samples / params.batch_size).astype(np.int32)
@@ -132,20 +249,44 @@ def train(params):
         reuse_variables = tf.AUTO_REUSE
         # split for each gpu
         model_generator = MonodepthGenerateModel(params, args.mode, z, reuse_variables, 0)
-        left_splits = tf.split(left,  args.num_gpus, 0)
-        left_splits_fake = tf.split(model_generator.get_model(), args.num_gpus, 0)
-        right_splits = tf.split(right, args.num_gpus, 0)
+        left_splits = tf.split(left,  args.num_gpus, 0)[0]
+        left_splits_fake = tf.split(model_generator.get_model(), args.num_gpus, 0)[0]
+        right_splits = tf.split(right, args.num_gpus, 0)[0]
 
         # left_splits_gradient = data_preprocessing_for_wasserstein_loss(left_splits, left_splits_fake)
 
-        model_real = MonodepthModel(params, args.mode, left_splits[0],
-                                                  right_splits[0], reuse_variables, 0)
+        # epsilon = tf.placeholder(tf.float32, shape=(params.batch_size, 1, 1, 1))
+        # wasserstein_gradient = epsilon * left_splits + (1.0 - epsilon) * left_splits_fake
+
+        model_real = MonodepthModel(params, args.mode, left_splits,
+                                                  right_splits, reuse_variables, 0)
         loss_discriminator_real = model_real.discriminator_total_loss
         real_feature_set = model_real.get_feature_set()
 
-        model_fake = MonodepthModel(params, args.mode, left_splits_fake[0], right_splits[0],
+        model_fake = MonodepthModel(params, args.mode, left_splits_fake, right_splits,
                                     reuse_variables, 10)
         fake_feature_set = model_fake.get_feature_set()
+
+        differences = tf.subtract(left_splits_fake, left_splits)
+        batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
+        alpha_shape = [batch_size] + [1] * (differences.shape.ndims - 1)
+        alpha = random_ops.random_uniform(shape=alpha_shape)
+        wasserstein_gradient = left_splits + (alpha * differences)
+
+        left_splits_wasserstein_model = MonodepthModel(params, args.mode, wasserstein_gradient,
+                                    right_splits, reuse_variables, 1)
+
+        gradients = tf.gradients(left_splits_wasserstein_model.logistic, [wasserstein_gradient])[0]
+        gradient_squares = math_ops.reduce_sum(
+            math_ops.square(gradients), axis=list(range(1, 1)))
+        # Propagate shape information, if possible.
+        if isinstance(batch_size, int):
+            gradient_squares.set_shape([batch_size] + gradient_squares.shape.as_list()[1:])
+        # For numerical stability, add epsilon to the sum before taking the square
+        # root. Note tf.norm does not add epsilon.
+
+        # _gradient_penalty = 10.0 * tf.square(tf.norm(gradients[0], ord=2) - 1.0)
+
         #loss_discriminator_fake = model_fake.discriminator_total_loss
 
         # gradients = gradients_impl.gradients(model_real.classification, left_splits_gradient[0])[0]
@@ -156,19 +297,19 @@ def train(params):
         #     gradient_squares.set_shape([params.batch_size] + gradient_squares.shape.as_list()[1:])
         # # For numerical stability, add epsilon to the sum before taking the square
         # root. Note tf.norm does not add epsilon.
-        # epsilon = 1e-10
-        # target = 1.0
-        # one_sided = False
-        # weights = 1.0
-        # scope = None
-        # loss_collection = ops.GraphKeys.LOSSES
-        # reduction = losses.Reduction.SUM_BY_NONZERO_WEIGHTS
-        # slopes = math_ops.sqrt(gradient_squares + epsilon)
-        # penalties = slopes / target - 1.0
-        # if one_sided:
-        #     penalties = math_ops.maximum(0., penalties)
-        # penalties_squared = math_ops.square(penalties)
-        # penalty = losses.compute_weighted_loss(penalties_squared, weights, loss_collection=loss_collection, reduction=reduction)
+        epsilon = 1e-10
+        target = 1.0
+        one_sided = False
+        weights = 1.0
+        scope = None
+        loss_collection = ops.GraphKeys.LOSSES
+        reduction = losses.Reduction.SUM_BY_NONZERO_WEIGHTS
+        slopes = math_ops.sqrt(gradient_squares + epsilon)
+        penalties = slopes / target - 1.0
+        if one_sided:
+            penalties = math_ops.maximum(0., penalties)
+        penalties_squared = math_ops.square(penalties)
+        _gradient_penalty = losses.compute_weighted_loss(penalties_squared, weights, loss_collection=loss_collection, reduction=reduction)
 
         # summary.scalar('gradient_penalty_loss', penalty)
 
@@ -189,13 +330,24 @@ def train(params):
 
         generator_loss = tf.nn.l2_loss((real_feature_set - fake_feature_set))
 
-        total_loss_discriminator = tf.reduce_mean(loss_discriminator) + wasserstein_discriminator_loss(
-            model_real.classification, model_fake.classification)
+        # total_loss_discriminator = tf.reduce_mean(loss_discriminator) + em_loss()
 
-        total_loss_generator = tf.reduce_mean(generator_loss) + wasserstein_generator_loss(model_fake.classification)
+        # total_loss_generator = tf.reduce_mean(generator_loss) \
+        #                        - em_loss(tf.ones(params.batch_size), model_fake.logistic)
+        #
+        # total_loss_discriminator = em_loss(tf.ones(params.batch_size), model_real.logistic) - \
+        #                            em_loss(tf.ones(params.batch_size), model_fake.logistic)  \
+        #                            + _gradient_penalty + loss_discriminator
+
+        total_loss_generator = tf.reduce_mean(generator_loss) + wasserstein_generator_loss(model_fake.logistic)
+
+        total_loss_discriminator = wasserstein_discriminator_loss(model_real.logistic, model_fake.logistic)+ \
+                                   _gradient_penalty + loss_discriminator
 
         opt_discriminator_step = tf.train.AdamOptimizer(learning_rate)
         opt_generator_step = tf.train.AdamOptimizer(learning_rate)
+
+
 
         extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
         with tf.control_dependencies(extra_update_ops):
@@ -242,9 +394,6 @@ def train(params):
         start_time = time.time()
         sample_dataset = np.random.uniform(low=-1, high=1, size=(params.batch_size, params.z_dim)).astype(np.float32)
 
-
-
-
         for step in range(start_step, num_total_steps):
             before_op_time = time.time()
 
@@ -279,53 +428,6 @@ def train(params):
                 train_saver.save(sess, args.log_directory + '/' + args.model_name + '/model', global_step=step)
 
         train_saver.save(sess, args.log_directory + '/' + args.model_name + '/model', global_step=num_total_steps)
-
-
-def wasserstein_generator_loss( discriminator_gen_outputs, weights=1.0, scope=None, loss_collection=ops.GraphKeys.LOSSES,
-    reduction=losses.Reduction.SUM_BY_NONZERO_WEIGHTS, add_summaries=True):
-  with ops.name_scope(scope, 'generator_wasserstein_loss', (
-      discriminator_gen_outputs, weights)) as scope:
-    discriminator_gen_outputs = math_ops.to_float(discriminator_gen_outputs)
-
-    loss = - discriminator_gen_outputs
-    loss = losses.compute_weighted_loss(
-        loss, weights, scope, loss_collection, reduction)
-
-    if add_summaries:
-      summary.scalar('generator_wass_loss', loss)
-  return loss
-
-
-def wasserstein_discriminator_loss(discriminator_real_outputs, discriminator_gen_outputs,
-    real_weights=1.0,
-    generated_weights=1.0,
-    scope=None,
-    loss_collection=ops.GraphKeys.LOSSES,
-    reduction=losses.Reduction.SUM_BY_NONZERO_WEIGHTS,
-    add_summaries=True):
-  with ops.name_scope(scope, 'discriminator_wasserstein_loss', (
-      discriminator_real_outputs, discriminator_gen_outputs, real_weights,
-      generated_weights)) as scope:
-    discriminator_real_outputs = math_ops.to_float(discriminator_real_outputs)
-    discriminator_gen_outputs = math_ops.to_float(discriminator_gen_outputs)
-    discriminator_real_outputs.shape.assert_is_compatible_with(
-        discriminator_gen_outputs.shape)
-
-    loss_on_generated = losses.compute_weighted_loss(
-        discriminator_gen_outputs, generated_weights, scope,
-        loss_collection=None, reduction=reduction)
-    loss_on_real = losses.compute_weighted_loss(
-        discriminator_real_outputs, real_weights, scope, loss_collection=None,
-        reduction=reduction)
-    loss = loss_on_generated - loss_on_real
-    util.add_loss(loss, loss_collection)
-
-    if add_summaries:
-      summary.scalar('discriminator_gen_wass_loss', loss_on_generated)
-      summary.scalar('discriminator_real_wass_loss', loss_on_real)
-      summary.scalar('discriminator_wass_loss', loss)
-
-  return loss
 
 def model_validate(params):
         """Test function."""
