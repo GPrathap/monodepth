@@ -194,30 +194,32 @@ def train(params):
         epsilon = tf.placeholder(tf.float32, shape=(params.batch_size, 1, 1, 1))
         wasserstein_gradient = epsilon * left_splits + (1.0 - epsilon) * left_splits_fake
 
-        model_real = MonodepthModel(params, args.mode, left_splits,
+        with tf.variable_scope('discriminator', reuse=reuse_variables):
+            model_real = MonodepthModel(params, args.mode, left_splits,
                                                   right_splits, reuse_variables,None, 0)
         loss_discriminator_real = model_real.discriminator_total_loss
         real_feature_set = model_real.get_feature_set()
 
-        model_fake = MonodepthModel(params, args.mode, left_splits_fake, right_splits,
+        with tf.variable_scope('discriminator', reuse=reuse_variables):
+            model_fake = MonodepthModel(params, args.mode, left_splits_fake, right_splits,
                                     reuse_variables,None, 10)
         fake_feature_set = model_fake.get_feature_set()
 
-        differences = tf.subtract(left_splits_fake, left_splits)
-        batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
-        alpha_shape = [batch_size] + [1] * (differences.shape.ndims - 1)
-        alpha = random_ops.random_uniform(shape=alpha_shape)
-        wasserstein_gradient = left_splits + (alpha * differences)
 
-        left_splits_wasserstein_model = MonodepthModel(params, args.mode, wasserstein_gradient,
+
+        with tf.variable_scope('discriminator', reuse=reuse_variables):
+            differences = tf.subtract(left_splits_fake, left_splits)
+            batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
+            alpha_shape = [batch_size] + [1] * (differences.shape.ndims - 1)
+            alpha = random_ops.random_uniform(shape=alpha_shape)
+            wasserstein_gradient = left_splits + (alpha * differences)
+            left_splits_wasserstein_model = MonodepthModel(params, args.mode, wasserstein_gradient,
                                     right_splits, reuse_variables, left_splits_fake, 1)
-
-        # with tf.variable_scope('discriminator', reuse=reuse_variables):
-        #     gradients = tf.gradients(left_splits_wasserstein_model.logistic, [wasserstein_gradient])[0]
-        #     _gradient_penalty = 10.0 * tf.square(tf.norm(gradients, ord=2) - 1.0)
+            gradients = tf.gradients(left_splits_wasserstein_model.logistic, [wasserstein_gradient])[0]
+            _gradient_penalty = 10.0 * tf.square(tf.norm(gradients, ord=2) - 1.0)
 
 
-        # with tf.variable_scope('discriminator', reuse=False):
+
 
         # gradient_squares = math_ops.reduce_sum(
         #     math_ops.square(gradients), axis=list(range(1, 1)))
@@ -283,9 +285,9 @@ def train(params):
 
         total_loss_generator = tf.reduce_mean(generator_loss) + wasserstein_generator_loss(model_fake.logistic)
 
-        # total_loss_discriminator = wasserstein_discriminator_loss(model_real.logistic, model_fake.logistic)+ \
-        #                            _gradient_penalty + loss_discriminator
-        total_loss_discriminator = left_splits_wasserstein_model._gradient_penalty + loss_discriminator
+        total_loss_discriminator = wasserstein_discriminator_loss(model_real.logistic, model_fake.logistic)+ \
+                                   _gradient_penalty + loss_discriminator
+        # total_loss_discriminator = _gradient_penalty + loss_discriminator
 
         opt_discriminator_step = tf.train.AdamOptimizer(learning_rate)
         opt_generator_step = tf.train.AdamOptimizer(learning_rate)

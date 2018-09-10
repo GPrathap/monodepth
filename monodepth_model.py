@@ -89,6 +89,7 @@ class MonodepthModel(object):
         self.build_losses()
         self.build_summaries()
 
+
     def gradient_x(self, img):
         gx = img[:,:,:-1,:] - img[:,:,1:,:]
         return gx
@@ -331,7 +332,7 @@ class MonodepthModel(object):
 
     def build_model(self):
         with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], activation_fn=tf.nn.elu):
-            with tf.variable_scope('discriminator', reuse=self.reuse_variables):
+
                 self.left_pyramid = self.scale_pyramid(self.left, 4)
                 if self.mode == 'train':
                     self.right_pyramid = self.scale_pyramid(self.right, 4)
@@ -348,14 +349,15 @@ class MonodepthModel(object):
                     self.build_resnet50()
 
                 if self.is_em_loss:
-                    self._gradient_penalty = 10.0
-                    differences = tf.subtract(self.left_fake, self.left)
-                    batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
-                    alpha_shape = [batch_size] + [1] * (differences.shape.ndims - 1)
-                    alpha = random_ops.random_uniform(shape=alpha_shape)
-                    wasserstein_gradient = self.left + (alpha * differences)
-                    gradients = tf.gradients(self.logistic, [wasserstein_gradient])[0]
-                    self._gradient_penalty = 10.0 * tf.square(tf.norm(gradients, ord=2) - 1.0)
+                    # self._gradient_penalty = 10.0
+                    # differences = tf.subtract(self.left_fake, self.left)
+                    # batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
+                    # alpha_shape = [batch_size] + [1] * (differences.shape.ndims - 1)
+                    # alpha = random_ops.random_uniform(shape=alpha_shape)
+                    # wasserstein_gradient = self.left + (alpha * differences)
+                    # gradients = tf.gradients(self.logistic, [wasserstein_gradient])[0]
+                    # self._gradient_penalty = 10.0 * tf.square(tf.norm(gradients, ord=2) - 1.0)
+                    self._gradient_penalty = 90
 
     def build_outputs(self):
         # STORE DISPARITIES
