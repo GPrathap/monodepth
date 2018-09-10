@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/gan_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monodepth_generate_model_gan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monodepth_main_new_api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monodepth_model_gan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utilsgan.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/monodepth_main_new_loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main_new_loss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monodepth_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,15 +21,15 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/monodepth$temp.coverage" NAME="temp Coverage Results" MODIFIED="1536330920939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$monodepth_main.coverage" NAME="monodepth_main Coverage Results" MODIFIED="1536160203389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/monodepth$monodepth_main_new_loss.coverage" NAME="monodepth_main_new_loss Coverage Results" MODIFIED="1536587810615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/monodepth$monodepth_main_new_loss.coverage" NAME="monodepth_main_new_loss Coverage Results" MODIFIED="1536607116364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1161">
-              <caret line="92" column="37" lean-forward="true" selection-start-line="92" selection-start-column="37" selection-end-line="92" selection-end-column="37" />
+            <state relative-caret-position="216">
+              <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -34,8 +40,20 @@
       <file leaf-file-name="monodepth_main_new_loss.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main_new_loss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="292" lean-forward="true" selection-start-line="292" selection-end-line="292" />
+            <state relative-caret-position="606">
+              <caret line="239" column="55" lean-forward="true" selection-start-line="239" selection-start-column="55" selection-end-line="239" selection-end-column="55" />
+              <folding>
+                <element signature="e#472#481#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="monodepth_main_new_api.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/monodepth_main_new_api.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="194" column="35" selection-start-line="194" selection-start-column="21" selection-end-line="194" selection-end-column="35" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -46,29 +64,11 @@
       <file leaf-file-name="monodepth_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1422">
-              <caret line="271" column="48" selection-start-line="271" selection-start-column="45" selection-end-line="271" selection-end-column="48" />
+            <state relative-caret-position="210">
+              <caret line="330" column="17" selection-start-line="330" selection-start-column="17" selection-end-line="330" selection-end-column="17" />
               <folding>
                 <element signature="e#548#612#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wloss.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wloss.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="43" column="76" lean-forward="true" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="monodepth_generate_model.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/monodepth_generate_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3648">
-              <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -84,8 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.right</find>
-      <find>tf.nn.elu</find>
       <find>relu</find>
       <find>gf_dim</find>
       <find>g_bn0</find>
@@ -114,6 +112,8 @@
       <find>_SetGrad</find>
       <find>xs</find>
       <find>nea</find>
+      <find>tf.gradients</find>
+      <find>logistic</find>
     </findStrings>
     <replaceStrings>
       <replace>png</replace>
@@ -139,6 +139,9 @@
         <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/monodepth_main.py" />
         <option value="$PROJECT_DIR$/wloss.py" />
+        <option value="$PROJECT_DIR$/gan_model.py" />
+        <option value="$PROJECT_DIR$/monodepth_model_gan.py" />
+        <option value="$PROJECT_DIR$/monodepth_main_new_api.py" />
         <option value="$PROJECT_DIR$/monodepth_model.py" />
         <option value="$PROJECT_DIR$/monodepth_main_new_loss.py" />
       </list>
@@ -171,29 +174,6 @@
               <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
               <item name="monodepth" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-              <item name="dataset" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-              <item name="dataset" type="462c0819:PsiDirectoryNode" />
-              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-              <item name="dataset" type="462c0819:PsiDirectoryNode" />
-              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -203,7 +183,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../normalize/monodepth" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../improved_wgan_training" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.buildout.BuildoutModulesConfigurable" />
@@ -644,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536587665699</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="tuning hyper parameters">
+      <created>1536588239019</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1536588239019</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -656,15 +643,15 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2458287" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23581758" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3826474" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15955175" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15154749" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.2580645" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.56062293" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -719,33 +706,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/monodepth_main_new_loss.py</url>
-          <line>237</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/monodepth_main_new_loss.py</url>
-          <line>107</line>
+          <line>108</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/monodepth_main_new_loss.py</url>
-          <line>280</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/monodepth_main_new_loss.py</url>
-          <line>223</line>
+          <line>217</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gradients_impl.py</url>
           <line>522</line>
           <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/monodepth_model.py</url>
-          <line>357</line>
-          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -755,13 +727,13 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="37" />
+      <option name="time" value="38" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="setValue">
       <expression>
-        <expression-string>Tensor(&quot;discriminator_3/gradients/discriminator_2/encoder/Pad_grad/Slice_1:0&quot;, shape=(8, 256, 512, 3), dtype=float32, device=/device:GPU:0)</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -778,22 +750,22 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=&quot;discriminator_3/*&quot;)</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=&quot;discriminator/*&quot;)</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>tf.gradients(iconv1, [wasserstein_gradient])[0]</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>[_GetGrad(grads, x) for x in xs]</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -1055,20 +1027,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_generate_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3648">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wloss.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="43" column="76" lean-forward="true" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gradients_impl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-537">
@@ -1076,10 +1034,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_generate_model_gan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_generate_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="866">
+          <caret line="173" column="42" lean-forward="true" selection-start-line="173" selection-start-column="42" selection-end-line="173" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wloss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="39" column="37" lean-forward="true" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gan_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1701">
+          <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
+          <folding>
+            <element signature="e#2#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_model_gan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="273" column="46" lean-forward="true" selection-start-line="273" selection-start-column="46" selection-end-line="273" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1161">
-          <caret line="92" column="37" lean-forward="true" selection-start-line="92" selection-start-column="37" selection-end-line="92" selection-end-column="37" />
+        <state relative-caret-position="216">
+          <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>
@@ -1088,18 +1084,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1422">
-          <caret line="271" column="48" selection-start-line="271" selection-start-column="45" selection-end-line="271" selection-end-column="48" />
+        <state relative-caret-position="210">
+          <caret line="330" column="17" selection-start-line="330" selection-start-column="17" selection-end-line="330" selection-end-column="17" />
           <folding>
             <element signature="e#548#612#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_main_new_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="194" column="35" selection-start-line="194" selection-start-column="21" selection-end-line="194" selection-end-column="35" />
+          <folding>
+            <element signature="e#472#481#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utilsgan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-702">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main_new_loss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="292" lean-forward="true" selection-start-line="292" selection-end-line="292" />
+        <state relative-caret-position="606">
+          <caret line="239" column="55" lean-forward="true" selection-start-line="239" selection-start-column="55" selection-end-line="239" selection-end-column="55" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>

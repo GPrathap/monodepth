@@ -59,7 +59,7 @@ class MonodepthModel(object):
     def __init__(self, params, mode, left, right ,reuse_variables=None, left_fake=None, model_index=0):
         self.params = params
         self.mode = mode
-        self.left = left
+
         self.left_fake = left_fake
         self.is_em_loss = False
         if left_fake is not None:
@@ -80,14 +80,7 @@ class MonodepthModel(object):
         self.g_bn1 = batch_norm(name='g_bn1')
         self.g_bn2 = batch_norm(name='g_bn2')
         self.g_bn3 = batch_norm(name='g_bn3')
-        self.build_model()
-        self.build_outputs()
 
-        if self.mode == 'test':
-            return
-
-        self.build_losses()
-        self.build_summaries()
 
 
     def gradient_x(self, img):
@@ -268,9 +261,18 @@ class MonodepthModel(object):
             iconv1 = conv(concat1,   16, 3, 1)
             self.disp1 = self.get_disp(iconv1)
             self.logistic = iconv1
-            self.logistic_linear = layers.linear(iconv1, 1)
             self.classification = tf.nn.sigmoid(iconv1)
             # self.classification = layers.linear(iconv1, 1)
+
+
+    def get_discriminator(self, real_images):
+        self.left = real_images
+        self.build_model()
+        self.build_outputs()
+        self.build_losses()
+        self.build_summaries()
+        return layers.linear(self.logistic, 1)
+
 
     def build_resnet50(self):
         #set convenience functions
@@ -328,13 +330,12 @@ class MonodepthModel(object):
             iconv1 = conv(concat1,   16, 3, 1)
             self.disp1 = self.get_disp(iconv1)
             self.logistic = iconv1
-            self.logistic_linear = layers.linear(iconv1, 1)
             self.classification = tf.nn.sigmoid(iconv1)
             # self.classification = layers.linear(iconv1, 1)
 
     def build_model(self):
         with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], activation_fn=tf.nn.elu):
-
+            with tf.variable_scope('discriminator', reuse=self.reuse_variables):
                 self.left_pyramid = self.scale_pyramid(self.left, 4)
                 if self.mode == 'train':
                     self.right_pyramid = self.scale_pyramid(self.right, 4)
@@ -349,7 +350,6 @@ class MonodepthModel(object):
                     self.build_vgg()
                 elif self.params.encoder == 'resnet50':
                     self.build_resnet50()
-
 
     def build_outputs(self):
         # STORE DISPARITIES
