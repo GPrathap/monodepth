@@ -23,6 +23,19 @@ import tensorflow.contrib.slim as slim
 histogram_summary = tf.summary.histogram
 from Batch_Norm import batch_norm
 from bilinear_sampler import *
+from tensorflow.contrib.framework.python.ops import variables as contrib_variables_lib
+from tensorflow.python.framework import ops
+from tensorflow.python.framework import tensor_util
+from tensorflow.python.ops import array_ops
+from tensorflow.python.ops import clip_ops
+from tensorflow.python.ops import gradients_impl
+from tensorflow.python.ops import math_ops
+from tensorflow.python.ops import random_ops
+from tensorflow.python.ops import variable_scope
+from tensorflow.python.ops.distributions import distribution as ds
+from tensorflow.python.ops.losses import losses
+from tensorflow.python.ops.losses import util
+from tensorflow.python.summary import summary
 layers = tf.contrib.layers
 
 monodepth_parameters = namedtuple('parameters', 
@@ -43,10 +56,14 @@ monodepth_parameters = namedtuple('parameters',
 
 class MonodepthModel(object):
     """monodepth model"""
-    def __init__(self, params, mode, left, right ,reuse_variables=None, model_index=0):
+    def __init__(self, params, mode, left, right ,reuse_variables=None, left_fake=None, model_index=0):
         self.params = params
         self.mode = mode
         self.left = left
+        self.left_fake = left_fake
+        self.is_em_loss = False
+        if left_fake is not None:
+            self.is_em_loss = True
         self.right = right
         self.model_collection = ['model_' + str(model_index)]
         self.width = self.params.width
@@ -329,8 +346,16 @@ class MonodepthModel(object):
                     self.build_vgg()
                 elif self.params.encoder == 'resnet50':
                     self.build_resnet50()
-                else:
-                    return None
+
+                if self.is_em_loss:
+                    self._gradient_penalty = 10.0
+                    differences = tf.subtract(self.left_fake, self.left)
+                    batch_size = differences.shape[0].value or array_ops.shape(differences)[0]
+                    alpha_shape = [batch_size] + [1] * (differences.shape.ndims - 1)
+                    alpha = random_ops.random_uniform(shape=alpha_shape)
+                    wasserstein_gradient = self.left + (alpha * differences)
+                    gradients = tf.gradients(self.logistic, [wasserstein_gradient])[0]
+                    self._gradient_penalty = 10.0 * tf.square(tf.norm(gradients, ord=2) - 1.0)
 
     def build_outputs(self):
         # STORE DISPARITIES
