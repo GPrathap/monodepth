@@ -216,12 +216,12 @@ def train(params):
         fake_feature_set = model_fake.get_feature_set()
         loss_discriminator = loss_discriminator_real
         generator_loss = tf.nn.l2_loss((real_feature_set - fake_feature_set))
-        total_loss_generator = tf.reduce_mean(generator_loss) + wasserstein_generator_loss(model_fake.logistic_linear)
-        total_loss_discriminator = wasserstein_discriminator_loss(model_real.logistic_linear, model_fake.logistic_linear)+ \
-                                    loss_discriminator + _gradient_penalty
-        # total_loss_generator = tf.reduce_mean(generator_loss)-tf.reduce_mean(model_fake.logistic_linear)
-        # total_loss_discriminator = tf.reduce_mean(model_fake.logistic_linear) - tf.reduce_mean(model_real.logistic_linear) \
-        #                            + loss_discriminator + _gradient_penalty
+        # total_loss_generator = tf.reduce_mean(generator_loss) + wasserstein_generator_loss(model_fake.logistic_linear)
+        # total_loss_discriminator = wasserstein_discriminator_loss(model_real.logistic_linear, model_fake.logistic_linear)+ \
+        #                             loss_discriminator + _gradient_penalty
+        total_loss_generator = tf.reduce_mean(generator_loss)-tf.reduce_mean(model_fake.logistic_linear)
+        total_loss_discriminator = tf.reduce_mean(model_fake.logistic_linear) - tf.reduce_mean(model_real.logistic_linear) \
+                                   + loss_discriminator + _gradient_penalty
 
         # with tf.device('/device:GPU:0'):
         opt_discriminator_step = tf.train.AdamOptimizer(learning_rate)
