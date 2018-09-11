@@ -34,7 +34,7 @@ parser = argparse.ArgumentParser(description='Monodepth TensorFlow implementatio
 parser.add_argument('--mode',                      type=str,   help='train or test', default='train')
 parser.add_argument('--model_name',                type=str,   help='model name', default='monodepth')
 parser.add_argument('--encoder',                   type=str,   help='type of encoder, vgg or resnet50', default='resnet50')
-parser.add_argument('--dataset',                   type=str,   help='dataset to train on, kitti, or cityscapes', default='kitti')
+parser.add_argument('--dataset',                   type=str,   help='datasetuhuu  quruqr to train on, kitti, or cityscapes', default='kitti')
 parser.add_argument('--z_dim',                     type=int,   help='default set to 100', default=100)
 parser.add_argument('--data_path',                 type=str,   help='path to the data', default="/home/a.gabdullin/geesara/2011_kia/")
 parser.add_argument('--filenames_file',            type=str,   help='path to the filenames text file', default="./utils/filenames/kitti_train_files.txt")
