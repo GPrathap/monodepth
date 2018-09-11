@@ -164,8 +164,8 @@ def wasserstein_discriminator_loss(
 
 def train(params):
     """Training loop."""
-    with tf.Graph().as_default(), tf.device('/cpu:0'):
-    #with tf.Graph().as_default(), tf.device('/device:GPU:0'):
+    # with tf.Graph().as_default(), tf.device('/cpu:0'):
+    with tf.Graph().as_default(), tf.device('/device:GPU:0'):
         global_step = tf.Variable(0, trainable=False)
         # OPTIMIZER
         num_training_samples = count_text_lines(args.filenames_file)
@@ -192,18 +192,16 @@ def train(params):
         right_splits = tf.split(right, args.num_gpus, 0)[0]
 
         with tf.variable_scope('discriminator', reuse=reuse_variables):
-            with tf.device('/device:GPU:0'):
                 differences = tf.subtract(left_splits_fake, left_splits)
                 alpha_shape = [params.batch_size] + [1] * (differences.shape.ndims - 1)
                 alpha = tf.random_uniform(shape=alpha_shape, minval=0., maxval=1.)
                 interpolates = left_splits + (alpha * differences)
-                left_splits_wasserstein_model = MonodepthModel(params, args.mode, interpolates,
-                                                               right_splits, reuse_variables, left_splits_fake, 1)
-        gradients = tf.gradients(left_splits_wasserstein_model.logistic_linear,
-                                     [interpolates], stop_gradients=interpolates)[0]
-        slopes = tf.sqrt(tf.reduce_sum(tf.square(gradients), reduction_indices=[1]))
-        gradient_penalty = tf.reduce_mean((slopes - 1.) ** 2)
-        _gradient_penalty = 10 * gradient_penalty
+                left_splits_wasserstein_model = MonodepthModel(params, args.mode, interpolates,                                                               right_splits, reuse_variables, left_splits_fake, 1)
+                gradients = tf.gradients(left_splits_wasserstein_model.logistic_linear,
+                                     [interpolates], stop_gradients=interpolates, colocate_gradients_with_ops=True)[0]
+                slopes = tf.sqrt(tf.reduce_sum(tf.square(gradients), reduction_indices=[1]))
+                gradient_penalty = tf.reduce_mean((slopes - 1.) ** 2)
+                _gradient_penalty = 10 * gradient_penalty
 
         with tf.variable_scope('discriminator', reuse=reuse_variables):
             model_real = MonodepthModel(params, args.mode, left_splits,
@@ -218,15 +216,14 @@ def train(params):
         fake_feature_set = model_fake.get_feature_set()
         loss_discriminator = loss_discriminator_real
         generator_loss = tf.nn.l2_loss((real_feature_set - fake_feature_set))
-        # total_loss_generator = tf.reduce_mean(generator_loss) + wasserstein_generator_loss(model_fake.logistic_linear)
-        # total_loss_discriminator = wasserstein_discriminator_loss(model_real.logistic_linear, model_fake.logistic_linear)+ \
-        #                             loss_discriminator + _gradient_penalty
-        total_loss_generator = tf.reduce_mean(generator_loss)-tf.reduce_mean(model_fake.logistic_linear)
-        total_loss_discriminator = tf.reduce_mean(model_fake.logistic_linear) - tf.reduce_mean(model_real.logistic_linear) \
-                                   + loss_discriminator + _gradient_penalty
+        total_loss_generator = tf.reduce_mean(generator_loss) + wasserstein_generator_loss(model_fake.logistic_linear)
+        total_loss_discriminator = wasserstein_discriminator_loss(model_real.logistic_linear, model_fake.logistic_linear)+ \
+                                    loss_discriminator + _gradient_penalty
+        # total_loss_generator = tf.reduce_mean(generator_loss)-tf.reduce_mean(model_fake.logistic_linear)
+        # total_loss_discriminator = tf.reduce_mean(model_fake.logistic_linear) - tf.reduce_mean(model_real.logistic_linear) \
+        #                            + loss_discriminator + _gradient_penalty
 
-
-
+        # with tf.device('/device:GPU:0'):
         opt_discriminator_step = tf.train.AdamOptimizer(learning_rate)
         opt_generator_step = tf.train.AdamOptimizer(learning_rate)
 

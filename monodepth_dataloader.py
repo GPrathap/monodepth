@@ -14,7 +14,7 @@ from __future__ import absolute_import, division, print_function
 import tensorflow as tf
 
 def string_length_tf(t):
-  return tf.py_func(len, [t], [tf.int64])
+  return tf.py_func(len, [t], tf.int64)
 
 class MonodepthDataloader(object):
     """monodepth dataloader"""
@@ -98,7 +98,8 @@ class MonodepthDataloader(object):
 
     def read_image(self, image_path):
         # tf.decode_image does not return the image size, this is an ugly workaround to handle both jpeg and png
-        path_length = string_length_tf(image_path)[0]
+        # path_length = string_length_tf(image_path)[0]
+        path_length = tf.size(tf.string_split([image_path], ""))
         file_extension = tf.substr(image_path, path_length - 3, 3)
         file_cond = tf.equal(file_extension, 'jpg')
         

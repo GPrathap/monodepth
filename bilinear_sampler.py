@@ -70,20 +70,14 @@ def bilinear_sampler_1d_h(input_images, x_offset, wrap_mode='border', name='bili
             # grid of (x_t, y_t, 1), eq (1) in ref [1]
             x_t, y_t = tf.meshgrid(tf.linspace(0.0,   _width_f - 1.0,  _width),
                                    tf.linspace(0.0 , _height_f - 1.0 , _height))
-
             x_t_flat = tf.reshape(x_t, (1, -1))
             y_t_flat = tf.reshape(y_t, (1, -1))
-
             x_t_flat = tf.tile(x_t_flat, tf.stack([_num_batch, 1]))
             y_t_flat = tf.tile(y_t_flat, tf.stack([_num_batch, 1]))
-
             x_t_flat = tf.reshape(x_t_flat, [-1])
             y_t_flat = tf.reshape(y_t_flat, [-1])
-
             x_t_flat = x_t_flat + tf.reshape(x_offset, [-1]) * _width_f
-
             input_transformed = _interpolate(input_images, x_t_flat, y_t_flat)
-
             output = tf.reshape(
                 input_transformed, tf.stack([_num_batch, _height, _width, _num_channels]))
             return output
@@ -93,11 +87,8 @@ def bilinear_sampler_1d_h(input_images, x_offset, wrap_mode='border', name='bili
         _height       = tf.shape(input_images)[1]
         _width        = tf.shape(input_images)[2]
         _num_channels = tf.shape(input_images)[3]
-
         _height_f = tf.cast(_height, tf.float32)
         _width_f  = tf.cast(_width,  tf.float32)
-
         _wrap_mode = wrap_mode
-
         output = _transform(input_images, x_offset)
         return output
