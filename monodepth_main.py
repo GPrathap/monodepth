@@ -57,6 +57,7 @@ parser.add_argument('--checkpoint_path',           type=str,   help='path to a s
 parser.add_argument('--retrain',                               help='if used with checkpoint_path, will restart training from step zero', action='store_true')
 parser.add_argument('--full_summary',                          help='if set, will keep more data for each summary. Warning: the file can become very large', action='store_true')
 parser.add_argument('--sample_dir',                type=str,   help='sample directory', default='./dataset/images')
+parser.add_argument('--use_bn',                type=bool,   help='is using batch normalization', default=True)
 
 args = parser.parse_args()
 
@@ -281,6 +282,7 @@ def main():
         lr_loss_weight=args.lr_loss_weight,
         full_summary=args.full_summary,
         sample_dir=args.sample_dir,
+        use_bn=True,
         z_dim=100)
 
     if args.mode == 'train':

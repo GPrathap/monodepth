@@ -23,6 +23,7 @@ import tensorflow.contrib.slim as slim
 histogram_summary = tf.summary.histogram
 from Batch_Norm import batch_norm
 from bilinear_sampler import *
+from tensorflow.python.training import moving_averages
 
 monodepth_parameters = namedtuple('parameters', 
                         'encoder, '
@@ -37,6 +38,7 @@ monodepth_parameters = namedtuple('parameters',
                         'disp_gradient_loss_weight, '
                         'lr_loss_weight, '
                         'sample_dir, '
+                        'use_bn, '
                         'z_dim, '
                         'full_summary')
 
@@ -58,12 +60,10 @@ class MonodepthModel(object):
         self.gf_dim = 64
         self.df_dim = 64
         self.c_dim = 3
-        self.g_bn0 = batch_norm(name='g_bn0')
-        self.g_bn1 = batch_norm(name='g_bn1')
-        self.g_bn2 = batch_norm(name='g_bn2')
-        self.g_bn3 = batch_norm(name='g_bn3')
+        self._extra_train_ops = []
         self.build_model()
         self.build_outputs()
+
 
         if self.mode == 'test':
             return
@@ -140,14 +140,14 @@ class MonodepthModel(object):
         disp = 0.3 * self.conv(x, 2, 3, 1, tf.nn.sigmoid)
         return disp
 
-    def conv(self, x, num_out_layers, kernel_size, stride, activation_fn=tf.nn.elu):
+    def conv(self, x, num_out_layers, kernel_size, stride, batch_normalization_fn, activation_fn=tf.nn.elu):
         p = np.floor((kernel_size - 1) / 2).astype(np.int32)
         p_x = tf.pad(x, [[0, 0], [p, p], [p, p], [0, 0]])
-        return slim.conv2d(p_x, num_out_layers, kernel_size, stride, 'VALID', activation_fn=activation_fn)
+        return slim.conv2d(p_x, num_out_layers, kernel_size, stride, 'VALID', normalizer_fn=batch_normalization_fn)
 
-    def conv_block(self, x, num_out_layers, kernel_size):
-        conv1 = self.conv(x,     num_out_layers, kernel_size, 1)
-        conv2 = self.conv(conv1, num_out_layers, kernel_size, 2)
+    def conv_block(self, x, num_out_layers, kernel_size, batch_normalization_fn):
+        conv1 = self.conv(x,     num_out_layers, kernel_size, 1, batch_normalization_fn=batch_normalization_fn)
+        conv2 = self.conv(conv1, num_out_layers, kernel_size, 2, batch_normalization_fn=batch_normalization_fn)
         return conv2
 
     def maxpool(self, x, kernel_size):
@@ -155,35 +155,35 @@ class MonodepthModel(object):
         p_x = tf.pad(x, [[0, 0], [p, p], [p, p], [0, 0]])
         return slim.max_pool2d(p_x, kernel_size)
 
-    def resconv(self, x, num_layers, stride, apply_batch_norm=False):
+    def resconv(self, x, num_layers, stride, batch_normalization_fn, apply_batch_norm=False, name="batch_norm"):
         do_proj = tf.shape(x)[3] != num_layers or stride == 2
         shortcut = []
-        conv1 = self.conv(x,         num_layers, 1, 1)
-        conv2 = self.conv(conv1,     num_layers, 3, stride)
-        conv3 = self.conv(conv2, 4 * num_layers, 1, 1, None)
+        conv1 = self.conv(x,         num_layers, 1, 1, batch_normalization_fn=batch_normalization_fn)
+        conv2 = self.conv(conv1,     num_layers, 3, stride, batch_normalization_fn=batch_normalization_fn)
+        conv3 = self.conv(conv2, 4 * num_layers, 1, 1, batch_normalization_fn=batch_normalization_fn, activation_fn=None)
         if do_proj:
-            shortcut = self.conv(x, 4 * num_layers, 1, stride, None)
+            shortcut = self.conv(x, 4 * num_layers, 1, stride, batch_normalization_fn=batch_normalization_fn, activation_fn=None)
         else:
             shortcut = x
         normalized_conv = conv3 + shortcut
-        if apply_batch_norm:
-            normalized_conv = self._batch_norm(conv3 + shortcut)
+        # if apply_batch_norm:
+        #     normalized_conv = self._batch_norm(normalized_conv, name)
         return tf.nn.elu(normalized_conv)
 
-    def resblock(self, x, num_layers, num_blocks):
+    def resblock(self, x, num_layers, num_blocks, name, batch_normalization_fn):
         out = x
         for i in range(num_blocks - 1):
-            out = self.resconv(out, num_layers, 1)
-        out = self.resconv(out, num_layers, 2, apply_batch_norm=True)
+            out = self.resconv(out, num_layers, 1, batch_normalization_fn)
+        out = self.resconv(out, num_layers, 2, batch_normalization_fn, apply_batch_norm=True, name=name)
         return out
 
     def get_feature_set(self):
         return tf.concat([tf.layers.flatten(self.disp1), tf.layers.flatten(self.disp2),
                           tf.layers.flatten(self.disp3), tf.layers.flatten(self.disp4)], axis=1)
 
-    def upconv(self, x, num_out_layers, kernel_size, scale):
+    def upconv(self, x, num_out_layers, kernel_size, scale, batch_normalization_fn):
         upsample = self.upsample_nn(x, scale)
-        conv = self.conv(upsample, num_out_layers, kernel_size, 1)
+        conv = self.conv(upsample, num_out_layers, kernel_size, 1, batch_normalization_fn)
         return conv
 
     def deconv(self, x, num_out_layers, kernel_size, scale):
@@ -191,16 +191,61 @@ class MonodepthModel(object):
         conv = slim.conv2d_transpose(p_x, num_out_layers, kernel_size, scale, 'SAME')
         return conv[:,3:-1,3:-1,:]
 
-    def _batch_norm(self, input_):
-        """Batch normalization for a 4-D tensor"""
-        assert len(input_.get_shape()) == 4
-        filter_shape = input_.get_shape().as_list()
-        mean, var = tf.nn.moments(input_, axes=[0, 1, 2])
-        out_channels = filter_shape[3]
-        offset = tf.Variable(tf.zeros([out_channels]))
-        scale = tf.Variable(tf.ones([out_channels]))
-        batch_norm = tf.nn.batch_normalization(input_, mean, var, offset, scale, 0.001)
-        return batch_norm
+    # def _batch_norm(self, input_):
+    #     """Batch normalization for a 4-D tensor"""
+    #     assert len(input_.get_shape()) == 4
+    #     filter_shape = input_.get_shape().as_list()
+    #     mean, var = tf.nn.moments(input_, axes=[0, 1, 2])
+    #     out_channels = filter_shape[3]
+    #     offset = tf.Variable(tf.zeros([out_channels]))
+    #     scale = tf.Variable(tf.ones([out_channels]))
+    #     batch_norm = tf.nn.batch_normalization(input_, mean, var, offset, scale, 0.001)
+    #     return batch_norm
+
+    def _batch_norm(self, x, name):
+        """Batch normalization."""
+        with tf.variable_scope(name):
+            params_shape = [x.get_shape()[-1]]
+
+            beta = tf.get_variable(
+                'beta', params_shape, tf.float32,
+                initializer=tf.constant_initializer(0.0, tf.float32))
+            gamma = tf.get_variable(
+                'gamma', params_shape, tf.float32,
+                initializer=tf.constant_initializer(1.0, tf.float32))
+
+            if self.mode == 'train':
+                mean, variance = tf.nn.moments(x, [0, 1, 2], name='moments')
+
+                moving_mean = tf.get_variable(
+                    'moving_mean', params_shape, tf.float32,
+                    initializer=tf.constant_initializer(0.0, tf.float32),
+                    trainable=False)
+                moving_variance = tf.get_variable(
+                    'moving_variance', params_shape, tf.float32,
+                    initializer=tf.constant_initializer(1.0, tf.float32),
+                    trainable=False)
+
+                self._extra_train_ops.append(moving_averages.assign_moving_average(
+                    moving_mean, mean, 0.9))
+                self._extra_train_ops.append(moving_averages.assign_moving_average(
+                    moving_variance, variance, 0.9))
+            else:
+                mean = tf.get_variable(
+                    'moving_mean', params_shape, tf.float32,
+                    initializer=tf.constant_initializer(0.0, tf.float32),
+                    trainable=False)
+                variance = tf.get_variable(
+                    'moving_variance', params_shape, tf.float32,
+                    initializer=tf.constant_initializer(1.0, tf.float32),
+                    trainable=False)
+                tf.summary.histogram(mean.op.name, mean)
+                tf.summary.histogram(variance.op.name, variance)
+            # epsilon used to be 1e-5. Maybe 0.001 solves NaN problem in deeper net.
+            y = tf.nn.batch_normalization(
+                x, mean, variance, beta, gamma, 0.001)
+            y.set_shape(x.get_shape())
+            return y
 
     def build_vgg(self):
         #set convenience functions
@@ -211,13 +256,13 @@ class MonodepthModel(object):
             upconv = self.upconv
 
         with tf.variable_scope('encoder'):
-            conv1 = self.conv_block(self.model_input,  32, 7) # H/2
-            conv2 = self.conv_block(conv1,             64, 5) # H/4
-            conv3 = self.conv_block(conv2,            128, 3) # H/8
-            conv4 = self.conv_block(conv3,            256, 3) # H/16
-            conv5 = self.conv_block(conv4,            512, 3) # H/32
-            conv6 = self.conv_block(conv5,            512, 3) # H/64
-            conv7 = self.conv_block(conv6,            512, 3) # H/128
+            conv1 = self.conv_block(self.model_input,  32, 7, batch_normalization_fn = None) # H/2
+            conv2 = self.conv_block(conv1,             64, 5, batch_normalization_fn = None) # H/4
+            conv3 = self.conv_block(conv2,            128, 3, batch_normalization_fn = None) # H/8
+            conv4 = self.conv_block(conv3,            256, 3, batch_normalization_fn = None) # H/16
+            conv5 = self.conv_block(conv4,            512, 3, batch_normalization_fn = None) # H/32
+            conv6 = self.conv_block(conv5,            512, 3, batch_normalization_fn = None) # H/64
+            conv7 = self.conv_block(conv6,            512, 3, batch_normalization_fn = None) # H/128
 
         with tf.variable_scope('skips'):
             skip1 = conv1
@@ -230,37 +275,37 @@ class MonodepthModel(object):
         with tf.variable_scope('decoder'):
             upconv7 = upconv(conv7,  512, 3, 2) #H/64
             concat7 = tf.concat([upconv7, skip6], 3)
-            iconv7  = conv(concat7,  512, 3, 1)
+            iconv7  = conv(concat7,  512, 3, 1, batch_normalization_fn = None)
 
             upconv6 = upconv(iconv7, 512, 3, 2) #H/32
             concat6 = tf.concat([upconv6, skip5], 3)
-            iconv6  = conv(concat6,  512, 3, 1)
+            iconv6  = conv(concat6,  512, 3, 1, batch_normalization_fn = None)
 
             upconv5 = upconv(iconv6, 256, 3, 2) #H/16
             concat5 = tf.concat([upconv5, skip4], 3)
-            iconv5  = conv(concat5,  256, 3, 1)
+            iconv5  = conv(concat5,  256, 3, 1, batch_normalization_fn = None)
 
             upconv4 = upconv(iconv5, 128, 3, 2) #H/8
             concat4 = tf.concat([upconv4, skip3], 3)
-            iconv4 = conv(concat4,  128, 3, 1)
+            iconv4 = conv(concat4,  128, 3, 1, batch_normalization_fn = None)
             self.disp4 = self.get_disp(iconv4)
             udisp4  = self.upsample_nn(self.disp4, 2)
 
             upconv3 = upconv(iconv4,  64, 3, 2) #H/4
             concat3 = tf.concat([upconv3, skip2, udisp4], 3)
-            iconv3  = conv(concat3,   64, 3, 1)
+            iconv3  = conv(concat3,   64, 3, 1, batch_normalization_fn = None)
             self.disp3 = self.get_disp(iconv3)
             udisp3  = self.upsample_nn(self.disp3, 2)
 
             upconv2 = upconv(iconv3,  32, 3, 2) #H/2
             concat2 = tf.concat([upconv2, skip1, udisp3], 3)
-            iconv2  = conv(concat2,   32, 3, 1)
+            iconv2  = conv(concat2,   32, 3, 1, batch_normalization_fn = None)
             self.disp2 = self.get_disp(iconv2)
             udisp2 = self.upsample_nn(self.disp2, 2)
 
             upconv1 = upconv(iconv2,  16, 3, 2) #H
             concat1 = tf.concat([upconv1, udisp2], 3)
-            iconv1 = conv(concat1,   16, 3, 1)
+            iconv1 = conv(concat1,   16, 3, 1, batch_normalization_fn = None)
             self.disp1 = self.get_disp(iconv1)
             self.classification = tf.nn.sigmoid(iconv1)
 
@@ -273,12 +318,12 @@ class MonodepthModel(object):
             upconv = self.upconv
 
         with tf.variable_scope('encoder'):
-            conv1 = conv(self.model_input, 64, 7, 2) # H/2  -   64D
+            conv1 = conv(self.model_input, 64, 7, 2, batch_normalization_fn = None) # H/2  -   64D
             pool1 = self.maxpool(conv1,           3) # H/4  -   64D
-            conv2 = self.resblock(pool1,      64, 3) # H/8  -  256D
-            conv3 = self.resblock(conv2,     128, 4) # H/16 -  512D
-            conv4 = self.resblock(conv3,     256, 6) # H/32 - 1024D
-            conv5 = self.resblock(conv4,     512, 3) # H/64 - 2048D
+            conv2 = self.resblock(pool1,      64, 3, "conv2batch", batch_normalization_fn = None) # H/8  -  256D
+            conv3 = self.resblock(conv2,     128, 4, "conv3batch", batch_normalization_fn = None) # H/16 -  512D
+            conv4 = self.resblock(conv3,     256, 6, "conv4batch", batch_normalization_fn = None) # H/32 - 1024D
+            conv5 = self.resblock(conv4,     512, 3, "conv5batch", batch_normalization_fn = None) # H/64 - 2048D
 
         with tf.variable_scope('skips'):
             skip1 = conv1
@@ -289,41 +334,51 @@ class MonodepthModel(object):
         
         # DECODING
         with tf.variable_scope('decoder'):
-            upconv6 = upconv(conv5, 512, 3, 2) #H/32
+            upconv6 = upconv(conv5, 512, 3, 2, batch_normalization_fn = None) #H/32
             concat6 = tf.concat([upconv6, skip5], 3)
-            iconv6 = conv(concat6, 512, 3, 1)
+            iconv6 = conv(concat6, 512, 3, 1, batch_normalization_fn = None)
 
-            upconv5 = upconv(iconv6, 256, 3, 2) #H/16
+            upconv5 = upconv(iconv6, 256, 3, 2, batch_normalization_fn = None) #H/16
             concat5 = tf.concat([upconv5, skip4], 3)
-            iconv5 = conv(concat5, 256, 3, 1)
+            iconv5 = conv(concat5, 256, 3, 1, batch_normalization_fn = None)
 
-            upconv4 = upconv(iconv5,  128, 3, 2) #H/8
+            upconv4 = upconv(iconv5,  128, 3, 2, batch_normalization_fn = None) #H/8
             concat4 = tf.concat([upconv4, skip3], 3)
-            iconv4  = conv(concat4,   128, 3, 1)
+            iconv4  = conv(concat4,   128, 3, 1, batch_normalization_fn = None)
             self.disp4 = self.get_disp(iconv4)
             udisp4 = self.upsample_nn(self.disp4, 2)
 
-            upconv3 = upconv(iconv4,   64, 3, 2) #H/4
+            upconv3 = upconv(iconv4,   64, 3, 2, batch_normalization_fn = None) #H/4
             concat3 = tf.concat([upconv3, skip2, udisp4], 3)
-            iconv3  = conv(concat3,    64, 3, 1)
+            iconv3  = conv(concat3,    64, 3, 1, batch_normalization_fn = None)
             self.disp3 = self.get_disp(iconv3)
             udisp3 = self.upsample_nn(self.disp3, 2)
 
-            upconv2 = upconv(iconv3,   32, 3, 2) #H/2
+            upconv2 = upconv(iconv3,   32, 3, 2, batch_normalization_fn = None) #H/2
             concat2 = tf.concat([upconv2, skip1, udisp3], 3)
-            iconv2  = conv(concat2,    32, 3, 1)
+            iconv2  = conv(concat2,    32, 3, 1, batch_normalization_fn = None)
             self.disp2 = self.get_disp(iconv2)
             udisp2 = self.upsample_nn(self.disp2, 2)
 
-            upconv1 = upconv(iconv2,  16, 3, 2) #H
+            upconv1 = upconv(iconv2,  16, 3, 2, batch_normalization_fn = None) #H
             concat1 = tf.concat([upconv1, udisp2], 3)
-            iconv1 = conv(concat1,   16, 3, 1)
+            iconv1 = conv(concat1,   16, 3, 1, batch_normalization_fn = None)
             self.disp1 = self.get_disp(iconv1)
             self.classification = tf.nn.sigmoid(iconv1)
 
 
     def build_model(self):
-        with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], activation_fn=tf.nn.elu):
+        if self.mode=="train":
+            is_training =True
+        else:
+            is_training = False
+
+        batch_norm_params = {'is_training': is_training}
+        normalizer_fn = slim.batch_norm if self.params.use_bn else None
+        normalizer_params = batch_norm_params if self.params.use_bn else None
+
+        with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], activation_fn=tf.nn.elu,
+                             normalizer_fn=normalizer_fn):
             with tf.variable_scope('discriminator', reuse=self.reuse_variables):
                 self.left_pyramid = self.scale_pyramid(self.left, 4)
                 if self.mode == 'train':
