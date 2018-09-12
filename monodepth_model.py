@@ -136,8 +136,8 @@ class MonodepthModel(object):
         smoothness_y = [disp_gradients_y[i] * weights_y[i] for i in range(4)]
         return smoothness_x + smoothness_y
 
-    def get_disp(self, x):
-        disp = 0.3 * self.conv(x, 2, 3, 1, tf.nn.sigmoid)
+    def get_disp(self, x, batch_normalization_fn):
+        disp = 0.3 * self.conv(x, 2, 3, 1, batch_normalization_fn, tf.nn.sigmoid)
         return disp
 
     def conv(self, x, num_out_layers, kernel_size, stride, batch_normalization_fn, activation_fn=tf.nn.elu):
@@ -288,25 +288,25 @@ class MonodepthModel(object):
             upconv4 = upconv(iconv5, 128, 3, 2) #H/8
             concat4 = tf.concat([upconv4, skip3], 3)
             iconv4 = conv(concat4,  128, 3, 1, batch_normalization_fn = None)
-            self.disp4 = self.get_disp(iconv4)
+            self.disp4 = self.get_disp(iconv4, batch_normalization_fn = None)
             udisp4  = self.upsample_nn(self.disp4, 2)
 
             upconv3 = upconv(iconv4,  64, 3, 2) #H/4
             concat3 = tf.concat([upconv3, skip2, udisp4], 3)
             iconv3  = conv(concat3,   64, 3, 1, batch_normalization_fn = None)
-            self.disp3 = self.get_disp(iconv3)
+            self.disp3 = self.get_disp(iconv3, batch_normalization_fn = None)
             udisp3  = self.upsample_nn(self.disp3, 2)
 
             upconv2 = upconv(iconv3,  32, 3, 2) #H/2
             concat2 = tf.concat([upconv2, skip1, udisp3], 3)
             iconv2  = conv(concat2,   32, 3, 1, batch_normalization_fn = None)
-            self.disp2 = self.get_disp(iconv2)
+            self.disp2 = self.get_disp(iconv2, batch_normalization_fn = None)
             udisp2 = self.upsample_nn(self.disp2, 2)
 
             upconv1 = upconv(iconv2,  16, 3, 2) #H
             concat1 = tf.concat([upconv1, udisp2], 3)
             iconv1 = conv(concat1,   16, 3, 1, batch_normalization_fn = None)
-            self.disp1 = self.get_disp(iconv1)
+            self.disp1 = self.get_disp(iconv1, batch_normalization_fn = None)
             self.classification = tf.nn.sigmoid(iconv1)
 
     def build_resnet50(self):
@@ -320,10 +320,10 @@ class MonodepthModel(object):
         with tf.variable_scope('encoder'):
             conv1 = conv(self.model_input, 64, 7, 2, batch_normalization_fn = None) # H/2  -   64D
             pool1 = self.maxpool(conv1,           3) # H/4  -   64D
-            conv2 = self.resblock(pool1,      64, 3, "conv2batch", batch_normalization_fn = None) # H/8  -  256D
-            conv3 = self.resblock(conv2,     128, 4, "conv3batch", batch_normalization_fn = None) # H/16 -  512D
-            conv4 = self.resblock(conv3,     256, 6, "conv4batch", batch_normalization_fn = None) # H/32 - 1024D
-            conv5 = self.resblock(conv4,     512, 3, "conv5batch", batch_normalization_fn = None) # H/64 - 2048D
+            conv2 = self.resblock(pool1,      64, 3, "conv2batch", batch_normalization_fn = self.normalizer_fn ) # H/8  -  256D
+            conv3 = self.resblock(conv2,     128, 4, "conv3batch", batch_normalization_fn = self.normalizer_fn ) # H/16 -  512D
+            conv4 = self.resblock(conv3,     256, 6, "conv4batch", batch_normalization_fn = self.normalizer_fn ) # H/32 - 1024D
+            conv5 = self.resblock(conv4,     512, 3, "conv5batch", batch_normalization_fn = self.normalizer_fn ) # H/64 - 2048D
 
         with tf.variable_scope('skips'):
             skip1 = conv1
@@ -334,51 +334,51 @@ class MonodepthModel(object):
         
         # DECODING
         with tf.variable_scope('decoder'):
-            upconv6 = upconv(conv5, 512, 3, 2, batch_normalization_fn = None) #H/32
+            upconv6 = upconv(conv5, 512, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/32
             concat6 = tf.concat([upconv6, skip5], 3)
-            iconv6 = conv(concat6, 512, 3, 1, batch_normalization_fn = None)
+            iconv6 = conv(concat6, 512, 3, 1, batch_normalization_fn = self.normalizer_fn )
 
-            upconv5 = upconv(iconv6, 256, 3, 2, batch_normalization_fn = None) #H/16
+            upconv5 = upconv(iconv6, 256, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/16
             concat5 = tf.concat([upconv5, skip4], 3)
-            iconv5 = conv(concat5, 256, 3, 1, batch_normalization_fn = None)
+            iconv5 = conv(concat5, 256, 3, 1, batch_normalization_fn = self.normalizer_fn )
 
-            upconv4 = upconv(iconv5,  128, 3, 2, batch_normalization_fn = None) #H/8
+            upconv4 = upconv(iconv5,  128, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/8
             concat4 = tf.concat([upconv4, skip3], 3)
-            iconv4  = conv(concat4,   128, 3, 1, batch_normalization_fn = None)
-            self.disp4 = self.get_disp(iconv4)
+            iconv4  = conv(concat4,   128, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            self.disp4 = self.get_disp(iconv4, batch_normalization_fn = None )
             udisp4 = self.upsample_nn(self.disp4, 2)
 
-            upconv3 = upconv(iconv4,   64, 3, 2, batch_normalization_fn = None) #H/4
+            upconv3 = upconv(iconv4,   64, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/4
             concat3 = tf.concat([upconv3, skip2, udisp4], 3)
-            iconv3  = conv(concat3,    64, 3, 1, batch_normalization_fn = None)
-            self.disp3 = self.get_disp(iconv3)
+            iconv3  = conv(concat3,    64, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            self.disp3 = self.get_disp(iconv3, batch_normalization_fn = None )
             udisp3 = self.upsample_nn(self.disp3, 2)
 
-            upconv2 = upconv(iconv3,   32, 3, 2, batch_normalization_fn = None) #H/2
+            upconv2 = upconv(iconv3,   32, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/2
             concat2 = tf.concat([upconv2, skip1, udisp3], 3)
-            iconv2  = conv(concat2,    32, 3, 1, batch_normalization_fn = None)
-            self.disp2 = self.get_disp(iconv2)
+            iconv2  = conv(concat2,    32, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            self.disp2 = self.get_disp(iconv2, batch_normalization_fn = None )
             udisp2 = self.upsample_nn(self.disp2, 2)
 
-            upconv1 = upconv(iconv2,  16, 3, 2, batch_normalization_fn = None) #H
+            upconv1 = upconv(iconv2,  16, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H
             concat1 = tf.concat([upconv1, udisp2], 3)
-            iconv1 = conv(concat1,   16, 3, 1, batch_normalization_fn = None)
-            self.disp1 = self.get_disp(iconv1)
+            iconv1 = conv(concat1,   16, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            self.disp1 = self.get_disp(iconv1, batch_normalization_fn = None)
             self.classification = tf.nn.sigmoid(iconv1)
 
 
     def build_model(self):
         if self.mode=="train":
-            is_training =True
+            is_training = True
         else:
             is_training = False
 
         batch_norm_params = {'is_training': is_training}
-        normalizer_fn = slim.batch_norm if self.params.use_bn else None
+        self.normalizer_fn = slim.batch_norm if self.params.use_bn else None
         normalizer_params = batch_norm_params if self.params.use_bn else None
 
         with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], activation_fn=tf.nn.elu,
-                             normalizer_fn=normalizer_fn):
+                             normalizer_fn=self.normalizer_fn, normalizer_params={'is_training': is_training}):
             with tf.variable_scope('discriminator', reuse=self.reuse_variables):
                 self.left_pyramid = self.scale_pyramid(self.left, 4)
                 if self.mode == 'train':
