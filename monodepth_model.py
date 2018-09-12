@@ -378,7 +378,7 @@ class MonodepthModel(object):
         normalizer_params = batch_norm_params if self.params.use_bn else None
 
         with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], activation_fn=tf.nn.elu,
-                             normalizer_fn=self.normalizer_fn, normalizer_params={'is_training': is_training}):
+                             normalizer_fn=self.normalizer_fn, normalizer_params=normalizer_params):
             with tf.variable_scope('discriminator', reuse=self.reuse_variables):
                 self.left_pyramid = self.scale_pyramid(self.left, 4)
                 if self.mode == 'train':
