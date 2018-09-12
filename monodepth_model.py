@@ -334,35 +334,35 @@ class MonodepthModel(object):
         
         # DECODING
         with tf.variable_scope('decoder'):
-            upconv6 = upconv(conv5, 512, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/32
+            upconv6 = upconv(conv5, 512, 3, 2, batch_normalization_fn = None ) #H/32
             concat6 = tf.concat([upconv6, skip5], 3)
-            iconv6 = conv(concat6, 512, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            iconv6 = conv(concat6, 512, 3, 1, batch_normalization_fn = None )
 
-            upconv5 = upconv(iconv6, 256, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/16
+            upconv5 = upconv(iconv6, 256, 3, 2, batch_normalization_fn = None ) #H/16
             concat5 = tf.concat([upconv5, skip4], 3)
-            iconv5 = conv(concat5, 256, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            iconv5 = conv(concat5, 256, 3, 1, batch_normalization_fn = None )
 
-            upconv4 = upconv(iconv5,  128, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/8
+            upconv4 = upconv(iconv5,  128, 3, 2, batch_normalization_fn = None ) #H/8
             concat4 = tf.concat([upconv4, skip3], 3)
-            iconv4  = conv(concat4,   128, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            iconv4  = conv(concat4,   128, 3, 1, batch_normalization_fn = None )
             self.disp4 = self.get_disp(iconv4, batch_normalization_fn = None )
             udisp4 = self.upsample_nn(self.disp4, 2)
 
-            upconv3 = upconv(iconv4,   64, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/4
+            upconv3 = upconv(iconv4,   64, 3, 2, batch_normalization_fn = None ) #H/4
             concat3 = tf.concat([upconv3, skip2, udisp4], 3)
-            iconv3  = conv(concat3,    64, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            iconv3  = conv(concat3,    64, 3, 1, batch_normalization_fn = None )
             self.disp3 = self.get_disp(iconv3, batch_normalization_fn = None )
             udisp3 = self.upsample_nn(self.disp3, 2)
 
-            upconv2 = upconv(iconv3,   32, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H/2
+            upconv2 = upconv(iconv3,   32, 3, 2, batch_normalization_fn = None ) #H/2
             concat2 = tf.concat([upconv2, skip1, udisp3], 3)
-            iconv2  = conv(concat2,    32, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            iconv2  = conv(concat2,    32, 3, 1, batch_normalization_fn = None )
             self.disp2 = self.get_disp(iconv2, batch_normalization_fn = None )
             udisp2 = self.upsample_nn(self.disp2, 2)
 
-            upconv1 = upconv(iconv2,  16, 3, 2, batch_normalization_fn = self.normalizer_fn ) #H
+            upconv1 = upconv(iconv2,  16, 3, 2, batch_normalization_fn = None ) #H
             concat1 = tf.concat([upconv1, udisp2], 3)
-            iconv1 = conv(concat1,   16, 3, 1, batch_normalization_fn = self.normalizer_fn )
+            iconv1 = conv(concat1,   16, 3, 1, batch_normalization_fn = None )
             self.disp1 = self.get_disp(iconv1, batch_normalization_fn = None)
             self.classification = tf.nn.sigmoid(iconv1)
 
