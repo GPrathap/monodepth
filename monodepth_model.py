@@ -320,10 +320,10 @@ class MonodepthModel(object):
         with tf.variable_scope('encoder'):
             conv1 = conv(self.model_input, 64, 7, 2, batch_normalization_fn = None) # H/2  -   64D
             pool1 = self.maxpool(conv1,           3) # H/4  -   64D
-            conv2 = self.resblock(pool1,      64, 3, "conv2batch", batch_normalization_fn = self.normalizer_fn ) # H/8  -  256D
-            conv3 = self.resblock(conv2,     128, 4, "conv3batch", batch_normalization_fn = self.normalizer_fn ) # H/16 -  512D
-            conv4 = self.resblock(conv3,     256, 6, "conv4batch", batch_normalization_fn = self.normalizer_fn ) # H/32 - 1024D
-            conv5 = self.resblock(conv4,     512, 3, "conv5batch", batch_normalization_fn = self.normalizer_fn ) # H/64 - 2048D
+            conv2 = self.resblock(pool1,      64, 3, "conv2batch", batch_normalization_fn = None ) # H/8  -  256D
+            conv3 = self.resblock(conv2,     128, 4, "conv3batch", batch_normalization_fn = None ) # H/16 -  512D
+            conv4 = self.resblock(conv3,     256, 6, "conv4batch", batch_normalization_fn = None ) # H/32 - 1024D
+            conv5 = self.resblock(conv4,     512, 3, "conv5batch", batch_normalization_fn = None ) # H/64 - 2048D
 
         with tf.variable_scope('skips'):
             skip1 = conv1
