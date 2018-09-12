@@ -155,7 +155,7 @@ class MonodepthModel(object):
         p_x = tf.pad(x, [[0, 0], [p, p], [p, p], [0, 0]])
         return slim.max_pool2d(p_x, kernel_size)
 
-    def resconv(self, x, num_layers, stride):
+    def resconv(self, x, num_layers, stride, apply_batch_norm=False):
         do_proj = tf.shape(x)[3] != num_layers or stride == 2
         shortcut = []
         conv1 = self.conv(x,         num_layers, 1, 1)
@@ -165,13 +165,16 @@ class MonodepthModel(object):
             shortcut = self.conv(x, 4 * num_layers, 1, stride, None)
         else:
             shortcut = x
-        return tf.nn.elu(conv3 + shortcut)
+        normalized_conv = conv3 + shortcut
+        if apply_batch_norm:
+            normalized_conv = self._batch_norm(conv3 + shortcut)
+        return tf.nn.elu(normalized_conv)
 
     def resblock(self, x, num_layers, num_blocks):
         out = x
         for i in range(num_blocks - 1):
             out = self.resconv(out, num_layers, 1)
-        out = self.resconv(out, num_layers, 2)
+        out = self.resconv(out, num_layers, 2, apply_batch_norm=True)
         return out
 
     def get_feature_set(self):
@@ -187,6 +190,17 @@ class MonodepthModel(object):
         p_x = tf.pad(x, [[0, 0], [1, 1], [1, 1], [0, 0]])
         conv = slim.conv2d_transpose(p_x, num_out_layers, kernel_size, scale, 'SAME')
         return conv[:,3:-1,3:-1,:]
+
+    def _batch_norm(self, input_):
+        """Batch normalization for a 4-D tensor"""
+        assert len(input_.get_shape()) == 4
+        filter_shape = input_.get_shape().as_list()
+        mean, var = tf.nn.moments(input_, axes=[0, 1, 2])
+        out_channels = filter_shape[3]
+        offset = tf.Variable(tf.zeros([out_channels]))
+        scale = tf.Variable(tf.ones([out_channels]))
+        batch_norm = tf.nn.batch_normalization(input_, mean, var, offset, scale, 0.001)
+        return batch_norm
 
     def build_vgg(self):
         #set convenience functions
@@ -275,13 +289,13 @@ class MonodepthModel(object):
         
         # DECODING
         with tf.variable_scope('decoder'):
-            upconv6 = upconv(conv5,   512, 3, 2) #H/32
+            upconv6 = upconv(conv5, 512, 3, 2) #H/32
             concat6 = tf.concat([upconv6, skip5], 3)
-            iconv6 = conv(concat6,   512, 3, 1)
+            iconv6 = conv(concat6, 512, 3, 1)
 
             upconv5 = upconv(iconv6, 256, 3, 2) #H/16
             concat5 = tf.concat([upconv5, skip4], 3)
-            iconv5 = conv(concat5,   256, 3, 1)
+            iconv5 = conv(concat5, 256, 3, 1)
 
             upconv4 = upconv(iconv5,  128, 3, 2) #H/8
             concat4 = tf.concat([upconv4, skip3], 3)
@@ -307,6 +321,7 @@ class MonodepthModel(object):
             self.disp1 = self.get_disp(iconv1)
             self.classification = tf.nn.sigmoid(iconv1)
 
+
     def build_model(self):
         with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], activation_fn=tf.nn.elu):
             with tf.variable_scope('discriminator', reuse=self.reuse_variables):
@@ -324,6 +339,7 @@ class MonodepthModel(object):
                     self.build_vgg()
                 elif self.params.encoder == 'resnet50':
                     self.build_resnet50()
+                    # self.build_resnet101()
                 else:
                     return None
 

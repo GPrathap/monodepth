@@ -82,7 +82,6 @@ def train(params):
 
     with tf.Graph().as_default(), tf.device('/device:GPU:0'):
         global_step = tf.Variable(0, trainable=False)
-
         # OPTIMIZER
         num_training_samples = count_text_lines(args.filenames_file)
         steps_per_epoch = np.ceil(num_training_samples / params.batch_size).astype(np.int32)
@@ -241,11 +240,12 @@ def model_validate(params):
             restore_path = tf.train.latest_checkpoint(args.log_directory + '/' + args.model_name)
         else:
             restore_path = args.checkpoint_path.split(".")[0]
+
         train_saver.restore(sess, restore_path)
 
         num_test_samples = count_text_lines(args.filenames_file)
 
-        print('now testing {} files'.format(num_test_samples))
+        print('Now testing {} files'.format(num_test_samples))
         disparities = np.zeros((num_test_samples, params.height, params.width), dtype=np.float32)
         disparities_pp = np.zeros((num_test_samples, params.height, params.width), dtype=np.float32)
         for step in range(num_test_samples):
