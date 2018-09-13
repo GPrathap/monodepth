@@ -9,7 +9,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="" />
+    <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/view_image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monodepth_dataloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_dataloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +26,7 @@
     <SUITE FILE_PATH="coverage/monodepth$temp.coverage" NAME="temp Coverage Results" MODIFIED="1536330920939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$monodepth_main.coverage" NAME="monodepth_main Coverage Results" MODIFIED="1536826315812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$Nosetests_in_test_downsample_py.coverage" NAME="Nosetests in test_downsample.py Coverage Results" MODIFIED="1536650911935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bicubic_interp-tensorflow" />
+    <SUITE FILE_PATH="coverage/monodepth$view_image.coverage" NAME="view_image Coverage Results" MODIFIED="1536831234573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$downsample.coverage" NAME="downsample Coverage Results" MODIFIED="1536651075025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bicubic_interp-tensorflow" />
     <SUITE FILE_PATH="coverage/monodepth$monodepth_main_new_loss.coverage" NAME="monodepth_main_new_loss Coverage Results" MODIFIED="1536737238102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -29,8 +35,8 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="58" column="33" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="33" />
+            <state relative-caret-position="108">
+              <caret line="220" column="39" lean-forward="true" selection-start-line="220" selection-start-column="39" selection-end-line="220" selection-end-column="39" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -38,11 +44,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monodepth_simple.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="monodepth_simple.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_simple.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="626">
-              <caret line="77" column="24" lean-forward="true" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+            <state relative-caret-position="-270">
+              <caret line="77" column="73" selection-start-line="77" selection-start-column="61" selection-end-line="77" selection-end-column="73" />
+              <folding>
+                <element signature="e#372#436#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view_image.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view_image.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -56,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monodepth_dataloader.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="monodepth_dataloader.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="102" column="51" lean-forward="true" selection-start-line="102" selection-start-column="51" selection-end-line="102" selection-end-column="51" />
+            <state relative-caret-position="468">
+              <caret line="39" column="78" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -77,8 +95,8 @@
       <file leaf-file-name="monodepth_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="729">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="252">
+              <caret line="404" column="17" selection-start-line="404" selection-start-column="17" selection-end-line="404" selection-end-column="17" />
               <folding>
                 <element signature="e#548#612#0" expanded="true" />
               </folding>
@@ -125,8 +143,8 @@
       <find>full_summary</find>
       <find>summary_op</find>
       <find>build_summaries</find>
-      <find>log_directory</find>
       <find>sample_dir</find>
+      <find>log_directory</find>
     </findStrings>
     <replaceStrings>
       <replace>png</replace>
@@ -162,9 +180,10 @@
         <option value="$PROJECT_DIR$/utils/filenames/kitti_test_files.txt" />
         <option value="$PROJECT_DIR$/monodepth_generate_model.py" />
         <option value="$PROJECT_DIR$/monodepth_model.py" />
-        <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
-        <option value="$PROJECT_DIR$/monodepth_main.py" />
         <option value="$PROJECT_DIR$/monodepth_simple.py" />
+        <option value="$PROJECT_DIR$/view_image.py" />
+        <option value="$PROJECT_DIR$/monodepth_main.py" />
+        <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
       </list>
     </option>
   </component>
@@ -195,17 +214,6 @@
             <path>
               <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
               <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="filenames" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -238,7 +246,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.monodepth_main">
+  <component name="RunManager" selected="Python.view_image">
     <configuration name="downsample" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="monodepth" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -296,7 +304,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="temp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="view_image" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="monodepth" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -309,7 +317,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/temp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/view_image.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -332,18 +340,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.monodepth_main" />
-      <item itemvalue="Python.temp" />
       <item itemvalue="Python.monodepth_main_new_loss" />
       <item itemvalue="Python tests.Nosetests in downsample.py" />
       <item itemvalue="Python.downsample" />
+      <item itemvalue="Python.view_image" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.view_image" />
         <item itemvalue="Python.monodepth_main" />
         <item itemvalue="Python.monodepth_main_new_loss" />
         <item itemvalue="Python.downsample" />
         <item itemvalue="Python tests.Nosetests in downsample.py" />
-        <item itemvalue="Python.temp" />
       </list>
     </recent_temporary>
   </component>
@@ -358,27 +366,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00022" summary="tuning hyper parameters">
-      <created>1536327939932</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1536327939932</updated>
-    </task>
-    <task id="LOCAL-00023" summary="tuning hyper parameters">
-      <created>1536328242560</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1536328242560</updated>
-    </task>
-    <task id="LOCAL-00024" summary="tuning hyper parameters">
-      <created>1536328280543</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1536328280543</updated>
     </task>
     <task id="LOCAL-00025" summary="tuning hyper parameters">
       <created>1536331007380</created>
@@ -702,7 +689,28 @@
       <option name="project" value="LOCAL" />
       <updated>1536830506011</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="initial testing">
+      <created>1536830761169</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1536830761170</updated>
+    </task>
+    <task id="LOCAL-00072" summary="initial testing">
+      <created>1536830811061</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1536830811061</updated>
+    </task>
+    <task id="LOCAL-00073" summary="initial testing">
+      <created>1536830883528</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1536830883528</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -722,9 +730,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.36262515" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.09566185" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.2814238" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21985058" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.067769475" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -893,23 +901,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_train_files_trail.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="79" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5373">
-          <caret line="199" column="74" lean-forward="true" selection-start-line="199" selection-start-column="74" selection-end-line="199" selection-end-column="74" />
-          <folding>
-            <element signature="e#472#481#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
@@ -1129,37 +1120,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="102" column="51" lean-forward="true" selection-start-line="102" selection-start-column="51" selection-end-line="102" selection-end-column="51" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/new_image_disp.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="252">
+          <caret line="404" column="17" selection-start-line="404" selection-start-column="17" selection-end-line="404" selection-end-column="17" />
           <folding>
             <element signature="e#548#612#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/view_image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_simple.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-270">
+          <caret line="77" column="73" selection-start-line="77" selection-start-column="61" selection-end-line="77" selection-end-column="73" />
+          <folding>
+            <element signature="e#372#436#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="58" column="33" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="33" />
+        <state relative-caret-position="108">
+          <caret line="220" column="39" lean-forward="true" selection-start-line="220" selection-start-column="39" selection-end-line="220" selection-end-column="39" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_simple.py">
+    <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="77" column="24" lean-forward="true" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+        <state relative-caret-position="468">
+          <caret line="39" column="78" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="78" />
         </state>
       </provider>
     </entry>

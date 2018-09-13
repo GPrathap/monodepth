@@ -242,6 +242,7 @@ def model_validate(params):
         # RESTORE
         if args.checkpoint_path == '':
             restore_path = tf.train.latest_checkpoint(args.log_directory + '/' + args.model_name)
+            print("Model name {} ".format(restore_path))
         else:
             restore_path = args.checkpoint_path.split(".")[0]
 

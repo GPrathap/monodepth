@@ -37,7 +37,9 @@ class MonodepthDataloader(object):
         # we load only one image for test, except if we trained a stereo model
         if mode == 'test' and not self.params.do_stereo:
             left_image_path  = tf.string_join([self.data_path, split_line[0]])
+            print("-------------> left_image_path {}".format(left_image_path))
             left_image_o  = self.read_image(left_image_path)
+
         else:
             left_image_path  = tf.string_join([self.data_path, split_line[0]])
             right_image_path = tf.string_join([self.data_path, split_line[1]])
@@ -101,7 +103,7 @@ class MonodepthDataloader(object):
         path_length = string_length_tf(image_path)[0]
         file_extension = tf.substr(image_path, path_length - 3, 3)
         file_cond = tf.equal(file_extension, 'jpg')
-        print("file extension: {}".format(file_cond))
+        print("file extension: {}  {}".format(image_path, file_extension))
         
         image = tf.cond(file_cond, lambda: tf.image.decode_jpeg(tf.read_file(image_path))
                          , lambda: tf.image.decode_png(tf.read_file(image_path)))
