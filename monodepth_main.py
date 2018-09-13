@@ -264,7 +264,8 @@ def model_validate(params):
         if args.output_directory == '':
             output_directory = os.path.dirname(args.checkpoint_path)
         else:
-            output_directory = args.log_directory + '/' + args.model_name
+            print("ffffff")
+        output_directory = args.log_directory + '/' + args.model_name
         np.save(output_directory + '/disparities.npy',    disparities)
         np.save(output_directory + '/disparities_pp.npy', disparities_pp)
 
