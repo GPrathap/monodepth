@@ -142,9 +142,9 @@ def train(params):
             d_optim = opt_discriminator_step.minimize(total_loss_discriminator, var_list=d_vars)
             g_optim = opt_generator_step.minimize(total_loss_generator, var_list=g_vars)
 
-        tf.summary.scalar('learning_rate', learning_rate, ['discriminator_0'])
-        tf.summary.scalar('total_loss', total_loss_discriminator, ['discriminator_0'])
-        summary_op = tf.summary.merge_all('discriminator_0')
+        tf.summary.scalar('learning_rate', learning_rate)
+        tf.summary.scalar('total_loss', total_loss_discriminator)
+        summary_op = tf.summary.merge_all()
 
         # SESSION
         config = tf.ConfigProto(allow_soft_placement=True)

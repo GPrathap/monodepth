@@ -464,23 +464,23 @@ class MonodepthModel(object):
         # SUMMARIES
         with tf.device('/cpu:0'):
             for i in range(4):
-                tf.summary.scalar('ssim_loss_' + str(i), self.ssim_loss_left[i] + self.ssim_loss_right[i], collections=self.model_collection)
-                tf.summary.scalar('l1_loss_' + str(i), self.l1_reconstruction_loss_left[i] + self.l1_reconstruction_loss_right[i], collections=self.model_collection)
-                tf.summary.scalar('image_loss_' + str(i), self.image_loss_left[i] + self.image_loss_right[i], collections=self.model_collection)
-                tf.summary.scalar('disp_gradient_loss_' + str(i), self.disp_left_loss[i] + self.disp_right_loss[i], collections=self.model_collection)
-                tf.summary.scalar('lr_loss_' + str(i), self.lr_left_loss[i] + self.lr_right_loss[i], collections=self.model_collection)
-                tf.summary.image('disp_left_est_' + str(i), self.disp_left_est[i], max_outputs=4, collections=self.model_collection)
-                tf.summary.image('disp_right_est_' + str(i), self.disp_right_est[i], max_outputs=4, collections=self.model_collection)
+                tf.summary.scalar('ssim_loss_' + str(i), self.ssim_loss_left[i] + self.ssim_loss_right[i])
+                tf.summary.scalar('l1_loss_' + str(i), self.l1_reconstruction_loss_left[i] + self.l1_reconstruction_loss_right[i])
+                tf.summary.scalar('image_loss_' + str(i), self.image_loss_left[i] + self.image_loss_right[i])
+                tf.summary.scalar('disp_gradient_loss_' + str(i), self.disp_left_loss[i] + self.disp_right_loss[i])
+                tf.summary.scalar('lr_loss_' + str(i), self.lr_left_loss[i] + self.lr_right_loss[i])
+                tf.summary.image('disp_left_est_' + str(i), self.disp_left_est[i], max_outputs=4)
+                tf.summary.image('disp_right_est_' + str(i), self.disp_right_est[i], max_outputs=4)
 
                 if self.params.full_summary:
-                    tf.summary.image('left_est_' + str(i), self.left_est[i], max_outputs=4, collections=self.model_collection)
-                    tf.summary.image('right_est_' + str(i), self.right_est[i], max_outputs=4, collections=self.model_collection)
-                    tf.summary.image('ssim_left_'  + str(i), self.ssim_left[i],  max_outputs=4, collections=self.model_collection)
-                    tf.summary.image('ssim_right_' + str(i), self.ssim_right[i], max_outputs=4, collections=self.model_collection)
-                    tf.summary.image('l1_left_'  + str(i), self.l1_left[i],  max_outputs=4, collections=self.model_collection)
-                    tf.summary.image('l1_right_' + str(i), self.l1_right[i], max_outputs=4, collections=self.model_collection)
+                    tf.summary.image('left_est_' + str(i), self.left_est[i], max_outputs=4)
+                    tf.summary.image('right_est_' + str(i), self.right_est[i], max_outputs=4)
+                    tf.summary.image('ssim_left_'  + str(i), self.ssim_left[i],  max_outputs=4)
+                    tf.summary.image('ssim_right_' + str(i), self.ssim_right[i], max_outputs=4)
+                    tf.summary.image('l1_left_'  + str(i), self.l1_left[i],  max_outputs=4)
+                    tf.summary.image('l1_right_' + str(i), self.l1_right[i], max_outputs=4)
 
             if self.params.full_summary:
-                tf.summary.image('left',  self.left,   max_outputs=4, collections=self.model_collection)
-                tf.summary.image('right', self.right,  max_outputs=4, collections=self.model_collection)
+                tf.summary.image('left',  self.left,   max_outputs=4)
+                tf.summary.image('right', self.right,  max_outputs=4)
 
