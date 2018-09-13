@@ -20,7 +20,7 @@ import time
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
 import scipy.misc
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 from monodepth_model import *
 from monodepth_dataloader import *
@@ -82,8 +82,8 @@ def test_simple(params):
     output_name = os.path.splitext(os.path.basename(args.image_path))[0]
 
     np.save(os.path.join(output_directory, "{}_disp.npy".format(output_name)), disp_pp)
-    disp_to_img = scipy.misc.imresize(disp_pp.squeeze(), [original_height, original_width])
-    plt.imsave(os.path.join(output_directory, "{}_disp.png".format(output_name)), disp_to_img, cmap='plasma')
+    # disp_to_img = scipy.misc.imresize(disp_pp.squeeze(), [original_height, original_width])
+    # plt.imsave(os.path.join(output_directory, "{}_disp.png".format(output_name)), disp_to_img, cmap='plasma')
 
     print('done!')
 
