@@ -28,9 +28,9 @@ from average_gradients import *
 
 parser = argparse.ArgumentParser(description='Monodepth TensorFlow implementation.')
 
-parser.add_argument('--encoder',          type=str,   help='type of encoder, vgg or resnet50', default='vgg')
-parser.add_argument('--image_path',       type=str,   help='path to the image', default="/dataset/images/data_tracking_image_2/testing/image_02/0028/000002.png")
-parser.add_argument('--checkpoint_path',  type=str,   help='path to a specific checkpoint to load', default="/home/geesara/project/monodepth/model")
+parser.add_argument('--encoder',          type=str,   help='type of encoder, vgg or resnet50', default='resnet50')
+parser.add_argument('--image_path',       type=str,   help='path to the image', default="/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_02/data/0000000000.png")
+parser.add_argument('--checkpoint_path',  type=str,   help='path to a specific checkpoint to load', default="/home/a.gabdullin/geesara/monodepth/o/monodepth")
 parser.add_argument('--input_height',     type=int,   help='input height', default=256)
 parser.add_argument('--input_width',      type=int,   help='input width', default=512)
 
@@ -72,7 +72,7 @@ def test_simple(params):
     threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
 
     # RESTORE
-    restore_path = "/home/geesara/project/monodepth/model/model_cityscapes".split(".")[0]
+    restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model".split(".")[0]
     train_saver.restore(sess, restore_path)
 
     disp = sess.run(model.disp_left_est[0], feed_dict={left: input_images})
