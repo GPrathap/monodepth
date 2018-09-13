@@ -103,7 +103,7 @@ def main():
         disp_gradient_loss_weight=0,
         lr_loss_weight=0,
         full_summary=False,
-        sample_dir=args.sample_dir,
+        sample_dir="",
         use_bn=True,
         z_dim=100)
 
