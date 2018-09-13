@@ -10,10 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/view_image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monodepth_dataloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_dataloader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/filenames/kitti_test_small.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,17 +65,17 @@
       <file leaf-file-name="kitti_test_files.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_files.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="67" lean-forward="true" selection-start-column="67" selection-end-column="119" />
+            <state relative-caret-position="270">
+              <caret line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monodepth_dataloader.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="monodepth_dataloader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="39" column="78" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="78" />
+            <state relative-caret-position="387">
+              <caret line="90" column="17" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -100,6 +97,15 @@
               <folding>
                 <element signature="e#548#612#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kitti_test_small.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_small.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -184,6 +190,7 @@
         <option value="$PROJECT_DIR$/view_image.py" />
         <option value="$PROJECT_DIR$/monodepth_main.py" />
         <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
+        <option value="$PROJECT_DIR$/utils/filenames/kitti_test_small.txt" />
       </list>
     </option>
   </component>
@@ -214,6 +221,17 @@
             <path>
               <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
               <item name="monodepth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="monodepth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="monodepth" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="filenames" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -366,13 +384,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00025" summary="tuning hyper parameters">
-      <created>1536331007380</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1536331007380</updated>
     </task>
     <task id="LOCAL-00026" summary="tuning hyper parameters">
       <created>1536331260288</created>
@@ -710,7 +721,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536830883528</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="initial testing">
+      <created>1536832334177</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1536832334177</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -732,7 +750,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.09566185" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.2814238" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.067769475" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1664888" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -901,13 +919,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/temp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1113,25 +1124,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_files.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="67" lean-forward="true" selection-start-column="67" selection-end-column="119" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/new_image_disp.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="404" column="17" selection-start-line="404" selection-start-column="17" selection-end-line="404" selection-end-column="17" />
-          <folding>
-            <element signature="e#548#612#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view_image.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1162,8 +1156,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="39" column="78" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="78" />
+        <state relative-caret-position="387">
+          <caret line="90" column="17" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_files.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="404" column="17" selection-start-line="404" selection-start-column="17" selection-end-line="404" selection-end-column="17" />
+          <folding>
+            <element signature="e#548#612#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_small.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
         </state>
       </provider>
     </entry>
