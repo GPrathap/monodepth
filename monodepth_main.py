@@ -245,7 +245,7 @@ def model_validate(params):
         #     print("Model name {} ".format(restore_path))
         # else:
         #     restore_path = args.checkpoint_path.split(".")[0]
-        restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-60000"
+        restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-50000"
         train_saver.restore(sess, restore_path)
         # train_saver.restore(sess, restore_path)
 
