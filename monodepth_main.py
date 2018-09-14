@@ -196,7 +196,7 @@ def train(params):
                     [g_optim, total_loss_generator, model_generator.samplter_network],
                     feed_dict={z: sample_dataset})
                 save_images(generated_images, image_manifold_size(generated_images.shape[0]),
-                             './{}/train_{:02d}_{:04d}.png'.format(params.sample_dir, step, 1))
+                             './{}/{:02d}_train_{:04d}.png'.format(params.sample_dir, step, 1))
                 examples_per_sec = params.batch_size / duration
                 time_sofar = (time.time() - start_time) / 3600
                 training_time_left = (num_total_steps / step - 1.0) * time_sofar
@@ -240,13 +240,14 @@ def model_validate(params):
         threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
 
         # RESTORE
-        if args.checkpoint_path == '':
-            restore_path = tf.train.latest_checkpoint(args.log_directory + '/' + args.model_name)
-            print("Model name {} ".format(restore_path))
-        else:
-            restore_path = args.checkpoint_path.split(".")[0]
-
+        # if args.checkpoint_path == '':
+        #     restore_path = tf.train.latest_checkpoint(args.log_directory + '/' + args.model_name)
+        #     print("Model name {} ".format(restore_path))
+        # else:
+        #     restore_path = args.checkpoint_path.split(".")[0]
+        restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-70000"
         train_saver.restore(sess, restore_path)
+        # train_saver.restore(sess, restore_path)
 
         num_test_samples = count_text_lines(args.filenames_file)
 
