@@ -10,7 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/utils/filenames/paking_dataset.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/view_image.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +25,7 @@
     <SUITE FILE_PATH="coverage/monodepth$temp.coverage" NAME="temp Coverage Results" MODIFIED="1536330920939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$monodepth_main.coverage" NAME="monodepth_main Coverage Results" MODIFIED="1536826315812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$Nosetests_in_test_downsample_py.coverage" NAME="Nosetests in test_downsample.py Coverage Results" MODIFIED="1536650911935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bicubic_interp-tensorflow" />
-    <SUITE FILE_PATH="coverage/monodepth$view_image.coverage" NAME="view_image Coverage Results" MODIFIED="1536923730642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/monodepth$view_image.coverage" NAME="view_image Coverage Results" MODIFIED="1536924442151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$downsample.coverage" NAME="downsample Coverage Results" MODIFIED="1536651075025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bicubic_interp-tensorflow" />
     <SUITE FILE_PATH="coverage/monodepth$monodepth_main_new_loss.coverage" NAME="monodepth_main_new_loss Coverage Results" MODIFIED="1536737238102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -32,8 +34,8 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="242" column="22" lean-forward="true" selection-start-line="242" selection-start-column="22" selection-end-line="242" selection-end-column="22" />
+            <state relative-caret-position="135">
+              <caret line="38" column="132" selection-start-line="38" selection-start-column="97" selection-end-line="38" selection-end-column="132" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -56,8 +58,8 @@
       <file leaf-file-name="view_image.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view_image.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="324">
+              <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -174,8 +176,8 @@
         <option value="$PROJECT_DIR$/monodepth_simple.py" />
         <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
         <option value="$PROJECT_DIR$/utils/filenames/kitti_test_small.txt" />
-        <option value="$PROJECT_DIR$/view_image.py" />
         <option value="$PROJECT_DIR$/monodepth_main.py" />
+        <option value="$PROJECT_DIR$/view_image.py" />
       </list>
     </option>
   </component>
@@ -233,6 +235,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils/filenames" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/utils" />
     </key>
@@ -369,13 +372,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00032" summary="tuning hyper parameters">
-      <created>1536353868797</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1536353868797</updated>
     </task>
     <task id="LOCAL-00033" summary="tuning hyper parameters">
       <created>1536390469025</created>
@@ -713,7 +709,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536923336963</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="initial testing">
+      <created>1536923946868</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1536923946868</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -733,7 +736,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32925472" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.14682981" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.2814238" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1664888" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -855,7 +858,7 @@
   <component name="debuggerHistoryManager">
     <expressions id="setValue">
       <expression>
-        <expression-string />
+        <expression-string>Tensor(&quot;discriminator_3/gradients/discriminator_2/encoder/Pad_grad/Slice_1:0&quot;, shape=(8, 256, 512, 3), dtype=float32, device=/device:GPU:0)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -882,12 +885,12 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=&quot;discriminator/*&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>self.image_resize_custom(x, 5, ratio)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -897,25 +900,18 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>tf.image.resize_bicubic(x, [h * ratio, w * ratio])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>self._Deconv(x, 2, 5, 2)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/temp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="65" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_generate_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -1134,13 +1130,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_small.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="74" column="46" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_files.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1158,10 +1147,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_test_small.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="74" column="46" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/filenames/paking_dataset.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/view_image.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="324">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
           </folding>
@@ -1170,8 +1169,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="242" column="22" lean-forward="true" selection-start-line="242" selection-start-column="22" selection-end-line="242" selection-end-column="22" />
+        <state relative-caret-position="135">
+          <caret line="38" column="132" selection-start-line="38" selection-start-column="97" selection-end-line="38" selection-end-column="132" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>
