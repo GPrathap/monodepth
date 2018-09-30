@@ -132,7 +132,7 @@ class MonodepthModel(object):
         s = tf.shape(x)
         h = s[1]
         w = s[2]
-        return tf.image.resize_nearest_neighbor(x, [h * ratio, w * ratio])
+        return tf.image.resize_bicubic(x, [h * ratio, w * ratio])
 
     def scale_pyramid(self, img, num_scales):
         scaled_imgs = [img]

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/monodepth_main_new_loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main_new_loss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monodepth_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monodepth_main_new_loss.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="monodepth_main_new_loss.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_main_new_loss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="225" column="42" lean-forward="true" selection-start-line="225" selection-start-column="42" selection-end-line="225" selection-end-column="42" />
+            <state relative-caret-position="-215">
+              <caret line="199" column="38" selection-start-line="199" selection-start-column="38" selection-end-line="199" selection-end-column="38" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -41,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monodepth_model.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="monodepth_model.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="108" selection-start-line="108" selection-end-line="108" />
+            <state relative-caret-position="281">
+              <caret line="128" column="19" selection-start-line="128" selection-start-column="8" selection-end-line="128" selection-end-column="19" />
               <folding>
                 <element signature="e#548#612#0" expanded="true" />
               </folding>
@@ -64,8 +64,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>discriminator_scope</find>
-      <find>model_generator</find>
       <find>util</find>
       <find>math_ops.square(gradients)</find>
       <find>get_</find>
@@ -94,6 +92,8 @@
       <find>upconv</find>
       <find>tra</find>
       <find />
+      <find>wasserstein_discriminator_loss</find>
+      <find>gradient</find>
     </findStrings>
     <replaceStrings>
       <replace>png</replace>
@@ -122,9 +122,9 @@
         <option value="$PROJECT_DIR$/monodepth_main_new_api.py" />
         <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
         <option value="$PROJECT_DIR$/monodepth_main.py" />
-        <option value="$PROJECT_DIR$/monodepth_model.py" />
         <option value="$PROJECT_DIR$/bilinear_sampler.py" />
         <option value="$PROJECT_DIR$/monodepth_main_new_loss.py" />
+        <option value="$PROJECT_DIR$/monodepth_model.py" />
       </list>
     </option>
   </component>
@@ -664,24 +664,23 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-1" width="1922" height="1059" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.07675195" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.07675195" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.44382647" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15314835" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1547492" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" weight="0.32925472" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.21579532" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -689,29 +688,30 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="8" weight="0.32925472" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15955175" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.30923247" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3826474" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1070,28 +1070,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
           <caret line="194" column="35" selection-start-line="194" selection-start-column="21" selection-end-line="194" selection-end-column="35" />
-          <folding>
-            <element signature="e#472#481#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bicubic_interp-tensorflow/test_upsample.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/bicubic_interp-tensorflow/downsample.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1099,9 +1087,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="6" column="46" lean-forward="true" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1133,16 +1118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="108" selection-start-line="108" selection-end-line="108" />
-          <folding>
-            <element signature="e#548#612#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_generate_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="636">
@@ -1152,10 +1127,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main_new_loss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="225" column="42" lean-forward="true" selection-start-line="225" selection-start-column="42" selection-end-line="225" selection-end-column="42" />
+        <state relative-caret-position="-215">
+          <caret line="199" column="38" selection-start-line="199" selection-start-column="38" selection-end-line="199" selection-end-column="38" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="128" column="19" selection-start-line="128" selection-start-column="8" selection-end-line="128" selection-end-column="19" />
+          <folding>
+            <element signature="e#548#612#0" expanded="true" />
           </folding>
         </state>
       </provider>
