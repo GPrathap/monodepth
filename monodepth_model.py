@@ -127,8 +127,12 @@ class MonodepthModel(object):
         return net
 
     def upsample_nn(self, x, ratio):
-        return self.image_resize_custom(x, 5, ratio)
+        # return self.image_resize_custom(x, 5, ratio)
         # return tf.image.resize_nearest_neighbor(x, [h * ratio, w * ratio])
+        s = tf.shape(x)
+        h = s[1]
+        w = s[2]
+        return tf.image.resize_nearest_neighbor(x, [h * ratio, w * ratio])
 
     def scale_pyramid(self, img, num_scales):
         scaled_imgs = [img]
@@ -281,11 +285,10 @@ class MonodepthModel(object):
     def build_vgg(self):
         #set convenience functions
         conv = self.conv
-        # if self.params.use_deconv:
-        upconv = self.deconv
-        # else:
-        #     print ("use nearest nabour ...")
-        #     upconv = self.upconv
+        if self.params.use_deconv:
+            upconv = self.deconv
+        else:
+            upconv = self.upconv
 
         with tf.variable_scope('encoder'):
             conv1 = self.conv_block(self.model_input,  32, 7) # H/2
@@ -348,10 +351,10 @@ class MonodepthModel(object):
     def build_resnet50(self):
         #set convenience functions
         conv = self.conv
-        # if self.params.use_deconv:
-        upconv = self.deconv
-        # else:
-        #     upconv = self.upconv
+        if self.params.use_deconv:
+            upconv = self.deconv
+        else:
+            upconv = self.upconv
 
         with tf.variable_scope('encoder'):
             conv1 = conv(self.model_input, 64, 7, 2) # H/2  -   64D
