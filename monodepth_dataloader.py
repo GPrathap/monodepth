@@ -104,8 +104,9 @@ class MonodepthDataloader(object):
 
     def read_image(self, image_path):
         # tf.decode_image does not return the image size, this is an ugly workaround to handle both jpeg and png
+        print(image_path)
         path_length = string_length_tf(image_path)[0]
-        file_extension = tf.substr(image_path, path_length - 3, 3)
+        file_extension = tf.substr(image_path, path_length -3, 3)
         file_cond = tf.equal(file_extension, 'jpg')
         print("file extension: {}  {}".format(image_path, file_extension))
         
