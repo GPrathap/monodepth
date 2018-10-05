@@ -12,6 +12,8 @@
 # only keep warnings and errors
 import os
 
+from tensorflow.python.saved_model import signature_def_utils, signature_constants, tag_constants
+
 from monodepth_generate_model import MonodepthGenerateModel
 from utils import save_images, image_manifold_size
 
@@ -271,6 +273,56 @@ def model_validate(params):
         np.save(output_directory + '/disparities_pp.npy', disparities_pp)
 
         print('done.')
+
+
+def export_model(params):
+    """Test function."""
+    dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
+    left = dataloader.left_image_batch
+    right = dataloader.right_image_batch
+
+    # left = tf.split(left, args.num_gpus, 0)[0]
+    # right = tf.split(right, args.num_gpus, 0)[0]
+
+    model = MonodepthModel(params, args.mode, left, right)
+
+    # SESSION
+    config = tf.ConfigProto(allow_soft_placement=True)
+    sess = tf.Session(config=config)
+
+    # SAVER
+    train_saver = tf.train.Saver()
+
+    # INIT
+    sess.run(tf.global_variables_initializer())
+    sess.run(tf.local_variables_initializer())
+    coordinator = tf.train.Coordinator()
+    threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
+
+    # RESTORE
+    # if args.checkpoint_path == '':
+    #     restore_path = tf.train.latest_checkpoint(args.log_directory + '/' + args.model_name)
+    #     print("Model name {} ".format(restore_path))
+    # else:
+    #     restore_path = args.checkpoint_path.split(".")[0]
+    restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-50000"
+    train_saver.restore(sess, restore_path)
+    # train_saver.restore(sess, restore_path)
+
+    signature = signature_def_utils.build_signature_def(
+        inputs=model.left,
+        outputs=model.disp_left_est,
+        method_name=signature_constants.PREDICT_METHOD_NAME)
+
+    signature_map = {signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
+                         signature}
+
+    model_builder = tf.saved_model.builder.SavedModelBuilder("/home/a.gabdullin/geesara/monodepth/o/monodepth")
+    model_builder.add_meta_graph_and_variables(sess,
+                                               tags=[tag_constants.SERVING],
+                                               signature_def_map=signature_map,
+                                               clear_devices=True)
+    model_builder.save()
 
 def main():
     params = monodepth_parameters(
