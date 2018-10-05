@@ -11,7 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monodepth_dataloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_dataloader.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="279" column="17" selection-start-line="279" selection-start-column="17" selection-end-line="279" selection-end-column="17" />
+            <state relative-caret-position="493">
+              <caret line="349" column="29" selection-start-line="349" selection-start-column="23" selection-end-line="349" selection-end-column="29" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -63,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monodepth_dataloader.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="monodepth_dataloader.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1863">
-              <caret line="70" column="43" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="43" />
+            <state relative-caret-position="520">
+              <caret line="72" column="48" lean-forward="true" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -170,11 +170,11 @@
         <option value="$PROJECT_DIR$/monodepth_generate_model.py" />
         <option value="$PROJECT_DIR$/monodepth_model.py" />
         <option value="$PROJECT_DIR$/monodepth_simple.py" />
-        <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
         <option value="$PROJECT_DIR$/utils/filenames/kitti_test_small.txt" />
         <option value="$PROJECT_DIR$/view_image.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/monodepth_main.py" />
+        <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
       </list>
     </option>
   </component>
@@ -358,20 +358,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00034" summary="tuning hyper parameters">
-      <created>1536409089020</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1536409089020</updated>
-    </task>
-    <task id="LOCAL-00035" summary="tuning hyper parameters">
-      <created>1536412907365</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1536412907365</updated>
     </task>
     <task id="LOCAL-00036" summary="tuning hyper parameters">
       <created>1536412951926</created>
@@ -702,7 +688,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536932383936</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="adding model exporting initial testing">
+      <created>1538749667864</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1538749667865</updated>
+    </task>
+    <task id="LOCAL-00084" summary="adding model exporting initial testing">
+      <created>1538749915773</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1538749915773</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -781,7 +781,8 @@
     <MESSAGE value="tuning hyper parameters" />
     <MESSAGE value="tuning hyper parameters try adding normalization layers" />
     <MESSAGE value="initial testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial testing" />
+    <MESSAGE value="adding model exporting initial testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding model exporting initial testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1105,13 +1106,6 @@
     <entry file="file://$PROJECT_DIR$/utils/filenames/paking_dataset.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1863">
-          <caret line="70" column="43" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -1138,11 +1132,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="279" column="17" selection-start-line="279" selection-start-column="17" selection-end-line="279" selection-end-column="17" />
+        <state relative-caret-position="493">
+          <caret line="349" column="29" selection-start-line="349" selection-start-column="23" selection-end-line="349" selection-end-column="29" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="72" column="48" lean-forward="true" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
         </state>
       </provider>
     </entry>

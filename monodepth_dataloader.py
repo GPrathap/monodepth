@@ -34,8 +34,12 @@ class MonodepthDataloader(object):
 
         split_line = tf.string_split([line]).values
 
+        if mode == "export":
+            left_image_path = tf.string_join([self.data_path, split_line[0]])
+            print("-------------> left_image_path {}".format(left_image_path))
+            left_image_o = self.read_image(left_image_path)
         # we load only one image for test, except if we trained a stereo model
-        if mode == 'test' and not self.params.do_stereo:
+        elif mode == 'test' and not self.params.do_stereo:
             left_image_path  = tf.string_join([self.data_path, split_line[0]])
             print("-------------> left_image_path {}".format(left_image_path))
             left_image_o  = self.read_image(left_image_path)
@@ -66,7 +70,7 @@ class MonodepthDataloader(object):
             self.left_image_batch, self.right_image_batch = tf.train.shuffle_batch([left_image, right_image],
                         params.batch_size, capacity, min_after_dequeue, params.num_threads)
 
-        elif mode == 'test':
+        elif mode == 'test' or mode == 'export':
             self.left_image_batch = tf.stack([left_image_o,  tf.image.flip_left_right(left_image_o)],  0)
             self.left_image_batch.set_shape( [2, None, None, 3])
 
