@@ -347,6 +347,8 @@ def main():
         train(params)
     elif args.mode == 'test':
         model_validate(params)
+    elif args.mode == 'export':
+        export_model(params)
 
 # if __name__ == '__main__':
 #     tf.app.run()
