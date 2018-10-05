@@ -14,7 +14,7 @@ from __future__ import absolute_import, division, print_function
 import tensorflow as tf
 
 def string_length_tf(t):
-  return tf.py_func(len, [t], [tf.int64])
+  return tf.py_func(len, [t], tf.int64)
 
 class MonodepthDataloader(object):
     """monodepth dataloader"""
