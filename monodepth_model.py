@@ -405,7 +405,7 @@ class MonodepthModel(object):
             self.disp_left_est  = [tf.expand_dims(d[:,:,:,0], 3) for d in self.disp_est]
             self.disp_right_est = [tf.expand_dims(d[:,:,:,1], 3) for d in self.disp_est]
 
-        if self.mode == 'test':
+        if self.mode == 'test' or self.mode == "export":
             return
 
         # if self.is_generator_in_use:
