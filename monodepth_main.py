@@ -311,8 +311,7 @@ def export_model(params):
 
     signature = signature_def_utils.build_signature_def(
         inputs=model.left,
-        outputs=model.disp_left_est,
-        method_name=signature_constants.PREDICT_METHOD_NAME)
+        outputs=model.disp_left_est)
 
     signature_map = {signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
                          signature}
