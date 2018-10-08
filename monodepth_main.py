@@ -309,6 +309,8 @@ def export_model(params):
     left = dataloader.left_image_batch
     right = dataloader.right_image_batch
 
+
+
     # left = tf.split(left, args.num_gpus, 0)[0]
     # right = tf.split(right, args.num_gpus, 0)[0]
 
@@ -318,7 +320,7 @@ def export_model(params):
         # Note: we don't nee to initialize/restore anything
         # There is no Variables in this graph, only hardcoded constants
         y_out = sess.run(y, feed_dict={
-            x: left  # < 45
+            x: np.ones([1,256, 512, 3])  # < 45
         })
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
