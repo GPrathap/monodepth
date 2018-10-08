@@ -10,6 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/exporting_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,13 +31,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="316" column="35" lean-forward="true" selection-start-line="316" selection-start-column="35" selection-end-line="316" selection-end-column="35" />
+            <state relative-caret-position="167">
+              <caret line="302" column="41" selection-start-line="302" selection-start-column="41" selection-end-line="302" selection-end-column="41" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="builder_impl.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/saved_model/builder_impl.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1781">
+              <caret line="339" column="25" selection-start-line="339" selection-start-column="25" selection-end-line="339" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="exporting_model.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/exporting_model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="601">
+              <caret line="66" column="21" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,14 +96,13 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>use_deconv</find>
       <find>upsample_nn</find>
       <find>gradient_x</find>
       <find>conv2d_transpose</find>
       <find>deconv</find>
       <find>upconv</find>
       <find>tra</find>
-      <find />
+      <find>no summary</find>
       <find>filenames_file</find>
       <find>jpg</find>
       <find>SSIM</find>
@@ -103,6 +125,7 @@
       <find>string_length_tf</find>
       <find>tf.py_func</find>
       <find>disp_left_est</find>
+      <find>signature_def_map</find>
     </findStrings>
     <replaceStrings>
       <replace>png</replace>
@@ -144,6 +167,7 @@
         <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
         <option value="$PROJECT_DIR$/monodepth_model.py" />
         <option value="$PROJECT_DIR$/monodepth_main.py" />
+        <option value="$PROJECT_DIR$/exporting_model.py" />
       </list>
     </option>
   </component>
@@ -327,27 +351,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00041" summary="tuning hyper parameters">
-      <created>1536525341943</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1536525341943</updated>
-    </task>
-    <task id="LOCAL-00042" summary="tuning hyper parameters">
-      <created>1536525813966</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1536525813966</updated>
-    </task>
-    <task id="LOCAL-00043" summary="tuning hyper parameters">
-      <created>1536525887643</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1536525887643</updated>
     </task>
     <task id="LOCAL-00044" summary="tuning hyper parameters">
       <created>1536526066202</created>
@@ -671,7 +674,28 @@
       <option name="project" value="LOCAL" />
       <updated>1538984371835</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="adding model exporting initial testing">
+      <created>1538984497977</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1538984497977</updated>
+    </task>
+    <task id="LOCAL-00091" summary="adding model exporting initial testing">
+      <created>1538984560448</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1538984560448</updated>
+    </task>
+    <task id="LOCAL-00092" summary="adding model exporting initial testing">
+      <created>1538984614613</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1538984614614</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -692,8 +716,8 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32925472" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.36262515" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.1679644" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19530416" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.1679644" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19530416" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -768,12 +792,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/monodepth_main.py</url>
-          <line>151</line>
+          <line>152</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/monodepth_main.py</url>
-          <line>212</line>
+          <line>213</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -788,7 +812,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/monodepth_main.py</url>
-          <line>113</line>
+          <line>114</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
       </breakpoints>
@@ -859,14 +883,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_train_files_trail.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="79" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../monodepth_main.py" />
     <entry file="file://$PROJECT_DIR$/../average_gradients.py" />
     <entry file="file://$PROJECT_DIR$/../monodepth_generate_model.py" />
     <entry file="file://$PROJECT_DIR$/../monodepth_generate_model.py" />
@@ -1113,10 +1129,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="316" column="35" lean-forward="true" selection-start-line="316" selection-start-column="35" selection-end-line="316" selection-end-column="35" />
+        <state relative-caret-position="167">
+          <caret line="302" column="41" selection-start-line="302" selection-start-column="41" selection-end-line="302" selection-end-column="41" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/saved_model/builder_impl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1781">
+          <caret line="339" column="25" selection-start-line="339" selection-start-column="25" selection-end-line="339" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exporting_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="66" column="21" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -11,6 +11,7 @@
 
 # only keep warnings and errors
 import os
+import sys
 
 from tensorflow.python.saved_model import signature_def_utils, signature_constants, tag_constants
 
@@ -280,10 +281,6 @@ def export_model(params):
     dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     left = dataloader.left_image_batch
     right = dataloader.right_image_batch
-
-    # left = tf.split(left, args.num_gpus, 0)[0]
-    # right = tf.split(right, args.num_gpus, 0)[0]
-
     model = MonodepthModel(params, args.mode, left, right)
 
     # SESSION
@@ -299,26 +296,18 @@ def export_model(params):
     coordinator = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
 
-    # RESTORE
-    # if args.checkpoint_path == '':
-    #     restore_path = tf.train.latest_checkpoint(args.log_directory + '/' + args.model_name)
-    #     print("Model name {} ".format(restore_path))
-    # else:
-    #     restore_path = args.checkpoint_path.split(".")[0]
     restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-50000"
     train_saver.restore(sess, restore_path)
-    # train_saver.restore(sess, restore_path)
-
-    # signature = signature_def_utils.build_signature_def(
-    #     inputs=model.left,
-    #     outputs=model.disp_left_est)
-    #
-    # signature_map = {signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
-    #                      signature}
 
     model_builder = tf.saved_model.builder.SavedModelBuilder("/home/a.gabdullin/geesara/monodepth/o/monodepth/export_model")
     model_builder.add_meta_graph_and_variables(sess,
                                                tags=[tag_constants.SERVING],
+                                               signature_def_map={
+                                                   'predict_images':
+                                                       prediction_signature,
+                                                   signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
+                                                       classification_signature,
+                                               },
                                                clear_devices=True)
     model_builder.save()
 
@@ -352,3 +341,13 @@ def main():
 #     tf.app.run()
 
 main()
+
+if os.path.exists(os.path.join(os.path.dirname(__file__), '..', 'python', 'catkin', '__init__.py')):
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'python'))
+    sys.path.append('/home/tmp/ros/lib/python2.7/dist-packages/')
+    from catkin.builder import build_workspace_isolated
+    from catkin.builder import colorize_line
+    from catkin.builder import determine_path_argument
+    from catkin.builder import extract_cmake_and_make_and_catkin_make_arguments
+    from catkin.builder import extract_jobs_flags
+
