@@ -32,8 +32,8 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="307" column="47" lean-forward="true" selection-start-line="307" selection-start-column="47" selection-end-line="307" selection-end-column="47" />
+            <state relative-caret-position="514">
+              <caret line="322" column="26" selection-start-line="322" selection-start-column="26" selection-end-line="322" selection-end-column="26" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -344,27 +344,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00047" summary="tuning hyper parameters">
-      <created>1536585845541</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1536585845541</updated>
-    </task>
-    <task id="LOCAL-00048" summary="tuning hyper parameters">
-      <created>1536587665699</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1536587665699</updated>
-    </task>
-    <task id="LOCAL-00049" summary="tuning hyper parameters">
-      <created>1536588239019</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1536588239019</updated>
     </task>
     <task id="LOCAL-00050" summary="tuning hyper parameters">
       <created>1536607165988</created>
@@ -688,7 +667,28 @@
       <option name="project" value="LOCAL" />
       <updated>1539031274930</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="adding model exporting initial testing">
+      <created>1539031428081</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1539031428081</updated>
+    </task>
+    <task id="LOCAL-00097" summary="adding model exporting initial testing">
+      <created>1539031483381</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1539031483381</updated>
+    </task>
+    <task id="LOCAL-00098" summary="adding model exporting initial testing">
+      <created>1539031528519</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1539031528519</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1165,8 +1165,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="307" column="47" lean-forward="true" selection-start-line="307" selection-start-column="47" selection-end-line="307" selection-end-column="47" />
+        <state relative-caret-position="514">
+          <caret line="322" column="26" selection-start-line="322" selection-start-column="26" selection-end-line="322" selection-end-column="26" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>
