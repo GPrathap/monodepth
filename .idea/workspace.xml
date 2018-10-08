@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/exporting_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
     </list>
@@ -23,7 +23,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/monodepth$temp.coverage" NAME="temp Coverage Results" MODIFIED="1536330920939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/monodepth$monodepth_main.coverage" NAME="monodepth_main Coverage Results" MODIFIED="1538835156400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/monodepth$monodepth_main.coverage" NAME="monodepth_main Coverage Results" MODIFIED="1539030227499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$Nosetests_in_test_downsample_py.coverage" NAME="Nosetests in test_downsample.py Coverage Results" MODIFIED="1536650911935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bicubic_interp-tensorflow" />
     <SUITE FILE_PATH="coverage/monodepth$view_image.coverage" NAME="view_image Coverage Results" MODIFIED="1538831201011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/monodepth$downsample.coverage" NAME="downsample Coverage Results" MODIFIED="1536651075025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bicubic_interp-tensorflow" />
@@ -31,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="302" column="41" selection-start-line="302" selection-start-column="41" selection-end-line="302" selection-end-column="41" />
+            <state relative-caret-position="528">
+              <caret line="63" column="44" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="44" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -43,20 +43,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="builder_impl.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/saved_model/builder_impl.py">
+      <file leaf-file-name="monodepth_model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/monodepth_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1781">
-              <caret line="339" column="25" selection-start-line="339" selection-start-column="25" selection-end-line="339" selection-end-column="25" />
+            <state relative-caret-position="374">
+              <caret line="383" column="40" lean-forward="true" selection-start-line="383" selection-start-column="40" selection-end-line="383" selection-end-column="40" />
+              <folding>
+                <element signature="e#548#612#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="exporting_model.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="exporting_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exporting_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="601">
-              <caret line="66" column="21" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+            <state relative-caret-position="918">
+              <caret line="34" column="37" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="37" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -64,22 +67,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="signature_def_utils_impl.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/saved_model/signature_def_utils_impl.py">
+      <file leaf-file-name="test_model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="40" column="48" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="monodepth_model.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/monodepth_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="407" column="21" selection-start-line="407" selection-start-column="21" selection-end-line="407" selection-end-column="21" />
+            <state relative-caret-position="663">
+              <caret line="61" column="50" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="61" selection-end-column="50" />
               <folding>
-                <element signature="e#548#612#0" expanded="true" />
+                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,8 +118,8 @@
       <find>log_directory</find>
       <find>string_length_tf</find>
       <find>tf.py_func</find>
-      <find>disp_left_est</find>
       <find>signature_def_map</find>
+      <find>disp_left_est</find>
     </findStrings>
     <replaceStrings>
       <replace>png</replace>
@@ -166,8 +160,9 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
         <option value="$PROJECT_DIR$/monodepth_model.py" />
-        <option value="$PROJECT_DIR$/monodepth_main.py" />
         <option value="$PROJECT_DIR$/exporting_model.py" />
+        <option value="$PROJECT_DIR$/test_model.py" />
+        <option value="$PROJECT_DIR$/monodepth_main.py" />
       </list>
     </option>
   </component>
@@ -351,13 +346,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00044" summary="tuning hyper parameters">
-      <created>1536526066202</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1536526066202</updated>
     </task>
     <task id="LOCAL-00045" summary="tuning hyper parameters">
       <created>1536555527988</created>
@@ -695,7 +683,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538984614614</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="adding model exporting initial testing">
+      <created>1539028484178</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1539028484178</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -716,14 +711,14 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32925472" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.36262515" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.1679644" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19530416" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.25917685" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19530416" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.43270302" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.14126807" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -792,12 +787,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/monodepth_main.py</url>
-          <line>152</line>
+          <line>154</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/monodepth_main.py</url>
-          <line>213</line>
+          <line>215</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -812,8 +807,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/monodepth_main.py</url>
-          <line>114</line>
+          <line>116</line>
           <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/monodepth_model.py</url>
+          <line>392</line>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -823,11 +823,21 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="60" />
+      <option name="time" value="62" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="setValue">
+      <expression>
+        <expression-string>Tensor(&quot;split:0&quot;, shape=(8, 256, 512, 3), dtype=float32, device=/device:GPU:0)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Tensor(&quot;disparities/ExpandDims:0&quot;, shape=(8, ?, ?, 1), dtype=float32, device=/device:GPU:0)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>Tensor(&quot;discriminator_3/gradients/discriminator_2/encoder/Pad_grad/Slice_1:0&quot;, shape=(8, 256, 512, 3), dtype=float32, device=/device:GPU:0)</expression-string>
         <language-id>Python</language-id>
@@ -835,6 +845,16 @@
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>self.model_input</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.disp_left_est</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>disp_pp[i]</expression-string>
         <language-id>Python</language-id>
@@ -870,21 +890,9 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>tf.image.resize_bicubic(x, [h * ratio, w * ratio])</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self._Deconv(x, 2, 5, 2)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../average_gradients.py" />
-    <entry file="file://$PROJECT_DIR$/../monodepth_generate_model.py" />
     <entry file="file://$PROJECT_DIR$/../monodepth_generate_model.py" />
     <entry file="file://$PROJECT_DIR$/../average_gradients.py" />
     <entry file="file://$PROJECT_DIR$/../monodepth_main.py" />
@@ -1110,13 +1118,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_model.py">
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/saved_model/builder_impl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="407" column="21" selection-start-line="407" selection-start-column="21" selection-end-line="407" selection-end-column="21" />
-          <folding>
-            <element signature="e#548#612#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1538">
+          <caret line="339" column="25" selection-start-line="339" selection-start-column="25" selection-end-line="339" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1127,29 +1132,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_main.py">
+    <entry file="file://$PROJECT_DIR$/new_image_1disp.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exporting_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="302" column="41" selection-start-line="302" selection-start-column="41" selection-end-line="302" selection-end-column="41" />
+        <state relative-caret-position="918">
+          <caret line="34" column="37" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="37" />
           <folding>
-            <element signature="e#472#481#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/saved_model/builder_impl.py">
+    <entry file="file://$PROJECT_DIR$/monodepth_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1781">
-          <caret line="339" column="25" selection-start-line="339" selection-start-column="25" selection-end-line="339" selection-end-column="25" />
+        <state relative-caret-position="374">
+          <caret line="383" column="40" lean-forward="true" selection-start-line="383" selection-start-column="40" selection-end-line="383" selection-end-column="40" />
+          <folding>
+            <element signature="e#548#612#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exporting_model.py">
+    <entry file="file://$PROJECT_DIR$/test_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="66" column="21" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+        <state relative-caret-position="663">
+          <caret line="61" column="50" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="61" selection-end-column="50" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="63" column="44" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="44" />
+          <folding>
+            <element signature="e#472#481#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -61,6 +61,8 @@ parser.add_argument('--retrain',                               help='if used wit
 parser.add_argument('--full_summary',                          help='if set, will keep more data for each summary. Warning: the file can become very large', action='store_true')
 parser.add_argument('--sample_dir',                type=str,   help='sample directory', default='./dataset/images')
 parser.add_argument('--use_bn',                type=bool,   help='is using batch normalization', default=True)
+parser.add_argument("--frozen_model_filename", default="results/frozen_model.pb", type=str,
+                    help="Frozen model file to import")
 
 args = parser.parse_args()
 
@@ -261,7 +263,6 @@ def model_validate(params):
             disp = sess.run(model.disp_left_est[0])
             disparities[step] = disp[0].squeeze()
             disparities_pp[step] = post_process_disparity(disp.squeeze())
-
         print('done.')
 
         print('writing disparities.')
@@ -275,41 +276,87 @@ def model_validate(params):
 
         print('done.')
 
+def load_graph(frozen_graph_filename):
+    # We load the protobuf file from the disk and parse it to retrieve the
+    # unserialized graph_def
+    with tf.gfile.GFile(frozen_graph_filename, "rb") as f:
+        graph_def = tf.GraphDef()
+        graph_def.ParseFromString(f.read())
+
+    # Then, we import the graph_def into a new Graph and returns it
+    with tf.Graph().as_default() as graph:
+        # The name var will prefix every op/nodes in your graph
+        # Since we load everything in a new graph, this is not needed
+        tf.import_graph_def(graph_def, name="prefix")
+    return graph
 
 def export_model(params):
-    """Test function."""
+    # We use our "load_graph" function
+    graph = load_graph(args.frozen_model_filename)
+
+    # We can verify that we can access the list of operations in the graph
+    for op in graph.get_operations():
+        print(op.name)
+        # prefix/Placeholder/inputs_placeholder
+        # ...
+        # prefix/Accuracy/predictions
+
+    # We access the input and output nodes
+    x = graph.get_tensor_by_name('split:0')
+    y = graph.get_tensor_by_name('disparities/ExpandDims:0')
+
     dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     left = dataloader.left_image_batch
     right = dataloader.right_image_batch
+
+    # left = tf.split(left, args.num_gpus, 0)[0]
+    # right = tf.split(right, args.num_gpus, 0)[0]
+
     model = MonodepthModel(params, args.mode, left, right)
+    # We launch a Session
+    with tf.Session(graph=graph) as sess:
+        # Note: we don't nee to initialize/restore anything
+        # There is no Variables in this graph, only hardcoded constants
+        y_out = sess.run(y, feed_dict={
+            x: left  # < 45
+        })
+        # I taught a neural net to recognise when a sum of numbers is bigger than 45
+        # it should return False in this case
+        print(y_out)  # [[ False ]] Yay, it works!
+    # """Test function."""
+    # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
+    # left = dataloader.left_image_batch
+    # right = dataloader.right_image_batch
+    # model = MonodepthModel(params, args.mode, left, right)
+    #
+    # # SESSION
+    # config = tf.ConfigProto(allow_soft_placement=True)
+    # sess = tf.Session(config=config)
+    #
+    # # SAVER
+    # train_saver = tf.train.Saver()
+    #
+    # # INIT
+    # sess.run(tf.global_variables_initializer())
+    # sess.run(tf.local_variables_initializer())
+    # coordinator = tf.train.Coordinator()
+    # threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
+    #
+    # restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-50000"
+    # train_saver.restore(sess, restore_path)
+    #
+    # model_builder = tf.saved_model.builder.SavedModelBuilder("/home/a.gabdullin/geesara/monodepth/o/monodepth/export_model")
+    # model_builder.add_meta_graph_and_variables(sess,
+    #                                            tags=[tag_constants.SERVING],
+    #                                            signature_def_map={
+    #                                                'predict_images':
+    #                                                    prediction_signature,
+    #                                                signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
+    #                                                    classification_signature,
+    #                                            },
+    #                                            clear_devices=True)
+    # model_builder.save()
 
-    # SESSION
-    config = tf.ConfigProto(allow_soft_placement=True)
-    sess = tf.Session(config=config)
-
-    # SAVER
-    train_saver = tf.train.Saver()
-
-    # INIT
-    sess.run(tf.global_variables_initializer())
-    sess.run(tf.local_variables_initializer())
-    coordinator = tf.train.Coordinator()
-    threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
-
-    restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-50000"
-    train_saver.restore(sess, restore_path)
-
-    model_builder = tf.saved_model.builder.SavedModelBuilder("/home/a.gabdullin/geesara/monodepth/o/monodepth/export_model")
-    model_builder.add_meta_graph_and_variables(sess,
-                                               tags=[tag_constants.SERVING],
-                                               signature_def_map={
-                                                   'predict_images':
-                                                       prediction_signature,
-                                                   signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
-                                                       classification_signature,
-                                               },
-                                               clear_devices=True)
-    model_builder.save()
 
 def main():
     params = monodepth_parameters(
