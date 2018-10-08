@@ -65,7 +65,7 @@ class MonodepthModel(object):
         self.build_outputs()
 
 
-        if self.mode == 'test':
+        if self.mode == 'test' or self.mode == 'export':
             return
 
         self.build_losses()
