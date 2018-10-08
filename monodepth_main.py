@@ -302,8 +302,8 @@ def export_model(params):
         # prefix/Accuracy/predictions
 
     # We access the input and output nodes
-    x = graph.get_tensor_by_name('prefix/split')
-    y = graph.get_tensor_by_name('prefix/disparities/ExpandDims')
+    x = graph.get_tensor_by_name('prefix/split:0')
+    y = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
 
     dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     left = dataloader.left_image_batch
