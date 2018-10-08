@@ -10,8 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monodepth_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="313" column="35" selection-start-line="313" selection-start-column="22" selection-end-line="313" selection-end-column="35" />
+            <state relative-caret-position="433">
+              <caret line="316" column="35" lean-forward="true" selection-start-line="316" selection-start-column="35" selection-end-line="316" selection-end-column="35" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -42,11 +41,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monodepth_model.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="signature_def_utils_impl.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/saved_model/signature_def_utils_impl.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="40" column="48" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="monodepth_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monodepth_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+            <state relative-caret-position="420">
+              <caret line="407" column="21" selection-start-line="407" selection-start-column="21" selection-end-line="407" selection-end-column="21" />
               <folding>
                 <element signature="e#548#612#0" expanded="true" />
               </folding>
@@ -65,7 +73,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>colocate_gradients_with_ops</find>
       <find>use_deconv</find>
       <find>upsample_nn</find>
       <find>gradient_x</find>
@@ -95,6 +102,7 @@
       <find>log_directory</find>
       <find>string_length_tf</find>
       <find>tf.py_func</find>
+      <find>disp_left_est</find>
     </findStrings>
     <replaceStrings>
       <replace>png</replace>
@@ -134,8 +142,8 @@
         <option value="$PROJECT_DIR$/view_image.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/monodepth_dataloader.py" />
-        <option value="$PROJECT_DIR$/monodepth_main.py" />
         <option value="$PROJECT_DIR$/monodepth_model.py" />
+        <option value="$PROJECT_DIR$/monodepth_main.py" />
       </list>
     </option>
   </component>
@@ -319,20 +327,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00039" summary="tuning hyper parameters">
-      <created>1536414970293</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1536414970293</updated>
-    </task>
-    <task id="LOCAL-00040" summary="tuning hyper parameters">
-      <created>1536415233960</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1536415233960</updated>
     </task>
     <task id="LOCAL-00041" summary="tuning hyper parameters">
       <created>1536525341943</created>
@@ -663,7 +657,21 @@
       <option name="project" value="LOCAL" />
       <updated>1538762345842</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="adding model exporting initial testing">
+      <created>1538984230201</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1538984230203</updated>
+    </task>
+    <task id="LOCAL-00089" summary="adding model exporting initial testing">
+      <created>1538984371835</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1538984371835</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -684,7 +692,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32925472" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.36262515" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.6284761" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.1679644" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19530416" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
@@ -851,13 +859,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_stereo_2015_test_files.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/filenames/kitti_train_files_trail.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -1093,22 +1094,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_main.py">
+    <entry file="file://$PROJECT_DIR$/monodepth_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="313" column="35" selection-start-line="313" selection-start-column="22" selection-end-line="313" selection-end-column="35" />
+        <state relative-caret-position="420">
+          <caret line="407" column="21" selection-start-line="407" selection-start-column="21" selection-end-line="407" selection-end-column="21" />
           <folding>
-            <element signature="e#472#481#0" expanded="true" />
+            <element signature="e#548#612#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monodepth_model.py">
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/saved_model/signature_def_utils_impl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+        <state relative-caret-position="374">
+          <caret line="40" column="48" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monodepth_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="316" column="35" lean-forward="true" selection-start-line="316" selection-start-column="35" selection-end-line="316" selection-end-column="35" />
           <folding>
-            <element signature="e#548#612#0" expanded="true" />
+            <element signature="e#472#481#0" expanded="true" />
           </folding>
         </state>
       </provider>

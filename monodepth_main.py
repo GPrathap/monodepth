@@ -309,17 +309,16 @@ def export_model(params):
     train_saver.restore(sess, restore_path)
     # train_saver.restore(sess, restore_path)
 
-    signature = signature_def_utils.build_signature_def(
-        inputs=model.left,
-        outputs=model.disp_left_est)
-
-    signature_map = {signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
-                         signature}
+    # signature = signature_def_utils.build_signature_def(
+    #     inputs=model.left,
+    #     outputs=model.disp_left_est)
+    #
+    # signature_map = {signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
+    #                      signature}
 
     model_builder = tf.saved_model.builder.SavedModelBuilder("/home/a.gabdullin/geesara/monodepth/o/monodepth")
     model_builder.add_meta_graph_and_variables(sess,
                                                tags=[tag_constants.SERVING],
-                                               signature_def_map=signature_map,
                                                clear_devices=True)
     model_builder.save()
 
