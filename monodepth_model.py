@@ -40,6 +40,7 @@ monodepth_parameters = namedtuple('parameters',
                         'sample_dir, '
                         'use_bn, '
                         'z_dim, '
+                        'frozen_model_filename, '
                         'full_summary')
 
 class MonodepthModel(object):

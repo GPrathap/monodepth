@@ -375,6 +375,7 @@ def main():
         full_summary=args.full_summary,
         sample_dir=args.sample_dir,
         use_bn=True,
+        frozen_model_filename=args.frozen_model_filename,
         z_dim=100)
 
     if args.mode == 'train':
