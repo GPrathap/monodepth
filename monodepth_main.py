@@ -316,7 +316,7 @@ def export_model(params):
     # signature_map = {signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
     #                      signature}
 
-    model_builder = tf.saved_model.builder.SavedModelBuilder("/home/a.gabdullin/geesara/monodepth/o/monodepth")
+    model_builder = tf.saved_model.builder.SavedModelBuilder("/home/a.gabdullin/geesara/monodepth/o/monodepth/export_model")
     model_builder.add_meta_graph_and_variables(sess,
                                                tags=[tag_constants.SERVING],
                                                clear_devices=True)
