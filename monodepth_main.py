@@ -300,15 +300,22 @@ def export_model(params):
         # prefix/Placeholder/inputs_placeholder
         # ...
         # prefix/Accuracy/predictions
-
+    #
     # We access the input and output nodes
+
+    filename_queue = tf.train.string_input_producer(['/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000005.png'])  # list of files to read
+
+    reader = tf.WholeFileReader()
+    key, value = reader.read(filename_queue)
+
+    my_img = tf.image.decode_png(value)  # use png or jpg decoder based on your files.
+
     x = graph.get_tensor_by_name('prefix/split:0')
     y = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
 
     dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     left = dataloader.left_image_batch
     right = dataloader.right_image_batch
-
 
 
     # left = tf.split(left, args.num_gpus, 0)[0]
@@ -319,8 +326,12 @@ def export_model(params):
     with tf.Session(graph=graph) as sess:
         # Note: we don't nee to initialize/restore anything
         # There is no Variables in this graph, only hardcoded constants
+
+        image = my_img.eval()
+        print ("shape of the image {}".format(image.shape))
+
         y_out = sess.run(y, feed_dict={
-            x: np.ones([1,256, 512, 3])  # < 45
+            x: image
         })
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
