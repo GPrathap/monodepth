@@ -327,7 +327,7 @@ def export_model(params):
         # Note: we don't nee to initialize/restore anything
         # There is no Variables in this graph, only hardcoded constants
 
-        image = my_img.eval()
+        image = my_img.eval(session=sess)
         print ("shape of the image {}".format(image.shape))
 
         y_out = sess.run(y, feed_dict={
