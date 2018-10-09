@@ -17,6 +17,7 @@ from tensorflow.python.saved_model import signature_def_utils, signature_constan
 
 from monodepth_generate_model import MonodepthGenerateModel
 from utils import save_images, image_manifold_size
+from skimage import img_as_float
 
 os.environ['TF_CPP_MIN_LOG_LEVEL']='1'
 
@@ -310,20 +311,20 @@ def export_model(params):
     #
     # my_img = tf.image.decode_png(value)  # use png or jpg decoder based on your files.
 
-    img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000005.png')
-
+    img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000005.png', mode='RGB')
+    img = img_as_float(img)
     x = graph.get_tensor_by_name('prefix/split:0')
     y = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
 
-    dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
-    left = dataloader.left_image_batch
-    right = dataloader.right_image_batch
+    # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
+    # left = dataloader.left_image_batch
+    # right = dataloader.right_image_batch
 
 
     # left = tf.split(left, args.num_gpus, 0)[0]
     # right = tf.split(right, args.num_gpus, 0)[0]
 
-    model = MonodepthModel(params, args.mode, left, right)
+    # model = MonodepthModel(params, args.mode, left, right)
     # We launch a Session
     with tf.Session(graph=graph) as sess:
         # Note: we don't nee to initialize/restore anything
