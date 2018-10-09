@@ -24,7 +24,7 @@ import numpy as np
 import argparse
 import re
 import time
-
+from scipy import misc
 import tensorflow.contrib.slim as slim
 
 from monodepth_model import *
@@ -303,12 +303,14 @@ def export_model(params):
     #
     # We access the input and output nodes
 
-    filename_queue = tf.train.string_input_producer(['/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000005.png'])  # list of files to read
+    # filename_queue = tf.train.string_input_producer(['/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000005.png'])  # list of files to read
+    #
+    # reader = tf.WholeFileReader()
+    # key, value = reader.read(filename_queue)
+    #
+    # my_img = tf.image.decode_png(value)  # use png or jpg decoder based on your files.
 
-    reader = tf.WholeFileReader()
-    key, value = reader.read(filename_queue)
-
-    my_img = tf.image.decode_png(value)  # use png or jpg decoder based on your files.
+    img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000005.png')
 
     x = graph.get_tensor_by_name('prefix/split:0')
     y = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
@@ -327,11 +329,11 @@ def export_model(params):
         # Note: we don't nee to initialize/restore anything
         # There is no Variables in this graph, only hardcoded constants
 
-        image = sess.run(my_img)
-        print ("shape of the image {}".format(image.shape))
+        # image = sess.run(my_img)
+        print ("shape of the image {}".format(img.shape))
 
         y_out = sess.run(y, feed_dict={
-            x: image
+            x: [img]
         })
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
