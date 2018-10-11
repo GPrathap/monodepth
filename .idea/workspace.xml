@@ -32,8 +32,8 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="327" column="18" selection-start-line="327" selection-start-column="18" selection-end-line="327" selection-end-column="18" />
+            <state relative-caret-position="675">
+              <caret line="355" column="36" selection-start-line="355" selection-start-column="36" selection-end-line="355" selection-end-column="36" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -343,20 +343,6 @@
       <option name="presentableId" value="Default" />
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
-    </task>
-    <task id="LOCAL-00078" summary="initial testing">
-      <created>1536834909891</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1536834909891</updated>
-    </task>
-    <task id="LOCAL-00079" summary="initial testing">
-      <created>1536922739260</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1536922739260</updated>
     </task>
     <task id="LOCAL-00080" summary="initial testing">
       <created>1536923336963</created>
@@ -687,7 +673,21 @@
       <option name="project" value="LOCAL" />
       <updated>1539250244248</updated>
     </task>
-    <option name="localTasksCounter" value="127" />
+    <task id="LOCAL-00127" summary="adding model exporting initial testing">
+      <created>1539250437005</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1539250437005</updated>
+    </task>
+    <task id="LOCAL-00128" summary="adding model exporting initial testing">
+      <created>1539250513684</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1539250513684</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1196,8 +1196,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="327" column="18" selection-start-line="327" selection-start-column="18" selection-end-line="327" selection-end-column="18" />
+        <state relative-caret-position="675">
+          <caret line="355" column="36" selection-start-line="355" selection-start-column="36" selection-end-line="355" selection-end-column="36" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>

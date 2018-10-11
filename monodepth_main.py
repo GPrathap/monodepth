@@ -350,14 +350,14 @@ def export_model(params):
             x: input_images
         })
 
-        y1_out = np.array(y1_out)
+        y1_out = np.array(y1_out).squeeze()
         print("shape of images {}".format(y1_out.shape))
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
           # [[ False ]] Yay, it works!
-        result = np.array([y1_out.squeeze()])
-        # y_out = post_process_disparity(result)
-        np.save('/home/a.gabdullin/geesara/disparities_export.npy', result)
+
+        y_out = post_process_disparity(y1_out)
+        np.save('/home/a.gabdullin/geesara/disparities_export.npy', y_out)
     # """Test function."""
     # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     # left = dataloader.left_image_batch
