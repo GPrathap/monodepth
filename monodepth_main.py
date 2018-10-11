@@ -339,7 +339,9 @@ def export_model(params):
         })
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
-        print(y_out)  # [[ False ]] Yay, it works!
+          # [[ False ]] Yay, it works!
+        y_out = post_process_disparity(y_out.squeeze())
+        np.save('/home/a.gabdullin/geesara/disparities_pp.npy', y_out)
     # """Test function."""
     # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     # left = dataloader.left_image_batch
@@ -407,12 +409,5 @@ def main():
 
 main()
 
-if os.path.exists(os.path.join(os.path.dirname(__file__), '..', 'python', 'catkin', '__init__.py')):
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'python'))
-    sys.path.append('/home/tmp/ros/lib/python2.7/dist-packages/')
-    from catkin.builder import build_workspace_isolated
-    from catkin.builder import colorize_line
-    from catkin.builder import determine_path_argument
-    from catkin.builder import extract_cmake_and_make_and_catkin_make_arguments
-    from catkin.builder import extract_jobs_flags
+
 
