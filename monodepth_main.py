@@ -327,7 +327,7 @@ def export_model(params):
 
     x = graph.get_tensor_by_name('prefix/split:0')
     y1 = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
-    y2 = graph.get_tensor_by_name('prefix/disparities/ExpandDims_1:0')
+    # y2 = graph.get_tensor_by_name('prefix/disparities/ExpandDims_1:0')
 
     # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     # left = dataloader.left_image_batch
@@ -344,7 +344,7 @@ def export_model(params):
         # There is no Variables in this graph, only hardcoded constants
 
         # image = sess.run(my_img)
-        print ("shape of the image {}".format(img.shape))
+        # print ("shape of the image {}".format(img.shape))
 
         y1_out = sess.run([y1], feed_dict={
             x: input_images
