@@ -32,8 +32,8 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="342" column="44" lean-forward="true" selection-start-line="342" selection-start-column="44" selection-end-line="342" selection-end-column="44" />
+            <state relative-caret-position="317">
+              <caret line="340" column="26" lean-forward="true" selection-start-line="340" selection-start-column="26" selection-end-line="340" selection-end-column="26" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -374,20 +374,6 @@
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
     </task>
-    <task id="LOCAL-00059" summary="tuning hyper parameters try adding normalization layers">
-      <created>1536760783485</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1536760783485</updated>
-    </task>
-    <task id="LOCAL-00060" summary="tuning hyper parameters try adding normalization layers">
-      <created>1536761774086</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1536761774087</updated>
-    </task>
     <task id="LOCAL-00061" summary="tuning hyper parameters try adding normalization layers">
       <created>1536772921196</created>
       <option name="number" value="00061" />
@@ -717,7 +703,21 @@
       <option name="project" value="LOCAL" />
       <updated>1539240359842</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="adding model exporting initial testing">
+      <created>1539240876330</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1539240876330</updated>
+    </task>
+    <task id="LOCAL-00109" summary="adding model exporting initial testing">
+      <created>1539241014642</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1539241014642</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -920,7 +920,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../monodepth_main.py" />
     <entry file="file://$PROJECT_DIR$/../utils/kitti_archives_to_download.txt" />
     <entry file="file://$PROJECT_DIR$/utils/kitti_archives_to_download_next.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -1210,10 +1209,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1247972723/PySide2/QtGui/QPolygonF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="139" column="8" selection-start-line="139" selection-start-column="8" selection-end-line="139" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="342" column="44" lean-forward="true" selection-start-line="342" selection-start-column="44" selection-end-line="342" selection-end-column="44" />
+        <state relative-caret-position="317">
+          <caret line="340" column="26" lean-forward="true" selection-start-line="340" selection-start-column="26" selection-end-line="340" selection-end-column="26" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>

@@ -338,11 +338,11 @@ def export_model(params):
             x: [img]
         })
 
-        print(y_out.shape)
+        print(y_out[0].shape)
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
           # [[ False ]] Yay, it works!
-        result = y_out
+        result = y_out[0]
         # y_out = post_process_disparity(result)
         np.save('/home/a.gabdullin/geesara/disparities_pp.npy', result)
     # """Test function."""
