@@ -228,7 +228,7 @@ def model_validate(params):
         left  = dataloader.left_image_batch
         right = dataloader.right_image_batch
 
-        left = tf.split(left, args.num_gpus, 0)[0]
+        # left = tf.split(left, args.num_gpus, 0)[0]
         # right = tf.split(right, args.num_gpus, 0)[0]
 
         model = MonodepthModel(params, args.mode, left, right)
