@@ -311,7 +311,7 @@ def export_model(params):
     #
     # my_img = tf.image.decode_png(value)  # use png or jpg decoder based on your files.
 
-    img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000005.png', mode='RGB')
+    img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000010.png', mode='RGB')
     img = img_as_float(img)
     img = misc.imresize(img, [256, 512, 3])
     x = graph.get_tensor_by_name('prefix/split:0')
