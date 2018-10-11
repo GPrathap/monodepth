@@ -316,6 +316,15 @@ def export_model(params):
     img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000010.png', mode='RGB')
     img = img_as_float(img)
     img = misc.imresize(img, [256, 512, 3])
+
+    # left = tf.placeholder(tf.float32, [2, 256, 512, 3])
+
+    input_image = misc.imread(args.image_path, mode="RGB")
+    original_height, original_width, num_channels = input_image.shape
+    input_image = misc.imresize(input_image, [256, 512])
+    input_image = input_image.astype(np.float32) / 255
+    input_images = np.stack((input_image, np.fliplr(input_image)), 0)
+
     x = graph.get_tensor_by_name('prefix/split:0')
     y1 = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
     y2 = graph.get_tensor_by_name('prefix/disparities/ExpandDims_1:0')
@@ -337,12 +346,11 @@ def export_model(params):
         # image = sess.run(my_img)
         print ("shape of the image {}".format(img.shape))
 
-        y1_out, y2_out = sess.run([y1, y2], feed_dict={
-            x: [img]
+        y1_out = sess.run([y1], feed_dict={
+            x: input_images
         })
 
         print(y1_out.shape)
-        print(y2_out.shape)
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
           # [[ False ]] Yay, it works!
