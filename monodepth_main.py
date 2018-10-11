@@ -263,7 +263,7 @@ def model_validate(params):
         disparities_pp = np.zeros((num_test_samples, params.height, params.width), dtype=np.float32)
         for step in range(num_test_samples):
             disp = sess.run(model.disp_left_est[0])
-            print("----------------------- <><><><> {} ".format(disp.shape))
+            print("----------------------- <><><><> {} ".format(disp[0].shape))
             disparities[step] = disp[0].squeeze()
             disparities_pp[step] = post_process_disparity(disp.squeeze())
         print('done.')
@@ -317,7 +317,8 @@ def export_model(params):
     img = img_as_float(img)
     img = misc.imresize(img, [256, 512, 3])
     x = graph.get_tensor_by_name('prefix/split:0')
-    y = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
+    y1 = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
+    y2 = graph.get_tensor_by_name('prefix/disparities/ExpandDims_1:0')
 
     # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     # left = dataloader.left_image_batch
@@ -336,15 +337,16 @@ def export_model(params):
         # image = sess.run(my_img)
         print ("shape of the image {}".format(img.shape))
 
-        y_out = sess.run(y, feed_dict={
+        y1_out, y2_out = sess.run([y1, y2], feed_dict={
             x: [img]
         })
 
-        print(y_out[0].shape)
+        print(y1_out.shape)
+        print(y2_out.shape)
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
           # [[ False ]] Yay, it works!
-        result = np.array([y_out.squeeze()])
+        result = np.array([y1_out.squeeze()])
         # y_out = post_process_disparity(result)
         np.save('/home/a.gabdullin/geesara/disparities_pp.npy', result)
     # """Test function."""
