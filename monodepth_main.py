@@ -68,6 +68,7 @@ parser.add_argument("--frozen_model_filename", default="results/frozen_model.pb"
 args = parser.parse_args()
 
 def post_process_disparity(disp):
+    print(disp.shape)
     _, h, w = disp.shape
     l_disp = disp[0,:,:]
     r_disp = np.fliplr(disp[1,:,:])
@@ -343,7 +344,7 @@ def export_model(params):
         # it should return False in this case
           # [[ False ]] Yay, it works!
         result = y_out.squeeze()
-        y_out = post_process_disparity(result)
+        y_out = post_process_disparity(result[0])
         np.save('/home/a.gabdullin/geesara/disparities_pp.npy', y_out)
     # """Test function."""
     # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
