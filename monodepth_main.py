@@ -350,7 +350,8 @@ def export_model(params):
             x: input_images
         })
 
-        print(y1_out)
+        y1_out = np.array(y1_out)
+        print("shape of images {}".format(y1_out.shape))
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
           # [[ False ]] Yay, it works!
