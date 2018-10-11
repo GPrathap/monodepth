@@ -345,8 +345,8 @@ def export_model(params):
         # it should return False in this case
           # [[ False ]] Yay, it works!
         result = np.array([y_out.squeeze()])
-        y_out = post_process_disparity(result)
-        np.save('/home/a.gabdullin/geesara/disparities_pp.npy', y_out)
+        # y_out = post_process_disparity(result)
+        np.save('/home/a.gabdullin/geesara/disparities_pp.npy', result)
     # """Test function."""
     # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
     # left = dataloader.left_image_batch
