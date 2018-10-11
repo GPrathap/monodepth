@@ -313,13 +313,13 @@ def export_model(params):
     #
     # my_img = tf.image.decode_png(value)  # use png or jpg decoder based on your files.
 
-    img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000010.png', mode='RGB')
-    img = img_as_float(img)
-    img = misc.imresize(img, [256, 512, 3])
+    # img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000010.png', mode='RGB')
+    # img = img_as_float(img)
+    # img = misc.imresize(img, [256, 512, 3])
 
     # left = tf.placeholder(tf.float32, [2, 256, 512, 3])
 
-    input_image = misc.imread(args.image_path, mode="RGB")
+    input_image = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000010.png', mode="RGB")
     original_height, original_width, num_channels = input_image.shape
     input_image = misc.imresize(input_image, [256, 512])
     input_image = input_image.astype(np.float32) / 255
