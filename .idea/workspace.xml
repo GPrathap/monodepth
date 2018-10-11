@@ -9,10 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
-    </list>
+    <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,8 +30,8 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="270" column="37" lean-forward="true" selection-start-line="270" selection-start-column="37" selection-end-line="270" selection-end-column="37" />
+            <state relative-caret-position="281">
+              <caret line="261" column="77" selection-start-line="261" selection-start-column="72" selection-end-line="261" selection-end-column="77" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -375,13 +372,6 @@
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
     </task>
-    <task id="LOCAL-00067" summary="initial testing">
-      <created>1536830056383</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1536830056383</updated>
-    </task>
     <task id="LOCAL-00068" summary="initial testing">
       <created>1536830292561</created>
       <option name="number" value="00068" />
@@ -718,7 +708,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539244109411</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="adding model exporting initial testing">
+      <created>1539244363252</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1539244363252</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1219,8 +1216,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="270" column="37" lean-forward="true" selection-start-line="270" selection-start-column="37" selection-end-line="270" selection-end-column="37" />
+        <state relative-caret-position="281">
+          <caret line="261" column="77" selection-start-line="261" selection-start-column="72" selection-end-line="261" selection-end-column="77" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>
