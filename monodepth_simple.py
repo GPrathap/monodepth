@@ -72,7 +72,7 @@ def test_simple(params):
     threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
 
     # RESTORE
-    restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-40000"
+    restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-50000"
     train_saver.restore(sess, restore_path)
 
     disp = sess.run(model.disp_left_est[0], feed_dict={left: input_images})
