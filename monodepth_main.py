@@ -263,6 +263,7 @@ def model_validate(params):
         disparities_pp = np.zeros((num_test_samples, params.height, params.width), dtype=np.float32)
         for step in range(num_test_samples):
             disp = sess.run(model.disp_left_est[0])
+            print("----------------------- <><><><> {} ".format(disp.shape))
             disparities[step] = disp[0].squeeze()
             disparities_pp[step] = post_process_disparity(disp.squeeze())
         print('done.')
