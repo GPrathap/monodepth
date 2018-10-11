@@ -298,24 +298,9 @@ def export_model(params):
     graph = load_graph(args.frozen_model_filename)
 
     # We can verify that we can access the list of operations in the graph
-    for op in graph.get_operations():
-        print(op.name)
-        # prefix/Placeholder/inputs_placeholder
-        # ...
-        # prefix/Accuracy/predictions
-    #
-    # We access the input and output nodes
+    # for op in graph.get_operations():
+    #     print(op.name)
 
-    # filename_queue = tf.train.string_input_producer(['/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000005.png'])  # list of files to read
-    #
-    # reader = tf.WholeFileReader()
-    # key, value = reader.read(filename_queue)
-    #
-    # my_img = tf.image.decode_png(value)  # use png or jpg decoder based on your files.
-
-    # img = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000010.png', mode='RGB')
-    # img = img_as_float(img)
-    # img = misc.imresize(img, [256, 512, 3])
 
     # left = tf.placeholder(tf.float32, [2, 256, 512, 3])
 
@@ -329,68 +314,16 @@ def export_model(params):
     y1 = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
     # y2 = graph.get_tensor_by_name('prefix/disparities/ExpandDims_1:0')
 
-    # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
-    # left = dataloader.left_image_batch
-    # right = dataloader.right_image_batch
-
-
-    # left = tf.split(left, args.num_gpus, 0)[0]
-    # right = tf.split(right, args.num_gpus, 0)[0]
-
-    # model = MonodepthModel(params, args.mode, left, right)
-    # We launch a Session
     with tf.Session(graph=graph) as sess:
-        # Note: we don't nee to initialize/restore anything
-        # There is no Variables in this graph, only hardcoded constants
-
-        # image = sess.run(my_img)
-        # print ("shape of the image {}".format(img.shape))
-
         y1_out = sess.run([y1], feed_dict={
             x: input_images
         })
 
         y1_out = np.array(y1_out).squeeze()
         print("shape of images {}".format(y1_out.shape))
-        # I taught a neural net to recognise when a sum of numbers is bigger than 45
-        # it should return False in this case
-          # [[ False ]] Yay, it works!
 
         y_out = post_process_disparity(y1_out)
-        np.save('/home/a.gabdullin/geesara/disparities_export.npy', y_out)
-    # """Test function."""
-    # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
-    # left = dataloader.left_image_batch
-    # right = dataloader.right_image_batch
-    # model = MonodepthModel(params, args.mode, left, right)
-    #
-    # # SESSION
-    # config = tf.ConfigProto(allow_soft_placement=True)
-    # sess = tf.Session(config=config)
-    #
-    # # SAVER
-    # train_saver = tf.train.Saver()
-    #
-    # # INIT
-    # sess.run(tf.global_variables_initializer())
-    # sess.run(tf.local_variables_initializer())
-    # coordinator = tf.train.Coordinator()
-    # threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
-    #
-    # restore_path = "/home/a.gabdullin/geesara/monodepth/o/monodepth/model-50000"
-    # train_saver.restore(sess, restore_path)
-    #
-    # model_builder = tf.saved_model.builder.SavedModelBuilder("/home/a.gabdullin/geesara/monodepth/o/monodepth/export_model")
-    # model_builder.add_meta_graph_and_variables(sess,
-    #                                            tags=[tag_constants.SERVING],
-    #                                            signature_def_map={
-    #                                                'predict_images':
-    #                                                    prediction_signature,
-    #                                                signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
-    #                                                    classification_signature,
-    #                                            },
-    #                                            clear_devices=True)
-    # model_builder.save()
+        np.save('/home/a.gabdullin/geesara/disparities_export1.npy', y_out)
 
 
 def main():
