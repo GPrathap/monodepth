@@ -340,7 +340,8 @@ def export_model(params):
         # I taught a neural net to recognise when a sum of numbers is bigger than 45
         # it should return False in this case
           # [[ False ]] Yay, it works!
-        y_out = post_process_disparity(y_out.squeeze())
+        result = np.array([y_out.squeeze()])
+        y_out = post_process_disparity(result)
         np.save('/home/a.gabdullin/geesara/disparities_pp.npy', y_out)
     # """Test function."""
     # dataloader = MonodepthDataloader(args.data_path, args.filenames_file, params, args.dataset, args.mode)
