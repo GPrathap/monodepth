@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae38d99b-1505-472c-8dd9-8a4939e7d75b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/monodepth_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/monodepth_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +32,8 @@
       <file leaf-file-name="monodepth_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monodepth_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="343" column="57" selection-start-line="343" selection-start-column="43" selection-end-line="343" selection-end-column="57" />
+            <state relative-caret-position="371">
+              <caret line="342" column="44" lean-forward="true" selection-start-line="342" selection-start-column="44" selection-end-line="342" selection-end-column="44" />
               <folding>
                 <element signature="e#472#481#0" expanded="true" />
               </folding>
@@ -375,13 +374,6 @@
       <updated>1536063341036</updated>
       <workItem from="1536773687860" duration="1198000" />
     </task>
-    <task id="LOCAL-00058" summary="tuning hyper parameters try adding normalization layers">
-      <created>1536760188724</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1536760188725</updated>
-    </task>
     <task id="LOCAL-00059" summary="tuning hyper parameters try adding normalization layers">
       <created>1536760783485</created>
       <option name="number" value="00059" />
@@ -718,7 +710,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539084657295</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="adding model exporting initial testing">
+      <created>1539240359841</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1539240359842</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -738,9 +737,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.36262515" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32925472" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="7" visible="true" weight="0.32925472" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.25917685" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17235859" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17235859" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -1213,8 +1212,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monodepth_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="343" column="57" selection-start-line="343" selection-start-column="43" selection-end-line="343" selection-end-column="57" />
+        <state relative-caret-position="371">
+          <caret line="342" column="44" lean-forward="true" selection-start-line="342" selection-start-column="44" selection-end-line="342" selection-end-column="44" />
           <folding>
             <element signature="e#472#481#0" expanded="true" />
           </folding>
