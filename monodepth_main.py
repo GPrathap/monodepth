@@ -309,7 +309,7 @@ def export_model(params):
         original_height, original_width, num_channels = input_image.shape
         input_image = misc.imresize(input_image, [256, 512])
         input_image = input_image.astype(np.float32) / 255
-        input_images = np.stack((input_image, np.fliplr(input_image)), 0)
+        # input_images = np.stack((input_image, np.fliplr(input_image)), 0)
 
         x = graph.get_tensor_by_name('prefix/split:0')
         y1 = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
@@ -317,14 +317,14 @@ def export_model(params):
 
         with tf.Session(graph=graph) as sess:
             y1_out = sess.run([y1], feed_dict={
-                x: input_images
+                x: [input_image]
             })
 
             y1_out = np.array(y1_out).squeeze()
             print("shape of images {}".format(y1_out.shape))
 
-            y_out = post_process_disparity(y1_out)
-            total_dataset_result.append(y_out)
+            # y1_out = post_process_disparity(y1_out)
+            total_dataset_result.append(y1_out)
     total_dataset_result=np.array(total_dataset_result)
     np.save('/home/a.gabdullin/geesara/disparities_export2.npy', total_dataset_result)
 
