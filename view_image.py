@@ -16,8 +16,8 @@ import os
 #     plt.imsave(os.path.join("/home/geesara/diparity/images", "{}_{}disp.png".format(i, "new_image"))
 #                , disp_to_img, cmap='plasma')
 
-disp_pp = np.load("/home/geesara/diparity/images/disparities_export1.npy")
+disp_pp = np.load("/home/geesara/diparity/images/disparities_export.npy")
 for i in range(0,len(disp_pp)):
     disp_to_img = scipy.misc.imresize(disp_pp.squeeze(), [256, 512])
-    plt.imsave(os.path.join("/home/geesara/diparity/images", "{}_{}dispooooooooooooooooo.png".format(i, "new_image"))
+    plt.imsave(os.path.join("/home/geesara/diparity/images", "{}_{}llllllloooo.png".format(i, "new_image"))
                , disp_to_img, cmap='plasma')

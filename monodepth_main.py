@@ -303,27 +303,30 @@ def export_model(params):
 
 
     # left = tf.placeholder(tf.float32, [2, 256, 512, 3])
+    total_dataset_result = []
+    for i in range(0, 9):
+        input_image = misc.imread('/home/a.gabdullin/geesara/2011_kia/0000/00000'+str(i)+'.png', mode="RGB")
+        original_height, original_width, num_channels = input_image.shape
+        input_image = misc.imresize(input_image, [256, 512])
+        input_image = input_image.astype(np.float32) / 255
+        input_images = np.stack((input_image, np.fliplr(input_image)), 0)
 
-    input_image = misc.imread('/home/a.gabdullin/geesara/2011_kia/2011_09_26/2011_09_26_drive_0005_sync/image_00/data/0000000010.png', mode="RGB")
-    original_height, original_width, num_channels = input_image.shape
-    input_image = misc.imresize(input_image, [256, 512])
-    input_image = input_image.astype(np.float32) / 255
-    input_images = np.stack((input_image, np.fliplr(input_image)), 0)
+        x = graph.get_tensor_by_name('prefix/split:0')
+        y1 = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
+        # y2 = graph.get_tensor_by_name('prefix/disparities/ExpandDims_1:0')
 
-    x = graph.get_tensor_by_name('prefix/split:0')
-    y1 = graph.get_tensor_by_name('prefix/disparities/ExpandDims:0')
-    # y2 = graph.get_tensor_by_name('prefix/disparities/ExpandDims_1:0')
+        with tf.Session(graph=graph) as sess:
+            y1_out = sess.run([y1], feed_dict={
+                x: input_images
+            })
 
-    with tf.Session(graph=graph) as sess:
-        y1_out = sess.run([y1], feed_dict={
-            x: input_images
-        })
+            y1_out = np.array(y1_out).squeeze()
+            print("shape of images {}".format(y1_out.shape))
 
-        y1_out = np.array(y1_out).squeeze()
-        print("shape of images {}".format(y1_out.shape))
-
-        y_out = post_process_disparity(y1_out)
-        np.save('/home/a.gabdullin/geesara/disparities_export1.npy', y_out)
+            y_out = post_process_disparity(y1_out)
+            total_dataset_result.append(y_out)
+    total_dataset_result=np.array(total_dataset_result)
+    np.save('/home/a.gabdullin/geesara/disparities_export2.npy', total_dataset_result)
 
 
 def main():
