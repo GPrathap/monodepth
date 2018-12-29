@@ -29,7 +29,7 @@ from monodepth_dataloader import *
 from average_gradients import *
 
 image_summary = tf.summary.image
-
+#print dfsf
 parser = argparse.ArgumentParser(description='Monodepth TensorFlow implementation.')
 parser.add_argument('--mode',                      type=str,   help='train or test', default='train')
 parser.add_argument('--model_name',                type=str,   help='model name', default='monodepth')
