@@ -60,7 +60,7 @@ parser.add_argument('--log_directory',             type=str,   help='directory t
 parser.add_argument('--checkpoint_path',           type=str,   help='path to a specific checkpoint to load', default='')
 parser.add_argument('--retrain',                               help='if used with checkpoint_path, will restart training from step zero', action='store_true')
 parser.add_argument('--full_summary',                          help='if set, will keep more data for each summary. Warning: the file can become very large', action='store_true')
-parser.add_argument('--sample_dir',                type=str,   help='sample directory', default='./dataset/images')
+parser.add_argument('--sample_dir',                type=str,   help='sample directory', default='dataset/images')
 parser.add_argument('--use_bn',                type=bool,   help='is using batch normalization', default=True)
 parser.add_argument("--frozen_model_filename", default="results/frozen_model.pb", type=str,
                     help="Frozen model file to import")
