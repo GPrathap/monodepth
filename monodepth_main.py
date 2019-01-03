@@ -108,32 +108,37 @@ def train(params):
         fake_generated_left_image = []
         reuse_variables = tf.AUTO_REUSE
         # split for each gpu
-        model_generator = MonodepthGenerateModel(params, args.mode, z, reuse_variables, 0)
+        net_g = MonodepthGenerateModel(params, args.mode, z, False, 0)
 
         left_splits = tf.split(left,  args.num_gpus, 0)
-        left_splits_fake = tf.split(model_generator.get_model(), args.num_gpus, 0)
+        left_splits_fake = tf.split(net_g.get_model(), args.num_gpus, 0)
         right_splits = tf.split(right, args.num_gpus, 0)
 
-        model_real = MonodepthModel(params, args.mode, left_splits[0],
-                                                  right_splits[0], reuse_variables, 0)
-        loss_discriminator_real = model_real.discriminator_total_loss
-        real_feature_set = model_real.get_feature_set()
+        net_d = MonodepthModel(params, args.mode, left_splits_fake[0], right_splits[0],
+                                    False, 10)
 
-        model_fake = MonodepthModel(params, args.mode, left_splits_fake[0], right_splits[0],
-                                    reuse_variables, 10)
+        fake_feature_set = net_d.get_feature_set()
+        # loss_discriminator_fake = model_fake.discriminator_total_loss
 
-        fake_feature_set = model_fake.get_feature_set()
-        #loss_discriminator_fake = model_fake.discriminator_total_loss
+        net_d2 = MonodepthModel(params, args.mode, left_splits[0],
+                                                  right_splits[0], True, 0)
+        loss_discriminator_real = net_d2.discriminator_total_loss
+        real_feature_set = net_d2.get_feature_set()
+
+        net_g2 = MonodepthGenerateModel(params, args.mode, z, True, 0)
+        net_d3 = MonodepthModel(params, args.mode, left_splits[0],
+                                right_splits[0], True, 0)
+
 
         d_loss_real = tf.reduce_mean(
-            tf.nn.sigmoid_cross_entropy_with_logits(logits=model_real.classification, labels=tf.ones_like(model_real.classification)))  # real == 1
+            tf.nn.sigmoid_cross_entropy_with_logits(logits=net_d2.classification, labels=tf.ones_like(net_d2.classification)))  # real == 1
         # discriminator: images from generator (fake) are labelled as 0
         d_loss_fake = tf.reduce_mean(
-            tf.nn.sigmoid_cross_entropy_with_logits(logits=model_fake.classification, labels=tf.zeros_like(model_fake.classification)))  # fake == 0
+            tf.nn.sigmoid_cross_entropy_with_logits(logits=net_d.classification, labels=tf.zeros_like(net_d.classification)))  # fake == 0
         loss_discriminator = loss_discriminator_real
 
         g_loss1 = tf.reduce_mean(
-            tf.nn.sigmoid_cross_entropy_with_logits(logits=model_fake.classification, labels=tf.ones_like(model_fake.classification)))
+            tf.nn.sigmoid_cross_entropy_with_logits(logits=net_d.classification, labels=tf.ones_like(net_d.classification)))
 
         generator_loss = tf.nn.l2_loss((real_feature_set - fake_feature_set))
         total_loss_discriminator = tf.reduce_mean(loss_discriminator) + d_loss_real + d_loss_fake
@@ -195,13 +200,14 @@ def train(params):
             # _, loss_value_discriminator, images_original = sess.run([d_optim, total_loss_discriminator, dataloader.left_image_batch], feed_dict={z: batch_z})
             # print("size-------> {}".format(images_original))
             for _ in range(2):
-                _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, model_generator.samplter_network],
+                _, loss_value_generator, generated_images = sess.run([g_optim, total_loss_generator, net_g.samplter_network],
                                                feed_dict={z: batch_z})
             duration = time.time() - before_op_time
             if step and step % 100 == 0:
-                _, loss_value_generator, generated_images = sess.run(
-                    [g_optim, total_loss_generator, model_generator.samplter_network],
+                loss_value_generator, generated_images = sess.run(
+                    [total_loss_generator, net_g2.samplter_network],
                     feed_dict={z: sample_dataset})
+                loss_value_discriminator = sess.run([total_loss_discriminator], feed_dict={z: batch_z})
                 save_images(generated_images, image_manifold_size(generated_images.shape[0]),
                              './{}/{:02d}_train_{:04d}.png'.format(params.sample_dir, step, 1))
                 examples_per_sec = params.batch_size / duration
