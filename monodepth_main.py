@@ -125,9 +125,9 @@ def train(params):
         loss_discriminator_real = net_d2.discriminator_total_loss
         real_feature_set = net_d2.get_feature_set()
 
-        net_g2 = MonodepthGenerateModel(params, args.mode, z, True, 0)
-        net_d3 = MonodepthModel(params, args.mode, left_splits[0],
-                                right_splits[0], True, 0)
+        # net_g2 = MonodepthGenerateModel(params, args.mode, z, True, 0)
+        # net_d3 = MonodepthModel(params, args.mode, left_splits[0],
+        #                         right_splits[0], True, 0)
 
 
         d_loss_real = tf.reduce_mean(
@@ -205,7 +205,7 @@ def train(params):
             duration = time.time() - before_op_time
             if step and step % 100 == 0:
                 loss_value_generator, generated_images = sess.run(
-                    [total_loss_generator, net_g2.samplter_network],
+                    [total_loss_generator, net_g.samplter_network],
                     feed_dict={z: sample_dataset})
                 loss_value_discriminator = sess.run([total_loss_discriminator], feed_dict={z: batch_z})
                 save_images(generated_images, image_manifold_size(generated_images.shape[0]),
